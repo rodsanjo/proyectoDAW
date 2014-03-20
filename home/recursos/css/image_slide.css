@@ -1,0 +1,70 @@
+/* 
+    Document   : image_slide
+    Created on : 21-dic-2013, 19:16:58
+    Author     : J&A
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+.slideshow{
+    width: 520px;
+    height: 190px;
+    margin-left: 10px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 20px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 20px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 20px;
+}  
+  
+/* styling for the slideshow on the homepage */
+ul.slideshow {
+  list-style: none;
+  width: 480px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  margin: 0px 0 0 0;
+}
+  
+ul.slideshow li {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  right: 0;
+}
+ 
+/*imagenes*/
+ul.slideshow li.show {
+  z-index: 500;
+}
+
+ul.slideshow li.show img {
+    padding: 0px;
+    width: 520px;
+}
+
+/*texto*/
+#slideshow-caption {
+  width: 520px;
+  position: relative;
+  top: 150px;
+  left: -40px; 
+  z-index: 500;}
+ 
+#slideshow-caption .slideshow-caption-container {
+  padding: 1px 10px; 
+  background: grey repeat;  
+  z-index: 1000;
+}
+ 
+#slideshow-caption p {
+  padding: 0;
+  font: normal 90% arial, sans-serif;
+  color: black;
+}
+
+

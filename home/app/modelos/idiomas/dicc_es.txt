@@ -1,0 +1,31 @@
+key|text
+title|3da2 juegos de mesa
+Bienvenido|
+saludo1|Bienvenido a 3da2
+Seleccinar|
+leyenda_menu|Menú - Barra de navegación
+saludo2|Bienvenido a la aplicación realizada siguiendo el patrón MVC.
+Saludo|
+Inicio|
+Juegos de mesa|
+Juegos de tablero|
+Juegos de cartas|
+2 jugadores|
+Accesorios|
+Galería|
+Enlaces|
+Contacto|
+Revista|
+Libros|
+h1#titulo|Biblioteca internacional del alumno
+h2#titulo|Página web generada con patrón MVC
+Diseñada por|
+Contacto|
+Fecha última actualización|
+Idioma|
+Alemán|
+Español|
+Inglés|
+Portugués|
+Contactar|
+parrafo1|Bienvenido a mi biblioteca, donde podrás descubrir algunos libros fascinantes. Algunos de ellos son de lectura muy recomendable, aunque depende de los gustos de cada lector para lograr encuentrar una lectura interesante, logrando la inmersión en cada aventura.

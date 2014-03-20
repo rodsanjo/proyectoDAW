@@ -1,0 +1,9 @@
+key|text
+Catan|Los colonos de Catán
+Smallworld|Small World
+Spartacus|Spartacus
+Leader 1|
+Carcassone|
+Demarraje|
+Ticket to run|Viajeros al tren
+Bang|
