@@ -20,6 +20,7 @@ set sql_mode = 'traditional';
 /*  3da2  */
 /* ****** */
 
+drop table if exists 3da2_menu;
 drop table if exists 3da2_usuarios_permisos;
 drop table if exists 3da2_usuarios_roles;
 drop table if exists 3da2_roles_permisos;
@@ -30,7 +31,7 @@ drop table if exists 3da2_usuarios;
 
 create table 3da2_usuarios
 (id integer unsigned not null auto_increment primary key,
-,login varchar(10) not null
+,login varchar(20) not null
 ,password char(20) not null
 ,email varchar(45) unique not null
 )
@@ -38,10 +39,10 @@ engine=innodb
 ;
 
 create table if not exists 3da2_datos_usuarios
-(usuario_login varchar(10)
+(usuario_login varchar(20)
 ,fecha_alta timestamp not null default now() /*current_timestamp()*/
-,fecha_confirmacion_alta datetime default null
-,clave_confirmacion char(30) null
+,fecha_confirmacion_alta timestamp
+,clave_confirmacion char(30)
 ,fecha_nac date
 ,nombre varchar(45)
 ,apellidos varchar(100)
@@ -64,8 +65,8 @@ delimiter //
 create trigger 3da2_t_registrar_datos_usuario_ai
 after insert on 3da2_usuarios for each row
 begin
-    insert into 3da2_datos_usuarios (usuario_login, usuario_login)
-    values ( new.login, new.usuario_login);	
+    insert into 3da2_datos_usuarios (usuario_login, fecha_confirmacion_alta)
+    values ( new.login, now());
 end;
 
 //
@@ -162,3 +163,116 @@ engine=innodb
 character set utf8 collate utf8_general_ci
 ;
 
+
+create table 3da2_menu
+( id integer unsigned not null
+, es_submenu_de_id integer unsigned null
+, nivel integer unsigned not null comment '1 menu principal, 2 submenú, ...'
+, orden integer unsigned null comment 'Orden en que aparecerán'
+, texto varchar(50) not null comment 'Texto a mostrar en el item del menú'
+, accion_controlador varchar(50) not null
+, accion_metodo varchar(50) null comment 'null si es una entrada de nivel 1 con submenu de nivel 2'
+, title varchar(255) null
+, primary key (id)
+, foreign key (es_submenu_de_id) references 3da2_menu(id)
+, unique (es_submenu_de_id, texto) -- Para evitar repeticiones de texto
+, unique (accion_controlador, accion_metodo) -- Si una acción/funcionalidad solo debe aparecer una vez en el menú
+)
+engine=innodb
+character set utf8 collate utf8_general_ci
+;
+
+
+/* ************** */
+/*  inserts HOME  */
+/* ************** */
+
+insert into 3da2_roles
+  (rol			, descripcion) values
+  ('administradores'	,'Administradores de la aplicación')
+, ('usuarios'		,'Todos los usuarios incluido anónimo')
+, ('usuarios_logueados'	,'Todos los usuarios excluido anónimo')
+;
+
+
+insert into 3da2_usuarios 
+  (login, email, password) values
+  ('admin', 'admin@3da2.com', md5('admin00'))
+, ('anonimo', 'anonimo@email.com', md5(''))
+, ('jorge', 'jergo23@gmail.com', md5('jorge00'))
+, ('juan', 'juan@email.com', md5('juan00'))
+, ('anais', 'anais@email.com', md5('anais00'))
+;
+
+insert into 3da2_metodos
+  (controlador          ,metodo) values
+  ('*'			,'*')
+, ('inicio'		,'*')
+, ('inicio'		,'index')
+, ('mensajes'		, '*')
+, ('roles'		,'*')
+, ('roles'		,'index')
+, ('roles'		,'form_borrar')
+, ('roles'		,'form_insertar')
+, ('roles'		,'form_modificar')
+, ('roles_permisos'	,'*')
+, ('roles_permisos'	,'index')
+, ('roles_permisos'	,'form_modificar')
+, ('usuarios'		,'*')
+, ('usuarios'		,'index')
+, ('usuarios'		,'desconectar')
+, ('usuarios'		,'form_login')
+, ('usuarios'		,'form_login_validar')
+, ('usuarios'		,'form_cambiar_password')
+, ('usuarios'		,'form_login_email')
+, ('usuarios'		,'form_login_email_validar')
+, ('usuarios'		,'confirmar_alta')
+, ('usuarios'		,'form_insertar_interno')
+, ('usuarios'		,'form_insertar_externo')
+, ('usuarios'		,'form_modificar')
+, ('usuarios'		,'form_borrar')
+, ('usuarios_permisos'	,'*')
+, ('usuarios_permisos'	,'index')
+, ('usuarios_permisos'	,'form_modificar')
+
+;
+
+insert into 3da2_roles_permisos
+  (rol                  ,controlador	,metodo) values
+  ('administradores'	,'*'            ,'*')
+, ('usuarios'		,'inicio'	,'*')
+, ('usuarios'		,'mensajes'	,'*')
+, ('usuarios_logueados' ,'usuarios'	,'desconectar')
+, ('usuarios_logueados' ,'usuarios'	,'form_cambiar_password')
+;
+
+insert into 3da2_usuarios_roles
+  (login	,rol) values
+  ('admin'	,'administradores')
+-- , ('anonimo'	,'usuarios')
+-- , ('juan'	,'usuarios')
+-- , ('juan'	,'usuarios_logueados')
+;
+
+insert into 3da2_usuarios_permisos
+  (login	,controlador	,metodo) values
+  ('anonimo'	,'usuarios'	,'form_login')
+, ('anonimo'	,'usuarios'	,'form_login_email')
+, ('anonimo'	,'usuarios'	,'form_insertar_externo')
+, ('anonimo'	,'usuarios'	,'confirmar_alta')
+;
+
+truncate table 3da2_menu;
+insert into 3da2_menu
+  (id, es_submenu_de_id	, nivel	, orden	, texto, accion_controlador, accion_metodo, title) values
+  (1 , null	, 1	, null	, 'Inicio', 'inicio', 'index', null)
+, (2 , null	, 1	, null	, 'Juegos de mesa', 'articulos', 'index', null)
+, (3 , null	, 1	, null	, 'Accesrios', 'articulos', 'accesorios', null)
+, (4 , null	, 1	, null	, 'Galeria', 'galeria', 'index', null)
+, (5 , null	, 1	, null	, 'Usuarios', 'usuarios', 'index', null)
+, (6 , null	, 1	, null	, 'Contacto', 'contacto', 'index', null)
+, (7 , null	, 1	, null	, 'Enlaces', 'enlaces', null, null)
+, (8 , 2	, 2	, null	, 'Juegos de Tablero', 'articulos', 'tablero', null)
+, (9 , 2	, 2	, null	, 'Juegos de cartas', 'articulos', 'cartas', null)
+, (10 , 2	, 2	, null	, '2 jugadores', 'articulos', '2jugadores', null)
+;

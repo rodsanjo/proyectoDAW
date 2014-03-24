@@ -1,11 +1,9 @@
 
 *{
 	/*border:solid yellow; */
-	font-family: arial, verdana, sans-serif;
+	font-family: Times New Roman, Georgia;
 
 }
-
-a:link { text-decoration:none; margin-top:0px;}
 
 body{
 	margin-top: 20px;
@@ -17,6 +15,15 @@ body{
 	width: 1050px;	/* para que el ancho sea fijo */
 	overflow: hidden;
 	margin-top:0px;
+}
+
+.boton {
+	margin: 5px 5px;
+	padding: 2px;
+	line-height: 170%;
+	background-color: lightgray;
+	border: 1px solid black;
+	text-decoration: none;
 }
 
 #encabezado{
@@ -37,6 +44,7 @@ img {
 }
 
 #idioma{
+    font-family: sans-serif, arial, verdana;
     position: fixed;
     top: 20px;
     right: 20px;
@@ -65,3 +73,17 @@ img {
 /*
 span .submenu { display:none }*/
 
+#sendero_migas_pan{
+    font-size: 50%;
+}
+
+.span_error{
+    color:red;
+}
+.precio{
+    font-size: 120%;
+}
+
+.text_justificado{
+    text-align: justify;
+}

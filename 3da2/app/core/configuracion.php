@@ -31,7 +31,7 @@ namespace core {
 		public static $url_amigable = false;
 
 		// URL registrar url_anterior btn_volver
-		public static $url_registrar_anterior = false;
+		public static $url_registrar_anterior = true;
 
 
 		// Gestión de usuarios si hay usuarios distintos

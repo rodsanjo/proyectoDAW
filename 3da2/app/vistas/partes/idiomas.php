@@ -6,7 +6,7 @@
 
     foreach ($idiomas_disponibles as $key => $idioma) {
         $linea = explode("||", $idioma);
-        $src = URL_ROOT.'/recursos/imagenes/banderas/'.'flag_'.$linea[1].'.png';
+        $src = URL_HOME_ROOT.'/recursos/imagenes/banderas/'.'flag_'.$linea[1].'.png';
         //$src = \core\URL::generar_sin_idioma('recursos/imagenes/banderas').'flag_'.$linea[1].'.png';
         $title = \core\Idioma::text($linea[0],'dicc');
         $lang = $linea[1];

@@ -388,11 +388,12 @@ abstract class mysqli implements \core\sgbd\SQL_interface {
 	
 	public static function select(
 			 $clausulas = array(
-				'columnas' => '',
-				'where' => '',
-				'group_by' => '',
-				'having' => '',
-				'order_by' => ''
+                            'columnas' => ''
+                            ,'where' => ''
+                            ,'group_by' => ''
+                            ,'having' => ''
+                            ,'order_by' => ''
+                            ,'limit' => ''
 			),
 			$table = null
 	) {
@@ -406,9 +407,10 @@ abstract class mysqli implements \core\sgbd\SQL_interface {
 		
 		$columnas = ((isset($clausulas['columnas']) and strlen($clausulas['columnas'])) ? $clausulas['columnas'] : '*');
 		$where = ((isset($clausulas['where']) and strlen($clausulas['where'])) ? "where ".$clausulas['where'] : '');
-		$order_by = ((isset($clausulas['order_by']) and strlen($clausulas['order_by'])) ? "order by ".$clausulas['order_by'] : '');	
 		$group_by = ((isset($clausulas['group_by']) and strlen($clausulas['group_by'])) ? "group by ".$clausulas['group_by'] : '');
 		$having = ((isset($clausulas['having']) and strlen($clausulas['having'])) ? "having ".$clausulas['having'] : '');
+                $order_by = ((isset($clausulas['order_by']) and strlen($clausulas['order_by'])) ? "order by ".$clausulas['order_by'] : '');	
+                $limit = ((isset($clausulas['limit']) and strlen($clausulas['limit'])) ? "limit ".$clausulas['limit'] : '');
 		
 		$sql = "
 				select $columnas
@@ -417,6 +419,7 @@ abstract class mysqli implements \core\sgbd\SQL_interface {
 				$group_by
 				$having
 				$order_by
+                                $limit
 				;
 		";
 		

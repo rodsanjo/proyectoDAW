@@ -22,6 +22,7 @@
 
     <style type="text/css" >
     </style>
+    <link rel="stylesheet" type="text/css" href="<?php echo PATH_HOME ?>recursos/css/main.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT ?>recursos/css/main.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT ?>recursos/css/menu_up.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT ?>recursos/css/menu_left_v.css" />

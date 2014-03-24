@@ -5,20 +5,20 @@ namespace modelos;
 class Menus{    //la clase se tiene que llamar igual que el archivo
     private static $menuUp = array(
         /*
-            item => "controlador,metodo,title"
+            item => "controlador,metodo/clausula,title"
             item => array( subitem, subitem, ...)
                 subitem => "controlador,metodo,title"
 
         */
         "Inicio" => "inicio,index,Home"
         ,"Juegos de mesa" => 
-            "juegosMesa,index,Juegos de mesa"
+            "articulos,index,Juegos de mesa"
 //            array(
-//                "Juegos de tablero"=>"juegosMesa,juegosTablero,Juegos de Tablero"
-//                ,"Juegos de cartas"=>"juegosMesa,juegosCartas,Juegos de Cartas"
-//                ,"2 jugadores"=>"juegosMesa,2juegadores,2 jugadores"
+//                "Juegos de tablero"=>"articulos,juegosTablero,Juegos de Tablero"
+//                ,"Juegos de cartas"=>"articulos,juegosCartas,Juegos de Cartas"
+//                ,"2 jugadores"=>"articulos,2juegadores,2 jugadores"
 //        )
-        ,"Accesorios" => "accesorios,index,Accesorios"
+        ,"Accesorios" => "articulos,index/accesorios,Accesorios"
         ,"Galería" => "galeria,index,Galeria de imagenes"
         ,"Enlaces" => "enlaces,index,Enlaces de interés"
         ,"Contacto" => "contacto,index,Contacto"
@@ -30,18 +30,18 @@ class Menus{    //la clase se tiene que llamar igual que el archivo
     
     private static $menuLeft = array(
         /*
-            item => "controlador,metodo,title"
+            item => "controlador,metodo/clausula,title"
             item => array( subitem, subitem, ...)
-                subitem => "controlador,metodo,title"
+                subitem => "controlador,metodo,clausula,title"
 
         */
         "Inicio" => "inicio,index,Home"
         ,"Juegos de mesa" => array(
-            "Juegos de tablero"=>"juegosMesa,juegosTablero,Juegos de Tablero"
-            ,"Juegos de cartas"=>"juegosMesa,juegosCartas,Juegos de Cartas"
-            ,"2 jugadores"=>"juegosMesa,2juegadores,2 jugadores"
+            "Juegos de tablero"=>"articulos,index,tablero,Juegos de Tablero"
+            ,"Juegos de cartas"=>"articulos,index,cartas,Juegos de Cartas"
+            ,"2 jugadores"=>"articulos,index,2jugadores,2 jugadores"            
         )
-        ,"Accesorios" => "accesorios,index,Accesorios"
+        ,"Accesorios" => "articulos,index/accesorios,Accesorios"
         ,"Galería" => "galeria,index,Galeria de imagenes"
         ,"Enlaces" => "enlaces,index,Enlaces de interés"
         ,"Contacto" => "contacto,index,Contacto"

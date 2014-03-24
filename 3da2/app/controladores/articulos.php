@@ -1,35 +1,68 @@
 <?php
 namespace controladores;
 
-class juegosMesa extends \core\Controlador{
+class articulos extends \core\Controlador{
     
-    private static $tabla = 'juegos_mesa';
-    private static $controlador = 'juegosMesa';
+    private static $tabla = 'articulos';
+    private static $controlador = 'articulos';
+    public static $num_arts_por_pag = 3;
     
-/**
+    /**
      * Presenta una <table> con las filas de la tabla con igual nombre que la clase.
      * @param array $datos
      */
     public function index(array $datos=array()) {
-
+        
+        $clausulas['where'] = 'true';
+        if(isset($_REQUEST['p3'])){
+            if($_REQUEST['p3']=='tablero'){
+                $clausulas['where']='categoria_id = 4';
+            }elseif($_REQUEST['p3']=='cartas'){
+                $clausulas['where']='categoria_id = 3';
+            }elseif($_REQUEST['p3']=='2jugadores'){
+                $clausulas['where']='num_min_jug <= 2 and num_max_jug = 2';
+            }elseif($_REQUEST['p3']=='solitario'){
+                $clausulas['where']='num_min_jug >= 1';
+            }elseif($_REQUEST['p3']=='accesorios'){
+                $clausulas['where']='categoria_id = 1';
+            }
+        }
+        $next_art = isset($_REQUEST['p4'])?$_REQUEST['p4']:0;
+        $next_art *= self::$num_arts_por_pag;
         $clausulas['order_by'] = 'nombre';
+        $clausulas['limit'] = $next_art.",".self::$num_arts_por_pag;
         //$datos["filas"] = \modelos\self::$tabla::select($clausulas, "self::$tabla"); // Recupera todas las filas ordenadas
-        $datos["filas"] = \modelos\Modelo_SQL::table(self::$tabla)->select($clausulas); // Recupera todas las filas ordenadas
-
-        //var_dump($datos);
-        //var_dump($datos["filas"]);
+        $datos["filas"] = \modelos\Modelo_SQL::table(self::$tabla)->select($clausulas); // Recupera todas las filas ordenadas        
+        
+        $sql = "select count(*) as num_total_juegos from 3da2_articulos where ".$clausulas['where'];
+        $datos["num_total_juegos"] = \modelos\Modelo_SQL::execute($sql);
+        
+        
         //Mostramos los datos a modificar en formato europeo. Convertimos el formato de MySQL a europeo
-//            foreach ($datos["filas"] as $key => $fila) {
-//                var_dump($fila['masa_atomica']);
-//                $datos['filas'][$key]['masa_atomica']=  \core\Conversiones::decimal_punto_a_coma($fila['masa_atomica']);
-//                var_dump($datos['filas'][$key]['masa_atomica']);
-//            }
         self::convertir_formato_mysql_a_ususario($datos['filas']);
 
         //var_dump($datos);
+        
+        $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
+        $http_body = \core\Vista_Plantilla::generar('DEFAULT', $datos);
+        \core\HTTP_Respuesta::enviar($http_body);
+
+    }
+    
+    /**
+     * Presenta solo los juegos de tablero
+     * @param array $datos
+     */
+    public function juego(array $datos=array()) {
+
+        //$datos["filas"] = \modelos\self::$tabla::select($clausulas, "self::$tabla"); // Recupera todas las filas ordenadas
+        $datos["filas"] = \modelos\Modelo_SQL::table(self::$tabla)->select($clausulas); // Recupera todas las filas ordenadas
+
+        //Mostramos los datos a modificar en formato europeo. Convertimos el formato de MySQL a europeo para su visualización
+        self::convertir_formato_mysql_a_ususario($datos['filas']);
 
         $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
-        $http_body = \core\Vista_Plantilla::generar('plantilla_principal', $datos);
+        $http_body = \core\Vista_Plantilla::generar('DEFAULT', $datos);
         \core\HTTP_Respuesta::enviar($http_body);
 
     }
@@ -42,7 +75,7 @@ class juegosMesa extends \core\Controlador{
 
         $datos["form_name"] = __FUNCTION__;
         $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
-        $http_body = \core\Vista_Plantilla::generar('plantilla_principal', $datos);
+        $http_body = \core\Vista_Plantilla::generar('DEFAULT', $datos);
         \core\HTTP_Respuesta::enviar($http_body);
 
     }
@@ -256,14 +289,13 @@ class juegosMesa extends \core\Controlador{
         //var_dump($param);
         if(!isset($param['id'])){   //Si existe $param['id'], es que vienen varias filas 0,1,2...,n, es decir no viene de intentar modificar o borrar ua única fila
             foreach ($param as $key => $fila) {
-                $param[$key]['masa_atomica']=  \core\Conversiones::decimal_punto_a_coma($fila['masa_atomica']);
-                $param[$key]['fecha_salida']=  \core\Conversiones::fecha_mysql_a_es($param[$key]['fecha_salida']);
-                $param[$key]['fecha_entrada'] = \core\Conversiones::fecha_hora_mysql_a_es($param[$key]['fecha_entrada']);
+                $param[$key]['precio']=  \core\Conversiones::decimal_punto_a_coma_y_miles($fila['precio']);
             }
         }else{
-            $param['masa_atomica']=  \core\Conversiones::decimal_punto_a_coma($param['masa_atomica']);            
-            if(preg_match("/MSIE|Firefox|Trident/", $_SERVER['HTTP_USER_AGENT'])){
-                $param['fecha_salida']=  \core\Conversiones::fecha_mysql_a_es($param['fecha_salida']);
+            $param['precio']=  \core\Conversiones::decimal_punto_a_coma_y_miles($param['precio']);
+            //Si hubiera fechas
+            if(preg_match("/MSIE|Firefox|Trident/", $_SERVER['HTTP_USER_AGENT'])){  //Para IE7
+                $param['fecha']=  \core\Conversiones::fecha_mysql_a_es($param['fecha']);
             }
             //fecha_entrada es readOnly en los formularios, por lo que no es necesario realizar la conversión.
         }
