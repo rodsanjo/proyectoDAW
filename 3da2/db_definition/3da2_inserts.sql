@@ -10,36 +10,6 @@ insert into 3da2_categorias values
 ,(6,'Solitario' , 'Juego para una sola persona')
 ;
 
-insert into 3da2_tematicas values
-(0,'Varios/Otros')
-,(1,'Historia')
-,(2,'Deporte')
-,(3,'Oeste')
-,(4,'Roma')
-,(5,'Grecia')
-,(6,'Ciclismo')
-,(7,'Motor')
-,(8,'Politica')
-,(9,'Economia')
-,(10,'Ciencia ficción')
-;
-
-drop trigger if exists 3da2_t_insertar_nueva_tematica_bi;
-delimiter //
-create trigger 3da2_t_insertar_nueva_tematica_bi before insert on 3da2_juegos_mesa
-for each row
-begin
-    if ((select count(*) from 3da2_tematicas where tematica = new.tematica) = 0)
-	insert into 3da2_tematicas (tematica) values ( new.tematica);
-	if (new.login != "anonimo") then
-		insert into 3da2_usuarios_roles (login,  rol) values ( new.login, 'usuarios_logueados');
-	end if;
-    end if;
-end;
-
-//
-delimiter ;
-
 insert into 3da2_articulos
 (nombre                         ,autor                          ,anho,editorial         ,categoria_id,tematica_id   ,num_min_jug,num_max_jug,edad_min,duracion   ,descripcion    ,precio,unds_stock)
 values
@@ -58,6 +28,16 @@ values
 ,('Zombicide' 			,'Jean-Baptiste'               	,2012,'edge'            ,4,'Terror'               ,1,6                    ,13,60         ,null       ,79.95,10)
 ,('Los Colonos de Catán' 	,'Klaus Teuber'               	,1995,'Devir'            ,4,'Medieval'               ,2,4                    ,10,45         ,null       ,39.95,22)
 ,('Dado de 6 caras'             ,null                           ,null,null              ,1,null                     ,null,null              ,null,null         ,null       ,0.75,45)
+;
+
+insert into 3da2_comentarios_articulo
+(articulo_nombre                ,usuario_login      ,comentario) values
+('Demarrage' /*9*/                   ,'juan'        ,'Muy básico, pero divertido')
+,('Bang!'    /*1*/                   ,'jorge'       ,'Fenomenal en grupos variados, gusta a todo el mundo')
+,('Demarrage'/*9*/                   ,'jorge'       ,'Que más se puede pedir')
+,('Demarrage'/*8*/                   ,'juan'        ,'Se queda atrás con respecto a los juegos actuales')
+,('Demarrage'/*9*/                   ,'jorge'       ,'Eso mismo le pasa al Formula Dé, se nota que ya es antiguo')
+,('Formula Dé'/*4*/                   ,'jorge'      ,'A la gente le sigue gustando a pesar de haber nuevos juegos dedicados a la formula1 más elaborados')
 ;
 
 insert into 3da2_metodos

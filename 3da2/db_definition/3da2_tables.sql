@@ -25,7 +25,7 @@ set sql_mode = 'traditional';
 drop table if exists 3da2_pedidos_detalles;
 drop table if exists 3da2_pedidos;
 drop table if exists 3da2_carritos;
-drop table if exists 3da2_comentarios_juego;
+drop table if exists 3da2_comentarios_articulo;
 drop table if exists 3da2_articulos;
 drop table if exists 3da2_tematicas;
 drop table if exists 3da2_categorias;
@@ -38,15 +38,9 @@ create table if not exists 3da2_categorias
 engine=myisam
 ;
 
-create table if not exists 3da2_tematicas
-(id integer unsigned primary key
-,tematica varchar(20) not null unique
-)
-engine=myisam
-;
-
 create table if not exists 3da2_articulos
 (id integer auto_increment
+,referencia integer(5) zerofill unsigned not null
 ,nombre varchar(50) unique not null comment 'titulo del juego de mesa'
 ,autor varchar(50)
 ,editorial varchar(30)
@@ -54,7 +48,7 @@ create table if not exists 3da2_articulos
 ,foto varchar(50)
 ,manual varchar(50)
 ,categoria_id integer default 0
-,tematica_id varchar(20)
+,tematica varchar(20) comment 'Que tema trata el juego o ambientacion'
 ,num_min_jug integer default 1
 ,num_max_jug integer
 ,edad_min integer
@@ -65,19 +59,21 @@ create table if not exists 3da2_articulos
 ,primary key(id)
 ,unique(nombre)
 ,foreign key(categoria_id) references 3da2_categorias(id)
-,foreign key(tematica_id) references 3da2_tematicas(tematica)
 )
 engine = myisam default charset=utf8
 ;
 
-create table if not exists 3da2_comentarios_juego
+create table if not exists 3da2_comentarios_articulo
 (id integer auto_increment
-,juego_id integer not null
+,articulo_nombre varchar(50) not null
 ,usuario_login varchar(20) not null
 ,comentario varchar(300) not null
-,fecha_comentario timestamp default now()
+,fecha_comentario datetime
+,fecha_ult_edicion timestamp default now()
+,num_ediciones integer default 0
 ,primary key(id)
-,foreign key(usuario_login) references 3da2_usuarios(login) on delete default on update cascade
+,foreign key(usuario_login) references 3da2_usuarios(login) on delete set default on update cascade
+,foreign key(articulo_nombre) references 3da2_articulos(articulo) on delete restrict on update cascade
 )
 engine = myisam default charset=utf8
 ;

@@ -32,7 +32,7 @@
         //<p>Precio: <b class='precio'>".\core\Conversiones::decimal_punto_a_coma_y_miles($fila['precio'])." €</b></p>
   
     }
-    $categoria = isset($_REQUEST['p3'])?$_REQUEST['p3']:'';
+    $categoria = isset($_REQUEST['p3'])?$_REQUEST['p3']:'g_juegos'; //g_juegos no vale para nada, solo para que p3 no quede vacio a la vista del usuario
     $num_grupo = isset($_REQUEST['p4'])?$_REQUEST['p4']:'';
     $num_total_juegos = $datos["num_total_juegos"][0]['num_total_juegos'];
     $ult_grupo = floor($num_total_juegos/\controladores\articulos::$num_arts_por_pag);
