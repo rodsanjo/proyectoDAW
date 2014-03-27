@@ -103,7 +103,7 @@ heredoc;
 	
     <div id='globals'>
         <?php
-//            var_dump($datos);
+            var_dump($datos);
             print "<pre>"; 
                 print_r($GLOBALS);
                 print("\$_GET "); print_r($_GET);

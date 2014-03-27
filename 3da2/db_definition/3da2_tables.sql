@@ -51,7 +51,7 @@ create table if not exists 3da2_articulos
 ,tematica varchar(20) comment 'Que tema trata el juego o ambientacion'
 ,num_min_jug integer default 1
 ,num_max_jug integer
-,edad_min integer
+,edad_min integer default 10
 ,duracion varchar(10) comment 'minutos aproximados de duracion de una partida'
 ,descripcion varchar(500) comment 'podrá ser una palabra para luego traducirla en el diccionario'
 ,precio decimal(12,2) null comment 'precio en € con IVA incluido'

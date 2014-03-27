@@ -28,7 +28,7 @@ namespace core {
 		public static $session_cookie_httponly = false;
 
 		// URL amigables
-		public static $url_amigable = false;
+		public static $url_amigable = true;
 
 		// URL registrar url_anterior btn_volver
 		public static $url_registrar_anterior = true;

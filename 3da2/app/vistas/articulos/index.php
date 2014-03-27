@@ -15,8 +15,9 @@
             $num_max_jug ='-'.$num_max_jug;
         }
         $rangoJug = $fila['num_min_jug'].$num_max_jug;
-        $href = \core\URL::generar("articulos/juego/{$fila['nombre']}");
-        echo "<h3>{$fila['nombre']}</h3>"
+        $articulo_nombre = str_replace(" ", "-", $fila['nombre']);
+        $href = \core\URL::generar(array('articulos','juego',$articulo_nombre));
+        echo "<a href='$href'><h3>{$fila['nombre']}</h3></a>"
             .$img.
             "<div class='text_justificado'>
                 <p>&nbsp;</p>

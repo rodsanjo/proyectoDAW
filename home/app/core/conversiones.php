@@ -119,7 +119,7 @@ class Conversiones {
 		if (preg_match($patron_fecha_hora, $fecha_hora_mysql)) {
 			// Creamos un objeto de la clase \DateTime que nos servirá para la conversión.
 			$fecha = \DateTime::createFromFormat("Y-m-d H:i:s", $fecha_hora_mysql);
-			return($fecha->format("d/m/Y H:i:s"));
+			return($fecha->format("d-m-Y H:i:s"));
 		}
 		else
 			return $fecha_hora_mysql;

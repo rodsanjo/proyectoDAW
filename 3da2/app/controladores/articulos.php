@@ -4,6 +4,7 @@ namespace controladores;
 class articulos extends \core\Controlador{
     
     private static $tabla = 'articulos';
+    private static $tabla2 = 'comentarios_articulo';
     private static $controlador = 'articulos';
     public static $num_arts_por_pag = 3;
     
@@ -13,7 +14,7 @@ class articulos extends \core\Controlador{
      */
     public function index(array $datos=array()) {
         
-        $clausulas['where'] = 'true';
+        $clausulas['where'] = 'categoria_id <> 1';
         if(isset($_REQUEST['p3'])){
             if($_REQUEST['p3']=='tablero'){
                 $clausulas['where']='categoria_id = 4';
@@ -54,12 +55,26 @@ class articulos extends \core\Controlador{
      * @param array $datos
      */
     public function juego(array $datos=array()) {
-
-        //$datos["filas"] = \modelos\self::$tabla::select($clausulas, "self::$tabla"); // Recupera todas las filas ordenadas
-        $datos["filas"] = \modelos\Modelo_SQL::table(self::$tabla)->select($clausulas); // Recupera todas las filas ordenadas
-
+        
+        if(isset($_GET['p3'])){
+            $articulo_nombre = str_replace("-", " ", $_GET['p3']);
+            $clausulas['where'] = " nombre like '%$articulo_nombre%' ";
+        }
+        if ( ! $filas = \modelos\Datos_SQL::select( $clausulas, self::$tabla)) {
+            $datos['mensaje'] = 'Error al recuperar la fila de la base de datos';
+            \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
+            return;
+        }else{   
+            $datos['articulo'] = $filas[0];
+            
+            $clausulas['where'] = " articulo_nombre like '%$articulo_nombre%' ";
+            $clausulas['order by'] = 'fecha_comentario desc';
+            $datos["comentarios"] = \modelos\Modelo_SQL::table(self::$tabla2)->select($clausulas);
+        }
+        
         //Mostramos los datos a modificar en formato europeo. Convertimos el formato de MySQL a europeo para su visualización
-        self::convertir_formato_mysql_a_ususario($datos['filas']);
+        self::convertir_formato_mysql_a_ususario($datos['articulo']);
+        self::convertir_formato_mysql_a_ususario($datos['comentarios']);
 
         $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
         $http_body = \core\Vista_Plantilla::generar('DEFAULT', $datos);
@@ -289,10 +304,20 @@ class articulos extends \core\Controlador{
         //var_dump($param);
         if(!isset($param['id'])){   //Si existe $param['id'], es que vienen varias filas 0,1,2...,n, es decir no viene de intentar modificar o borrar ua única fila
             foreach ($param as $key => $fila) {
-                $param[$key]['precio']=  \core\Conversiones::decimal_punto_a_coma_y_miles($fila['precio']);
+                if(isset($param[$key]['precio']))
+                    $param[$key]['precio']=  \core\Conversiones::decimal_punto_a_coma_y_miles($fila['precio']);
+                if(isset($param[$key]['fecha_comentario']))
+                        $param[$key]['fecha_comentario'] = \core\Conversiones::fecha_hora_mysql_a_es($param[$key]['fecha_comentario']);
+                if(isset($param[$key]['fecha_edicion']))
+                    $param[$key]['fecha_edicion'] = \core\Conversiones::fecha_hora_mysql_a_es($param[$key]['fecha_edicion']);
             }
         }else{
-            $param['precio']=  \core\Conversiones::decimal_punto_a_coma_y_miles($param['precio']);
+            if(isset($param['precio']))
+                $param['precio']=  \core\Conversiones::decimal_punto_a_coma_y_miles($param['precio']);
+            if(isset($param['fecha_comentario']))
+                $param['fecha_comentario'] = \core\Conversiones::fecha_hora_mysql_a_es($param[$key]['fecha_comentario']);
+            if(isset($param['fecha_edicion']))
+                $param['fecha_edicion'] = \core\Conversiones::fecha_hora_mysql_a_es($param[$key]['fecha_edicion']);
             //Si hubiera fechas
             if(preg_match("/MSIE|Firefox|Trident/", $_SERVER['HTTP_USER_AGENT'])){  //Para IE7
                 $param['fecha']=  \core\Conversiones::fecha_mysql_a_es($param['fecha']);
