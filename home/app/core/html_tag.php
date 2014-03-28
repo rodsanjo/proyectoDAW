@@ -184,7 +184,7 @@ class HTML_Tag extends \core\Clase_Base {
 		if ( ! \core\Usuario::tiene_permiso($controlador, $metodo)) {
 			return $link;
 		};
-		
+                
 		if (isset($query_string[2])) {
 			$id = $query_string[2];
 			unset($query_string[2]);

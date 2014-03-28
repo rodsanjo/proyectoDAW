@@ -48,6 +48,7 @@ create table if not exists 3da2_articulos
 ,num_max_jug integer
 ,edad_min integer default 10
 ,duracion varchar(10) comment 'minutos aproximados de duracion de una partida'
+,resenha varchar(500) comment 'breve reseña sobre el juego de mesa'
 ,descripcion varchar(500) comment 'podrá ser una palabra para luego traducirla en el diccionario'
 ,precio decimal(12,2) null comment 'precio en € con IVA incluido'
 ,unds_stock integer
@@ -113,7 +114,7 @@ delimiter //
 create trigger 3da2_t_ref_articulo_bi before insert on 3da2_articulos for each row
 begin
     declare _ultima_ref int;
-    select max(referencia) into _ultimo_ref_anho from 3da2_articulos;
+    select max(referencia) into _ultima_ref from 3da2_articulos;
     if (isnull(_ultima_ref)) then set _ultima_ref=0;
     end if;
     set new.referencia = _ultima_ref + 1;
@@ -162,23 +163,23 @@ insert into 3da2_categorias values
 ;
 
 insert into 3da2_articulos
-(nombre                         ,autor                          ,anho,editorial         ,categoria_id,tematica_id   ,num_min_jug,num_max_jug,edad_min,duracion   ,descripcion    ,precio,unds_stock)
+(nombre                         ,autor                          ,anho,editorial         ,categoria_id,tematica   ,num_min_jug,num_max_jug,edad_min,duracion   ,descripcion    ,precio,unds_stock,resenha,descripcion)
 values
-('Bang!'                        ,'Emiliano Sciarra'             ,2002,'daVinci'         ,3,'Oeste'                  ,4,7                    ,null,null       ,null       ,9.95,13)
-,('Bang! dodge city'            ,'Emiliano Sciarra'             ,2004,'daVinci'         ,3,'Oeste'                  ,4,8                    ,null,null       ,null       ,5.95,9)
-,('Carcassone'                  ,'Klaus-Jürgen Wrede'           ,2001,'devir'           ,4,'Medieval Historia'               ,2,5                    ,8,null          ,null       ,21.95,18)
-,('Formula Dé'                  ,'Lauren Lavaur & Eric Randall' ,1996,'Euro games'      ,4,'Motor'                  ,2,10                   ,null,null       ,null       ,39.90,6)
-,('Blood Bowl Team Manager'     ,'Jay Little'                   ,2010,'edge'            ,3,null                     ,2,4                    ,null,null       ,null       ,31.95,11)
-,('Spartacus'                   ,'John Kovaleski'               ,2012,'GaleForce'       ,4,'Roma Historia'                   ,2,4                    ,18,120         ,null       ,32.95,12)
-,('Small World'                 ,'Philippe Keyaerts'            ,2010,'Days of wonder'  ,4,null                     ,2,5                    ,null,null       ,null       ,41.95,11)
-,('Small World underground'     ,'Philippe Keyaerts'            ,2011,'Days of wonder'  ,4,null                     ,2,5                    ,null,null       ,null       ,39.95,9)
-,('Demarrage'                   ,'Rob Bontenbal'                ,1972,'Jumbo'           ,4,'Ciclismo'               ,2,4                    ,null,60       ,null       ,19.95,3)
-,('Leader 1'                    ,'A. Ollier & C. Leclerq'       ,2008,'Ghenos games'    ,4,'Ciclismo'               ,2,10                   ,14,90         ,null       ,22.95,6)
-,('1911 Amundsen vs Scott'      ,'Perepau LListosella'          ,2013,'Looping Games'   ,4,'Historia'               ,2,2                    ,10,20         ,null       ,13.45,22)
-,('El Señor de los Anillos LCG' ,'Nate French'                  ,2010,'edge'            ,3,'Fantasia'               ,1,4                    ,13,30-90         ,null       ,35.95,2)
-,('Zombicide' 			,'Jean-Baptiste'               	,2012,'edge'            ,4,'Terror'               ,1,6                    ,13,60         ,null       ,79.95,10)
-,('Los Colonos de Catán' 	,'Klaus Teuber'               	,1995,'Devir'            ,4,'Medieval'               ,2,4                    ,10,45         ,null       ,39.95,22)
-,('Dado de 6 caras'             ,null                           ,null,null              ,1,null                     ,null,null              ,null,null         ,null       ,0.75,45)
+('Bang!'                        ,'Emiliano Sciarra'             ,2002,'daVinci'         ,3,'Oeste'                  ,4,7                    ,null,null       ,null       ,9.95,13, null, null)
+,('Bang! dodge city'            ,'Emiliano Sciarra'             ,2004,'daVinci'         ,3,'Oeste'                  ,4,8                    ,null,null       ,null       ,5.95,9, null, null)
+,('Carcassone'                  ,'Klaus-Jürgen Wrede'           ,2001,'devir'           ,4,'Medieval Historia'               ,2,5                    ,8,null          ,null       ,21.95,18, null, null)
+,('Formula Dé'                  ,'Lauren Lavaur & Eric Randall' ,1996,'Euro games'      ,4,'Motor'                  ,2,10                   ,null,null       ,null       ,39.90,6, null, null)
+,('Blood Bowl Team Manager'     ,'Jay Little'                   ,2010,'edge'            ,3,null                     ,2,4                    ,null,null       ,null       ,31.95,11, null, null)
+,('Spartacus'                   ,'John Kovaleski'               ,2012,'GaleForce'       ,4,'Roma Historia'                   ,2,4                    ,18,120         ,null       ,32.95,12, 'juego ambientado en la antigua Roma', null)
+,('Small World'                 ,'Philippe Keyaerts'            ,2010,'Days of wonder'  ,4,null                     ,2,5                    ,null,null       ,null       ,41.95,11, null, null)
+,('Small World underground'     ,'Philippe Keyaerts'            ,2011,'Days of wonder'  ,4,null                     ,2,5                    ,null,null       ,null       ,39.95,9, null, null)
+,('Demarrage'                   ,'Rob Bontenbal'                ,1972,'Jumbo'           ,4,'Ciclismo'               ,2,4                    ,null,60       ,null       ,19.95,3, null, null)
+,('Leader 1'                    ,'A. Ollier & C. Leclerq'       ,2008,'Ghenos games'    ,4,'Ciclismo'               ,2,10                   ,14,90         ,null       ,22.95,6, null, null)
+,('1911 Amundsen vs Scott'      ,'Perepau LListosella'          ,2013,'Looping Games'   ,4,'Historia'               ,2,2                    ,10,20         ,null       ,13.45,22, null, null)
+,('El Señor de los Anillos LCG' ,'Nate French'                  ,2010,'edge'            ,3,'Fantasia'               ,1,4                    ,13,30-90         ,null       ,35.95,2, null, null)
+,('Zombicide' 			,'Jean-Baptiste'               	,2012,'edge'            ,4,'Terror'               ,1,6                    ,13,60         ,null       ,79.95,10, null, null)
+,('Los Colonos de Catán' 	,'Klaus Teuber'               	,1995,'Devir'            ,4,'Medieval'               ,2,4                    ,10,45         ,null       ,39.95,22, null, null)
+,('Dado de 6 caras'             ,null                           ,null,null              ,1,null                     ,null,null              ,null,null         ,null       ,0.75,45, null, null)
 ;
 
 insert into 3da2_comentarios_articulo

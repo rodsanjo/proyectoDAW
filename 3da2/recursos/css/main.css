@@ -35,6 +35,7 @@ body{
 }
 
 #sendero_migas_pan{
+    float: left;
     font-family: arial;
     font-size: 80%;
 }
@@ -45,4 +46,21 @@ body{
 
 #view_content{
     margin-left: 20%;
+}
+
+.form_buscar{
+    float: right;
+    width: 250px;
+    border: 1px solid blue;
+    margin-left: 5px;
+}
+
+.boton {
+    margin: 5px 5px;
+    padding: 2px;
+    line-height: 170%;
+    background-color: lightgray;
+    border: 1px solid black;
+    text-decoration: none;       
+    cursor:pointer;
 }

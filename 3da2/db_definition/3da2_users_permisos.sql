@@ -190,6 +190,7 @@ character set utf8 collate utf8_general_ci
 insert into 3da2_roles
   (rol			, descripcion) values
   ('administradores'	,'Administradores de la aplicación')
+,('empleados'           ,'Empleados de la tienda')
 , ('usuarios'		,'Todos los usuarios incluido anónimo')
 , ('usuarios_logueados'	,'Todos los usuarios excluido anónimo')
 ;
@@ -244,11 +245,14 @@ insert into 3da2_roles_permisos
 , ('usuarios'		,'mensajes'	,'*')
 , ('usuarios_logueados' ,'usuarios'	,'desconectar')
 , ('usuarios_logueados' ,'usuarios'	,'form_cambiar_password')
+, ('empleados'          ,'usuarios'	,'desconectar')
+, ('empleados'          ,'usuarios'	,'form_cambiar_password')
 ;
 
 insert into 3da2_usuarios_roles
   (login	,rol) values
   ('admin'	,'administradores')
+,('jorge'   ,'empleados')
 -- , ('anonimo'	,'usuarios')
 -- , ('juan'	,'usuarios')
 -- , ('juan'	,'usuarios_logueados')

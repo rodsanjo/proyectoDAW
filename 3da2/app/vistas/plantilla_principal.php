@@ -69,6 +69,10 @@
         <div id="sendero_migas_pan">
             <?php echo \controladores\sendero::ver(); ?>
         </div>
+        <form class="form_buscar" method='post' action='<?php echo \core\URL::generar("articulos/busqueda"); ?>' onsubmit='return(document.getElementById("buscar_nombre").value.length>0);'>
+            <input type="text" id='buscar_nombre' name='nombre' />
+            <input type='submit' value='Buscar' />
+        </form>
         <div id="view_content">
             <?php
                 echo $datos['view_content'];

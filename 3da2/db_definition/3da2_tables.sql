@@ -22,6 +22,7 @@ set sql_mode = 'traditional';
 
 /* TABLAS */
 
+drop table if exists 3da2_descargas;
 drop table if exists 3da2_pedidos_detalles;
 drop table if exists 3da2_pedidos;
 drop table if exists 3da2_carritos;
@@ -46,14 +47,16 @@ create table if not exists 3da2_articulos
 ,editorial varchar(30)
 ,anho integer
 ,foto varchar(50)
+,video varchar(50)
 ,manual varchar(50)
 ,categoria_id integer default 0
 ,tematica varchar(20) comment 'Que tema trata el juego o ambientacion'
-,num_min_jug integer default 1
+,num_min_jug integer
 ,num_max_jug integer
-,edad_min integer default 10
+,edad_min integer default 3 comment 'por contener piezas pequeñas generalmente'
 ,duracion varchar(10) comment 'minutos aproximados de duracion de una partida'
-,descripcion varchar(500) comment 'podrá ser una palabra para luego traducirla en el diccionario'
+,resenha varchar(300) comment 'breve reseña sobre el juego de mesa'
+,descripcion varchar(1000) comment 'podrá ser una palabra para luego traducirla en el diccionario'
 ,precio decimal(12,2) null comment 'precio en € con IVA incluido'
 ,unds_stock integer
 ,primary key(id)

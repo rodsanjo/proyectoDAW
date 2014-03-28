@@ -7,7 +7,7 @@
 //    for($i=0;$i<$num_arts_por_pag && $i<count($datos['filas']);$i++){
 //        $fila = $datos['filas'][$i];
     foreach ($datos['filas'] as $key => $fila){ //cada fila corresponde a un juego de mesa        
-        $img = ($fila["foto"]) ? "<img src='".URL_ROOT."recursos/imagenes/articulos/".$fila["foto"]."' width='200px' />" :"";
+        $img = ($fila["foto"]) ? "<img src='".URL_ROOT."recursos/imagenes/articulos/".$fila["foto"]."' alt='{$fila['nombre']}' tittle='{$fila['nombre']}' width='200px' />" :"";
         $num_max_jug = isset($fila['num_max_jug'])?$fila['num_max_jug']:null;
         if(is_null($num_max_jug) || $num_max_jug == $fila['num_min_jug']){
             $num_max_jug ='';
@@ -17,7 +17,8 @@
         $rangoJug = $fila['num_min_jug'].$num_max_jug;
         $articulo_nombre = str_replace(" ", "-", $fila['nombre']);
         $href = \core\URL::generar(array('articulos','juego',$articulo_nombre));
-        echo "<a href='$href'><h3>{$fila['nombre']}</h3></a>"
+        $title = ((isset($fila['resenha']) and strlen($filas['resenha'])) ? $filas['resenha'] : $fila['nombre']); 
+        echo "<a href='$href' title='$title'><h3>{$fila['nombre']}</h3></a>"
             .$img.
             "<div class='text_justificado'>
                 <p>&nbsp;</p>
@@ -54,7 +55,7 @@
     
     <a class='boton' href='<?php echo $href1 ?>' title="primero"><<</a>
     <a class='boton' href='<?php echo $href2 ?>' title="anterior"><</a>
-    
+    <?php echo 'Artículos'; ?>
     <a class='boton' href='<?php echo $href3 ?>' title="siguiente">></a>
     <a class='boton' href='<?php echo $href4 ?>' title="último">>></a>
     

@@ -36,7 +36,7 @@ delimiter //
 create trigger 3da2_t_ref_articulo_bi before insert on 3da2_articulos for each row
 begin
     declare _ultima_ref int;
-    select max(referencia) into _ultimo_ref_anho from 3da2_articulos;
+    select max(referencia) into _ultima_ref from 3da2_articulos;
     if (isnull(_ultima_ref)) then set _ultima_ref=0;
     end if;
     set new.referencia = _ultima_ref + 1;

@@ -18,14 +18,14 @@ body{
 }
 
 .boton {
-	margin: 5px 5px;
-	padding: 2px;
-	line-height: 170%;
-	background-color: lightgray;
-	border: 1px solid black;
-	text-decoration: none;
+    margin: 5px 5px;
+    padding: 2px;
+    line-height: 170%;
+    background-color: lightgray;
+    border: 1px solid black;
+    text-decoration: none;       
+    cursor:pointer;
 }
-
 #encabezado{
 	/*text-shadow:0 0 3px #FF0000;
 	font-size:150%;*/
