@@ -48,11 +48,16 @@ body{
     margin-left: 20%;
 }
 
+#sidebar_right{
+    float:right;
+}
 .form_buscar{
-    float: right;
     width: 250px;
     border: 1px solid blue;
     margin-left: 5px;
+}
+.cuadro_login{
+    float: right;
 }
 
 .boton {
@@ -64,3 +69,5 @@ body{
     text-decoration: none;       
     cursor:pointer;
 }
+
+

@@ -41,7 +41,7 @@ engine=myisam
 
 create table if not exists 3da2_articulos
 (id integer auto_increment
-,referencia integer(5) zerofill unsigned not null
+,referencia integer(5) zerofill unsigned not null default 0
 ,nombre varchar(50) unique not null comment 'titulo del juego de mesa'
 ,autor varchar(50)
 ,editorial varchar(30)
@@ -71,8 +71,8 @@ create table if not exists 3da2_comentarios_articulo
 ,articulo_nombre varchar(50) not null
 ,usuario_login varchar(20) not null
 ,comentario varchar(300) not null
-,fecha_comentario datetime
-,fecha_ult_edicion timestamp default now()
+,fecha_comentario datetime default now()
+,fecha_ult_edicion timestamp
 ,num_ediciones integer default 0
 ,primary key(id)
 ,foreign key(usuario_login) references 3da2_usuarios(login) on delete set default on update cascade

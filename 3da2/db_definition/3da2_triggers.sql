@@ -56,7 +56,7 @@ begin
 end;
 
 //
-delimiter;
+delimiter ;
 
 
 /*Número de ediciones de comentario y fecha de edición*/

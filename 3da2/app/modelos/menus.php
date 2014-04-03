@@ -39,7 +39,8 @@ class Menus{    //la clase se tiene que llamar igual que el archivo
         ,"Juegos de mesa" => array(
             "Juegos de tablero"=>"articulos,index,tablero,Juegos de Tablero"
             ,"Juegos de cartas"=>"articulos,index,cartas,Juegos de Cartas"
-            ,"2 jugadores"=>"articulos,index,2jugadores,2 jugadores"            
+            ,"2 jugadores"=>"articulos,index,2jugadores,2 jugadores"
+            ,"Solitarios"=>"articulos,index,solitarios,Solitarios" 
         )
         ,"Accesorios" => "articulos,index/accesorios,Accesorios"
         ,"Galería" => "galeria,index,Galeria de imagenes"

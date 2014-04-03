@@ -69,10 +69,19 @@
         <div id="sendero_migas_pan">
             <?php echo \controladores\sendero::ver(); ?>
         </div>
-        <form class="form_buscar" method='post' action='<?php echo \core\URL::generar("articulos/busqueda"); ?>' onsubmit='return(document.getElementById("buscar_nombre").value.length>0);'>
-            <input type="text" id='buscar_nombre' name='nombre' />
-            <input type='submit' value='Buscar' />
-        </form>
+        <div id="sidebar_right">
+            <form class="form_buscar" method='post' action='<?php echo \core\URL::generar("articulos/busqueda"); ?>' onsubmit='return(document.getElementById("buscar_nombre").value.length>0);'>
+                <input type='text' id='buscar_nombre' name='nombre'/>
+                <input type='submit' value='Buscar' />
+            </form>
+            <div class="cuadro_login">
+                <form class="validar_form_login" method='post' action='<?php echo \core\URL::generar("inicio/index"); ?>' onsubmit='return(document.getElementById("buscar_nombre").value.length>0);'>
+                    Usuario:<br/><input type="text" id='login' name='login' /><br/>
+                    Contraseña:<br/><input type="text" id='password' name='password'/><br/>
+                    <input type='submit' value='Entrar' />
+                </form>            
+            </div>
+        </div>
         <div id="view_content">
             <?php
                 echo $datos['view_content'];
@@ -107,7 +116,7 @@ heredoc;
 	
     <div id='globals'>
         <?php
-            var_dump($datos);
+//            var_dump($datos);
             print "<pre>"; 
                 print_r($GLOBALS);
                 print("\$_GET "); print_r($_GET);

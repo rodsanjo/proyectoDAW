@@ -15,8 +15,8 @@
     $rangoJug = $fila['num_min_jug'].$num_max_jug;
     $duracion = $fila['duracion'].' min.';
     $articulo_nombre = str_replace(" ", "-", $fila['nombre']);
-    $resenha = ((isset($fila['resenha']) and strlen($filas['resenha'])) ? $filas['resenha'] : ''); 
-    $descripcion = ((isset($fila['descripcion']) and strlen($filas['descripcion'])) ? $filas['descripcion'] : ''); 
+    $resenha = ((isset($fila['resenha']) and strlen($fila['resenha'])) ? $fila['resenha'] : ''); 
+    $descripcion = ((isset($fila['descripcion']) and strlen($fila['descripcion'])) ? $fila['descripcion'] : ''); 
     echo "<div class='text_justificado'>
             <p>$resenha</p>
             $img
@@ -54,3 +54,4 @@
         echo $comentario['comentario']."<br/><br/>";
     }
     ?>
+</div>

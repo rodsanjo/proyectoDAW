@@ -6,8 +6,8 @@ insert into 3da2_categorias values
 ,(3,'Cartas', 'Se juega sobre un tablero')
 ,(4,'Tablero', 'El componente principal del juego son cartas')
 ,(5,'Dados', 'Juegos que utilizan dados sin tablero ni cartas')
-,(5,'Infantil', 'Recomendado para los más pequeños')
-,(6,'Solitario' , 'Juego para una sola persona')
+,(6,'Infantil', 'Recomendado para los más pequeños')
+,(7,'Solitario' , 'Juego para una sola persona')
 ;
 
 insert into 3da2_articulos
@@ -28,8 +28,8 @@ values
 ,('Zombicide' 			,'Jean-Baptiste'               	,2012,'edge'            ,4,'Terror'               ,1,6                    ,13,60              ,79.95,10, null, null)
 ,('Los Colonos de Catán' 	,'Klaus Teuber'               	,1995,'Devir'            ,4,'Medieval'               ,2,4                    ,10,45          ,39.95,22, null, null)
 ,('Dado de 6 caras'             ,null                           ,null,null              ,1,null                     ,null,null              ,null,null        ,0.75,45, null, null)
-,('Un mundo sin fin'             ,'Michael Riencek & Stefan Stadler'                           ,2009,'Devir'              ,5,'Medieval'                     ,2,4              ,12,'90-120'          ,9.99,4, null, null)
-,('Los Colonos de Catán: el juego de dados' 	,'Klaus Teuber'               	,2007,'Devir'            ,4,'Medieval'               ,1,4                    ,7,'15-30'          ,2.95,15, null, null)
+,('Un mundo sin fin'             ,'Michael Riencek & Stefan Stadler'                           ,2009,'Devir'              ,4,'Medieval'                     ,2,4              ,12,'90-120'          ,9.99,4, null, null)
+,('Los Colonos de Catán: el juego de dados' 	,'Klaus Teuber'               	,2007,'Devir'            ,5,'Medieval'               ,1,4                    ,7,'15-30'          ,2.95,15, null, null)
 ;
 
 /*Descripciones de los articulos*/

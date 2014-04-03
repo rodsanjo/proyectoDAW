@@ -6,7 +6,7 @@ class articulos extends \core\Controlador{
     private static $tabla = 'articulos';
     private static $tabla2 = 'comentarios_articulo';
     private static $controlador = 'articulos';
-    public static $num_arts_por_pag = 3;
+    public static $num_arts_por_pag = 4;
     
     /**
      * Presenta una <table> con las filas de la tabla con igual nombre que la clase.
@@ -18,16 +18,23 @@ class articulos extends \core\Controlador{
         if(isset($_REQUEST['p3'])){
             $sql = 'select id from 3da2_categorias where categoria like "%'.$_REQUEST['p3'].'%"';
             $categoria_id = \modelos\Modelo_SQL::execute($sql);
-            $clausulas['where'] = 'categoria_id = "'.$categoria_id[0]['id'].'"';
+            if(count($categoria_id)) $clausulas['where'] = 'categoria_id = "'.$categoria_id[0]['id'].'"';
             //Categorias especiales:            
             if($_REQUEST['p3']=='2jugadores'){
                 $clausulas['where']='num_min_jug <= 2 and num_max_jug = 2';
-            }elseif($_REQUEST['p3']=='solitario'){
-                $clausulas['where']='num_min_jug >= 1';
+            }elseif($_REQUEST['p3']=='solitarios'){
+                $clausulas['where']='num_min_jug = 1';
+            }elseif($_REQUEST['p3']=='busqueda'){
+                $busqueda = isset($_SESSION['busqueda'])?$_SESSION['busqueda']:'';
+                $clausulas["where"] = "nombre like '%$busqueda%' ";
+                /*
+                $busqueda =array('nombre' => isset($_SESSION['busqueda'])?$_SESSION['busqueda']:'' );
+                self::busqueda($busqueda);
+                 */
             }
         }
-        $next_art = isset($_REQUEST['p4'])?$_REQUEST['p4']:0;
-        $next_art *= self::$num_arts_por_pag;
+        $next_grp = isset($_REQUEST['p4'])?$_REQUEST['p4']:0;
+        $next_art = $next_grp * self::$num_arts_por_pag;
         $clausulas['order_by'] = 'nombre';
         $clausulas['limit'] = $next_art.",".self::$num_arts_por_pag;
         //$datos["filas"] = \modelos\self::$tabla::select($clausulas, "self::$tabla"); // Recupera todas las filas ordenadas
@@ -35,8 +42,11 @@ class articulos extends \core\Controlador{
         
         $sql = "select count(*) as num_total_juegos from 3da2_articulos where ".$clausulas['where'];
         $datos["num_total_juegos"] = \modelos\Modelo_SQL::execute($sql);
-        
-        
+
+        if($next_grp >= $datos["num_total_juegos"][0]['num_total_juegos']/self::$num_arts_por_pag){
+            $datos['mensaje'] = '<b>Entrada incorrecta</b>';
+            \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
+        }
         //Mostramos los datos a modificar en formato europeo. Convertimos el formato de MySQL a europeo
         self::convertir_formato_mysql_a_ususario($datos['filas']);
 
@@ -65,8 +75,8 @@ class articulos extends \core\Controlador{
         }else{   
             $datos['articulo'] = $filas[0];
             
-            $clausulas['where'] = " articulo_nombre like '%$articulo_nombre%' ";
-            $clausulas['order by'] = 'fecha_comentario desc';
+            $clausulas['where'] = " articulo_nombre = '$articulo_nombre' ";
+            $clausulas['order by'] = 'fecha_comentario asc';
             $datos["comentarios"] = \modelos\Modelo_SQL::table(self::$tabla2)->select($clausulas);
         }
         
@@ -100,12 +110,20 @@ class articulos extends \core\Controlador{
             $clausulas['limit'] = $next_art.",".self::$num_arts_por_pag;
             //$datos["filas"] = \modelos\self::$tabla::select($clausulas, "self::$tabla"); // Recupera todas las filas ordenadas
             $datos["filas"] = \modelos\Modelo_SQL::table(self::$tabla)->select($clausulas); // Recupera todas las filas ordenadas
+
+            $busqueda = isset($datos["values"]["nombre"])?$datos["values"]["nombre"]:'';
+            $_SESSION['busqueda'] = $busqueda; 
             
-            $clausulas["where"] = "nombre like '%{$datos["values"]["nombre"]}%' ";
+            $clausulas["where"] = "nombre like '%$busqueda%' ";
             $datos["filas"] = \modelos\Modelo_SQL::table("articulos")->select($clausulas);
 
             $sql = "select count(*) as num_total_juegos from 3da2_articulos where ".$clausulas['where'];
             $datos["num_total_juegos"] = \modelos\Modelo_SQL::execute($sql);
+            
+            if($datos["num_total_juegos"][0]['num_total_juegos'] == 0){
+                $datos['mensaje'] = '<b>No se encontraron articulos que coincidan con la busqueda especificada</b>';
+                \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
+            }
 
             //Mostramos los datos a modificar en formato europeo. Convertimos el formato de MySQL a europeo
             self::convertir_formato_mysql_a_ususario($datos['filas']);
@@ -425,9 +443,11 @@ class articulos extends \core\Controlador{
             if(isset($param['fecha_edicion']))
                 $param['fecha_edicion'] = \core\Conversiones::fecha_hora_mysql_a_es($param[$key]['fecha_edicion']);
             //Si hubiera fechas
+            /*
             if(preg_match("/MSIE|Firefox|Trident/", $_SERVER['HTTP_USER_AGENT'])){  //Para IE7
                 $param['fecha']=  \core\Conversiones::fecha_mysql_a_es($param['fecha']);
             }
+             */
             //fecha_entrada es readOnly en los formularios, por lo que no es necesario realizar la conversión.
         }
         

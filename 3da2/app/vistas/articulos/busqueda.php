@@ -17,7 +17,7 @@
         $rangoJug = $fila['num_min_jug'].$num_max_jug;
         $articulo_nombre = str_replace(" ", "-", $fila['nombre']);
         $href = \core\URL::generar(array('articulos','juego',$articulo_nombre));
-        $title = ((isset($fila['resenha']) and strlen($filas['resenha'])) ? $filas['resenha'] : $fila['nombre']); 
+        $title = ((isset($fila['resenha']) and strlen($fila['resenha'])) ? $fila['resenha'] : $fila['nombre']); 
         echo "<a href='$href' title='$title'><h3>{$fila['nombre']}</h3></a>"
             .$img.
             "<div class='text_justificado'>
@@ -34,12 +34,14 @@
         //<p>Precio: <b class='precio'>".\core\Conversiones::decimal_punto_a_coma_y_miles($fila['precio'])." €</b></p>
   
     }
-    $categoria = isset($_REQUEST['p3'])?$_REQUEST['p3']:'g_juegos'; //g_juegos no vale para nada, solo para que p3 no quede vacio a la vista del usuario
+    $categoria = isset($_REQUEST['p3'])?$_REQUEST['p3']:'busqueda'; //busqueda lo enviamos por get como parametro 3
     $num_grupo = isset($_REQUEST['p4'])?$_REQUEST['p4']:'';
     $num_total_juegos = $datos["num_total_juegos"][0]['num_total_juegos'];
     $ult_grupo = floor($num_total_juegos/\controladores\articulos::$num_arts_por_pag);
-    if($ult_grupo > 1 && $num_total_juegos%$ult_grupo == 0){    //Evto el cero por indeterminación y el 1 por ser primo
+    if($ult_grupo > 1 && $num_total_juegos%\controladores\articulos::$num_arts_por_pag == 0){    //Evito el cero por indeterminación y el 1 por ser primo
         $ult_grupo--; 
+    }elseif($ult_grupo == 1 && $num_total_juegos == \controladores\articulos::$num_arts_por_pag){    //Evita el 1
+        $ult_grupo = 0;
     }
     $grupo_ant = $num_grupo-1;
     if($grupo_ant < 0) $grupo_ant = 0;

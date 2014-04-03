@@ -11,6 +11,7 @@ Juegos de mesa|Boardgames
 Juegos de tablero|Table games
 Juegos de cartas|Card games
 2 jugadores|2 players
+Solitarios|Solitaire
 Accesorios|Accesories
 Galería|Galery
 Enlaces|Links
