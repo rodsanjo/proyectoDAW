@@ -44,88 +44,78 @@ class usuarios extends \core\Controlador {
 	
 	public function form_login_validar(array $datos = array()) {
 		
-		if (\core\Usuario::$login != "anonimo") {
-								exit(__METHOD__.__LINE__);
+            if (\core\Usuario::$login != "anonimo") {
+                exit(__METHOD__.__LINE__);
 
-			$datos["mensaje"] = "Ya te encuentras conectado. Utiliza el menú para navegar.";
-			\core\Distribuidor::cargar_controlador("mensajes", "mensaje", $datos);
-		}
-		elseif ( ! \core\HTML_Tag::form_autenticar("form_login", "post")) {
-			// El formulario no se ha enviado con anterioridad desde el servidor
-			$datos["mensaje"] = "Error: formulario no identificado.";
-			\core\Distribuidor::cargar_controlador("errores", "mensaje", $datos);
-		}
-		else {
+                $datos["mensaje"] = "Ya te encuentras conectado. Utiliza el menú para navegar.";
+                \core\Distribuidor::cargar_controlador("mensajes", "mensaje", $datos);
+            }elseif ( ! \core\HTML_Tag::form_autenticar("form_login", "post")) {
+                    // El formulario no se ha enviado con anterioridad desde el servidor
+                $datos["mensaje"] = "Error: formulario no identificado.";
+                \core\Distribuidor::cargar_controlador("errores", "mensaje", $datos);
+            }else {
+                // El formulario sí se ha enviado desde el servidor
+                $validaciones = array(
+                    'login' => 'errores_requerido && errores_login',
+                    'password' => 'errores_requerido '
+                );
 
-				// El formulario sí se ha enviado desde el servidor
-				$validaciones = array(
-					'login' => 'errores_requerido && errores_login',
-					'password' => 'errores_requerido '
-				);
+                $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos);
+                if ($validacion && \core\Configuracion::$form_login_catcha) {
+                    require_once(PATH_APP.'lib/php/recaptcha-php-1.11/recaptchalib.php');
+                    $privatekey = "6Lem1-sSAAAAAPfnSmYe5wyruyuj1B7001AJ3CBh";
+                    $resp = recaptcha_check_answer ($privatekey,
+                            $_SERVER["REMOTE_ADDR"],
+                            $_POST["recaptcha_challenge_field"],
+                            $_POST["recaptcha_response_field"]);
 
-				$validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos);
-				if ($validacion && \core\Configuracion::$form_login_catcha) {
-					require_once(PATH_APP.'lib/php/recaptcha-php-1.11/recaptchalib.php');
-					$privatekey = "6Lem1-sSAAAAAPfnSmYe5wyruyuj1B7001AJ3CBh";
-					$resp = recaptcha_check_answer ($privatekey,
-												  $_SERVER["REMOTE_ADDR"],
-												  $_POST["recaptcha_challenge_field"],
-												  $_POST["recaptcha_response_field"]);
+                    if ( ! $resp->is_valid) {
+                        $validacion = false;
+                        $datos['errores']['validacion'] = 'Error de intruducción del captcha.';
+//			\core\Distribuidor::cargar_controlador("usuarios", "form_login", $datos);
+                    }
+                }
 
-					if ( ! $resp->is_valid) {
-							$validacion = false;
-							$datos['errores']['validacion'] = 'Error de intruducción del captcha.';
-//							\core\Distribuidor::cargar_controlador("usuarios", "form_login", $datos);
-					}
+                if ($validacion) {
+                    // En este punto el captcha se ha superado y validado las inputs
+                    if (\core\Configuracion::$usuarios_origen == "bd") {                                            
+                        $respuesta = \modelos\Modelo_SQL::table("usuarios")->validar_usuario($datos['values']['login'], $datos['values']['password']);
+                        //$respuesta = \modelos\Usuarios::validar_usuario($datos['values']['login'], $datos['values']['password']);
+                    }else {
+                        $respuesta = \core\Usuario::autenticar_en_ACL($datos['values']['login'], $datos['values']['password']);
+                    }
 
-				}
-				
-				if ($validacion) {
-					// En este punto el captcha se ha superado y validado las inputs
-					if (\core\Configuracion::$usuarios_origen == "bd") {                                            
-                                            $respuesta = \modelos\Modelo_SQL::table("usuarios")->validar_usuario($datos['values']['login'], $datos['values']['password']);
-                                            //$respuesta = \modelos\Usuarios::validar_usuario($datos['values']['login'], $datos['values']['password']);
-					}
-					else {
-						$respuesta = \core\Usuario::autenticar_en_ACL($datos['values']['login'], $datos['values']['password']);
-					}
-					
-					
-					if  ($respuesta == 'existe') {
-						$datos['errores']['validacion'] = 'Error en login o password';
-						\core\Distribuidor::cargar_controlador("usuarios", "form_login", $datos);
-					}
-					elseif ($respuesta == 'existe_autenticado') {
-						$datos['mensaje'] = "Falta confimación del usuario {$datos['values']['login']}. Consulta tu correo electrónico" ;
-						$this->cargar_controlador('mensajes', 'mensaje', $datos);
-					}
-					elseif ($respuesta == 'existe_autenticado_confirmado') {
-						$datos['login'] = $datos['values']['login'];
+                    if  ($respuesta == 'existe') {
+                        $datos['errores']['validacion'] = 'Error en login o password';
+                        \core\Distribuidor::cargar_controlador("usuarios", "form_login", $datos);
+                    }elseif ($respuesta == 'existe_autenticado') {
+                        $datos['mensaje'] = "Falta confimación del usuario {$datos['values']['login']}. Consulta tu correo electrónico" ;
+                        $this->cargar_controlador('mensajes', 'mensaje', $datos);
+                    }elseif ($respuesta == 'existe_autenticado_confirmado') {
+                        $datos['login'] = $datos['values']['login'];
 
-						$clausulas['where'] = " login = '{$datos['values']['login']}' ";
-						$filas = \modelos\Modelo_SQL::table("usuarios")->select($clausulas);
+                        $clausulas['where'] = " login = '{$datos['values']['login']}' ";
+                        $filas = \modelos\Modelo_SQL::table("usuarios")->select($clausulas);
 
-						\core\Usuario::nuevo($datos['values']['login'], $filas[0]['id']);
-						$datos["mensaje"] = "Bienvenido la aplicación: <b>{$datos['values']['login']}</b>." ;
-						$this->cargar_controlador('mensajes', 'mensaje', $datos);
-							
-					}
-					elseif ($respuesta == 'autenticado_en_ACL') {
-						
-						$datos['login'] = $datos['values']['login'];
-						\core\Usuario::nuevo($datos['values']['login']);
-						$datos["mensaje"] = "Bienvenido la aplicación: <b>{$datos['values']['login']}</b>." ;
-						$this->cargar_controlador('mensajes', 'mensaje', $datos);
-						
-					}else{
-						$datos['mensaje'] = "Usuario <b><i>{$datos['values']['login']}</i></b> no registrado.";
-						$this->cargar_controlador('mensajes', 'mensaje', $datos);
-					}
-				}
-				else {
-					\core\Distribuidor::cargar_controlador("usuarios", "form_login", $datos);
-				}
-			}
+                        \core\Usuario::nuevo($datos['values']['login'], $filas[0]['id']);
+                        $datos["mensaje"] = "Bienvenido la aplicación: <b>{$datos['values']['login']}</b>." ;
+                        $this->cargar_controlador('mensajes', 'mensaje', $datos);
+
+                    }elseif ($respuesta == 'autenticado_en_ACL') {
+
+                        $datos['login'] = $datos['values']['login'];
+                        \core\Usuario::nuevo($datos['values']['login']);
+                        $datos["mensaje"] = "Bienvenido la aplicación: <b>{$datos['values']['login']}</b>." ;
+                        $this->cargar_controlador('mensajes', 'mensaje', $datos);
+
+                    }else{
+                        $datos['mensaje'] = "Usuario <b><i>{$datos['values']['login']}</i></b> no registrado.";
+                        $this->cargar_controlador('mensajes', 'mensaje', $datos);
+                    }
+                }else{
+                    \core\Distribuidor::cargar_controlador("usuarios", "form_login", $datos);
+                }   
+            }
 			
 	}
 		

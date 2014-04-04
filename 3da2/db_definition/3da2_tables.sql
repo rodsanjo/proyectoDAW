@@ -90,24 +90,21 @@ create table if not exists 3da2_carritos
 , texto blob not null
 , primary key (id)
 )
-engine = innodb
+engine = myisam
 default charset=utf8
 ;
 
-
-
 create table if not exists 3da2_pedidos
 ( id integer unsigned auto_increment
-, fecha_hora_inicio timestamp not null default current_timestamp comment "Fecha de apertura del pediddo"
+, fecha_hora_inicio timestamp not null default current_timestamp comment 'Fecha de apertura del pediddo'
 , fecha_hora_compra datetime null 
 , usuario_id integer unsigned not null
 , primary key (id)
 , foreign key (usuario_id) references 3da2_usuarios(id)
 )
-engine = innodb
+engine = myisam
 default charset=utf8
 ;
-
 
 create table if not exists 3da2_pedidos_detalles
 ( id integer unsigned auto_increment
@@ -119,9 +116,9 @@ create table if not exists 3da2_pedidos_detalles
 , foto varchar(50) null
 , primary key (id)
 , foreign key (pedido_id) references 3da2_pedidos(id) on delete cascade
-, foreign key (articulo_id) references 3da2_articulos(id)
+, foreign key (articulo_id) references 3da2_articulos(id) /*Tengo que eliminar esta FK pa que funcione*/
 )
-engine = innodb
+engine = myisam
 default charset=utf8
 ;
 

@@ -2,7 +2,7 @@
     <h3>Artículos disponibles:</h3>
     
     <?php
-    echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar");
+    echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar un nuevo artículo");
 
     foreach ($datos['filas'] as $key => $fila){ //cada fila corresponde a un juego de mesa        
         $img = ($fila["foto"]) ? "<img src='".URL_ROOT."recursos/imagenes/articulos/".$fila["foto"]."' alt='{$fila['nombre']}' tittle='{$fila['nombre']}' width='200px' />" :"";
@@ -23,7 +23,20 @@
                 <p>Precio: <b class='precio'>{$fila['precio']} €</b></p>                    
                 <p>Jugadores: $rangoJug</p>
                 <a class='button' href='$href'>Mas detalles</a>
-            </div>"
+            </div>
+                
+            <form method='post' action='".\core\URL::generar('carrito/meter')."' >
+                <input type='hidden' name='articulo_id' value='{$fila['id']}' />
+                <tr>
+                    <td><input type='hidden' readonly='readonly' name='nombre' value='{$fila['nombre']}' /></td>
+                    <td><input type='hidden' readonly='readonly' name='precio' value='{$fila['precio']}' /></td>
+                    <td><input type='text'  name='unidades' value='1' size='2'/></td>
+                    <td>
+                        <input name='accion' type='submit' value='añadir' />
+                    </td>
+                </tr>
+            </form>"
+                
             .\core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_modificar", $fila['id']), "Modificar")
             //<a class='boton' href='?menu={$datos['controlador_clase']}&submenu=form_modificar&id={$fila['id']}' >modificar</a>
             .\core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")

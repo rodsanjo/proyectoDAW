@@ -29,32 +29,39 @@ drop table if exists 3da2_metodos;
 drop table if exists 3da2_datos_usuarios;
 drop table if exists 3da2_usuarios;
 
-create table if not exists 3da2_usuarios
-(id integer unsigned not null auto_increment
-,login varchar(20) unique not null
-,email varchar(100) unique not null
-,password char(40) not null
-,fecha_alta timestamp not null default current_timestamp()
-,fecha_confirmacion_alta datetime default null
-,clave_confirmacion char(30) null
-,primary key (id)
-)
-engine=myisam
-character set utf8 collate utf8_general_ci
-;
 /*
 create table if not exists 3da2_usuarios
 (id integer unsigned not null auto_increment primary key
-,login varchar(20) unique not null
+,login varchar(20) not null
 ,password char(40) not null
 ,email varchar(100) unique not null
+,fecha_alta timestamp not null default now() /*current_timestamp()
+,fecha_confirmacion_alta datetime
+,clave_confirmacion char(30)
+,fecha_nac date
+,nombre varchar(45)
+,apellidos varchar(100)
+,tlfs varchar(30)
+,nif varchar(10) unique
+,pais varchar(30) not null default 'España'
 )
-engine=myisam
+engine=innodb
+;
+*/
+
+create table if not exists 3da2_usuarios
+(id integer unsigned not null auto_increment primary key
+,login varchar(20) not null
+,password char(40) not null
+,email varchar(45) unique not null
+,UNIQUE KEY login (login)
+)
+engine=innodb
 ;
 
 create table if not exists 3da2_datos_usuarios
 (usuario_login varchar(20)
-,fecha_alta timestamp not null default now() /*current_timestamp()
+,fecha_alta timestamp not null default now() /*current_timestamp()*/
 ,fecha_confirmacion_alta datetime
 ,clave_confirmacion char(30)
 ,fecha_nac date
@@ -70,9 +77,9 @@ create table if not exists 3da2_datos_usuarios
 ,primary key(usuario_login)
 ,foreign key(usuario_login) references 3da2_usuarios(login)
 )
-engine=myisam
+engine=innodb
 ;
-*/
+
 
 -- Recursos almacena la colección de funcionalidades que es posible desarrollar en la aplicación.
 
@@ -83,7 +90,7 @@ create table if not exists 3da2_metodos
 , primary key (id)
 , unique (controlador, metodo)
 )
-engine=myisam
+engine=innodb
 character set utf8 collate utf8_general_ci
 ;
 
@@ -98,14 +105,13 @@ create table if not exists 3da2_roles
 , primary key (id)
 , unique (rol)
 )
-engine=myisam
+engine=innodb
 character set utf8 collate utf8_general_ci
 ;
 
 
 /* seccion y subseccion se validarán en v_negocios_permisos */
-
-create table 3da2_roles_permisos
+create table if not exists 3da2_roles_permisos
 ( id integer unsigned auto_increment not null
 , rol varchar(50) not null
 , controlador varchar(50) not null comment 'Si vale * equivale a todos los controladores'
@@ -115,9 +121,10 @@ create table 3da2_roles_permisos
 , foreign key (rol) references 3da2_roles(rol) on delete cascade on update cascade
 , foreign key (controlador, metodo) references 3da2_metodos(controlador, metodo) on delete cascade on update cascade
 )
-engine=myisam
+engine=innodb
 character set utf8 collate utf8_general_ci
 ;
+
 
 create table 3da2_usuarios_roles
 ( id integer unsigned auto_increment not null
@@ -125,12 +132,13 @@ create table 3da2_usuarios_roles
 , rol varchar(50) not null
 , primary key (id)
 , unique (login, rol) -- Evita que a un usuario se le asigne más de una vez el mismo rol
-, foreign key ( login) references 3da2_usuarios(login) on delete cascade on update cascade
-, foreign key ( rol) references 3da2_roles(rol) on delete cascade on update cascade
+, foreign key (login) references 3da2_usuarios(login) on delete cascade on update cascade
+, foreign key (rol) references 3da2_roles(rol) on delete cascade on update cascade
 )
-engine=myisam
+engine=innodb
 character set utf8 collate utf8_general_ci
 ;
+
 
 -- Algunos hosting no dan el permiso de trigger por lo que habrá que implementarlo en programación php.
 drop trigger if exists 3da2_t_usuarios_ai;
@@ -153,6 +161,7 @@ end;
 delimiter ;
 
 
+
 create table 3da2_usuarios_permisos
 ( id integer unsigned auto_increment not null
 , login varchar(20) not null
@@ -163,7 +172,7 @@ create table 3da2_usuarios_permisos
 , foreign key (login) references 3da2_usuarios(login) on delete cascade on update cascade
 , foreign key (controlador, metodo) references 3da2_metodos(controlador, metodo) on delete cascade on update cascade
 )
-engine=myisam
+engine=innodb
 character set utf8 collate utf8_general_ci
 ;
 
@@ -182,7 +191,7 @@ create table 3da2_menu
 , unique (es_submenu_de_id, texto) -- Para evitar repeticiones de texto
 , unique (accion_controlador, accion_metodo) -- Si una acción/funcionalidad solo debe aparecer una vez en el menú
 )
-engine=myisam
+engine=innodb
 character set utf8 collate utf8_general_ci
 ;
 
@@ -201,7 +210,7 @@ insert into 3da2_roles
 
 
 insert into 3da2_usuarios 
-  (login, email, password, fecha_confirmacion_alta) values
+  (login, email, password, fecha_alta) values
   ('admin', 'admin@3da2.com', md5('admin00'), now())
 , ('anonimo', 'anonimo@email.com', md5(''), now())
 , ('jorge', 'jergo23@gmail.com', md5('jorge00'), now())

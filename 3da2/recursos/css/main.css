@@ -45,19 +45,35 @@ body{
 }
 
 #view_content{
+    margin-top: 40px;
     margin-left: 20%;
 }
 
 #sidebar_right{
     float:right;
+
+}
+#sidebar_right > div{
+    text-align: right;
+    /*width: 200px;*/
 }
 .form_buscar{
-    width: 250px;
-    border: 1px solid blue;
-    margin-left: 5px;
+    width: 200px;
+    padding: 5px;
+    background: aquamarine;
+    margin-right: 0px;
+    border-radius: 10px;
 }
-.cuadro_login{
+#cuadro_login{
     float: right;
+    padding: 5px;
+    margin-top: 10px;
+    background: gainsboro;
+    border: solid 0.5px;
+    border-radius: 10px;
+}
+.validar_form_login{
+        text-align: left;
 }
 
 .boton {
@@ -68,6 +84,14 @@ body{
     border: 1px solid black;
     text-decoration: none;       
     cursor:pointer;
+}
+.menu_adm{
+    border: 1px red solid;
+    margin-top: 20px;
+    background: darkorange;
+    width: 150px;
+    list-style: none;
+    text-align: center;
 }
 
 

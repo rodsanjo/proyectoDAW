@@ -40,6 +40,8 @@ class articulos extends \core\Controlador{
         //$datos["filas"] = \modelos\self::$tabla::select($clausulas, "self::$tabla"); // Recupera todas las filas ordenadas
         $datos["filas"] = \modelos\Modelo_SQL::table(self::$tabla)->select($clausulas); // Recupera todas las filas ordenadas        
         
+        $_SESSION["expositor_actual"] = \core\URL::actual();
+        
         $sql = "select count(*) as num_total_juegos from 3da2_articulos where ".$clausulas['where'];
         $datos["num_total_juegos"] = \modelos\Modelo_SQL::execute($sql);
 
@@ -66,16 +68,18 @@ class articulos extends \core\Controlador{
         
         if(isset($_GET['p3'])){
             $articulo_nombre = str_replace("-", " ", $_GET['p3']);
+            //$articulo_nombre = mysql_escape_string($articulo_nombre);
+            //printf("Escaped string: %s\n", $articulo_nombre);
             $clausulas['where'] = " nombre like '%$articulo_nombre%' ";
         }
         if ( ! $filas = \modelos\Datos_SQL::select( $clausulas, self::$tabla)) {
-            $datos['mensaje'] = 'Error al recuperar la fila de la base de datos';
+            $datos['mensaje'] = 'El articulo seleccionado no se encuentra en nuestro catálogo de productos';
             \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
             return;
         }else{   
             $datos['articulo'] = $filas[0];
             
-            $clausulas['where'] = " articulo_nombre = '$articulo_nombre' ";
+            $clausulas['where'] = " articulo_nombre like '%$articulo_nombre%' ";
             $clausulas['order by'] = 'fecha_comentario asc';
             $datos["comentarios"] = \modelos\Modelo_SQL::table(self::$tabla2)->select($clausulas);
         }

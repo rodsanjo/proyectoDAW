@@ -34,7 +34,7 @@
     <script type="text/javascript" src="<?php echo \core\URL::generar_sin_idioma(); ?>recursos/js/idiomas.js"></script>
     
     <script type="text/javascript" src=""></script>
-    <script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="<?php echo URL_HOME_ROOT ?>recursos/js/jquery/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/funciones.js"></script>
     
     <script type="text/javascript">       
@@ -65,22 +65,51 @@
             <?php 
                 include PATH_APPLICATION_APP."vistas/partes/menu_left.php";
             ?>
+            <?php echo \core\HTML_Tag::li_menu("menu_adm", array("usuarios"), "Usuarios"); ?>
+            <?php echo \core\HTML_Tag::li_menu("menu_adm", array("roles"), "Roles"); ?>
         </div>
         <div id="sendero_migas_pan">
             <?php echo \controladores\sendero::ver(); ?>
         </div>
         <div id="sidebar_right">
             <form class="form_buscar" method='post' action='<?php echo \core\URL::generar("articulos/busqueda"); ?>' onsubmit='return(document.getElementById("buscar_nombre").value.length>0);'>
-                <input type='text' id='buscar_nombre' name='nombre'/>
-                <input type='submit' value='Buscar' />
+                <input type='submit' value='Buscar' title='Buscar'/>
+                <input type='text' id='buscar_nombre' name='nombre' title='Introduzca el nombre o parte del nombre del articulo a buscar'/>        
             </form>
-            <div class="cuadro_login">
-                <form class="validar_form_login" method='post' action='<?php echo \core\URL::generar("inicio/index"); ?>' onsubmit='return(document.getElementById("buscar_nombre").value.length>0);'>
-                    Usuario:<br/><input type="text" id='login' name='login' /><br/>
-                    Contraseña:<br/><input type="text" id='password' name='password'/><br/>
+            
+            <div id="cuadro_login">
+                <form class="validar_form_login" method='post' action='<?php echo \core\URL::generar("usuarios/form_login_validar"); ?>' >
+                    <?php echo \core\HTML_Tag::form_registrar("form_login", "post"); ?>
+                    Usuario:<br/><input type='text' id='login' name='login' value='<?php echo \core\Datos::values('login', $datos) ?>'/><br/>
+                    Contraseña:<br/><input type='password' id='password' name='password' value='<?php echo \core\Datos::values('password', $datos) ?>'/><br/>
                     <input type='submit' value='Entrar' />
                 </form>            
             </div>
+            <div style="clear: both;">
+                Usuario:
+                <?php 
+                    echo "<b>".\core\Usuario::$login."</b><br/>";
+                    if (\core\Usuario::$login != 'anonimo') {
+                        echo " <a href='".\core\URL::generar("usuarios/desconectar")."'>Desconectar</a>";
+                    }
+                    else {
+                        if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_login")) {
+                                echo " <a href='".\core\URL::generar("usuarios/form_login")."'>Conectar</a>";
+                        }
+                        if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_insertar_externo")) {
+                                echo " <a href='".\core\URL::generar("usuarios/form_insertar_externo")."'>Regístrate</a>";
+                        }
+                    }	
+                ?>
+            </div>
+            
+            <div id='carrito'>
+                <?php
+                    echo self::incluir("carrito", "ver");
+                    //echo $datos["carrito"];
+                ?>
+            </div>
+            
         </div>
         <div id="view_content">
             <?php
@@ -116,7 +145,7 @@ heredoc;
 	
     <div id='globals'>
         <?php
-//            var_dump($datos);
+            var_dump($datos);
             print "<pre>"; 
                 print_r($GLOBALS);
                 print("\$_GET "); print_r($_GET);
