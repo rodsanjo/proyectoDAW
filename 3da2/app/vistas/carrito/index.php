@@ -19,18 +19,30 @@
                     $total = $articulo['unidades'] * $articulo['precio'];
                     $total_acumulado += $total;
                     echo "
-                        
-
-                        <form method='post' action='".\core\URL::generar("carrito/modificar")."'>
-                            <input type='hidden' name='articulo_id' value='$articulo_id' />
-                            <input type='hidden' name='unidades' value='".number_format($articulo["unidades"], 0, ",", ".")."' />
+                        <td>".number_format($articulo["unidades"], 0, ",", ".")." x </td>
+                        <td>{$articulo['nombre']}</td>
+                        <td>".number_format($total,2,",",".")."</td>
+                            
+                            <form method='post' action='".\core\URL::generar("carrito/modificar")."'>
+                                    <input type='hidden' name='articulo_id' value='$articulo_id' />
                             <tr>
-                                <td name='unidades'>".number_format($articulo["unidades"], 0, ",", ".")." x </td>
-                                <td>{$articulo['nombre']}</td>
-                                <td>".number_format($total,2,",",".")."</td>
+                                    <td>{$articulo['nombre']}</td>
+                                    <td></td>
+                                    <td><input id='unidades' name='unidades' size='8' value='".number_format($articulo["unidades"], 0, ",", ".")."' /></td>
+                                    <td>"
+                                                    .number_format($articulo['precio'], 2, ",", ".").
+//								.$articulo["precio"].
+                                                    "</td>
+
+                                    <td>"
+                                    . number_format($total,2,",",".") .
+                                    "</td>
+                                    <td>								
+                                    <input name='accion' type='submit' value='corregir' />
+                                    <input name='accion' type='submit' value='quitar' />
+                                    </td>
                             </tr>
-                            <input name='accion' type='submit' value='quitar' />
-                        </form>
+                            </form>
                             ";
                 }
                 echo "<tr><td colspan='4'></td><td><b>".number_format($total_acumulado,2,",",".") ."</b></td><td></td></tr>";

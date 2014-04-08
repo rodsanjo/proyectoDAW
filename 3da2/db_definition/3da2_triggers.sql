@@ -1,5 +1,5 @@
 /*Número de referencia*/
-drop function if exists 3da2_f_num_ref_articulo
+drop function if exists 3da2_f_num_ref_articulo;
 
 delimiter //
 create function 3da2_f_num_ref_articulo()

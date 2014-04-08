@@ -55,7 +55,7 @@ body{
 }
 #sidebar_right > div{
     text-align: right;
-    /*width: 200px;*/
+    /*width: 160px;*/
 }
 .form_buscar{
     width: 200px;
@@ -65,15 +65,16 @@ body{
     border-radius: 10px;
 }
 #cuadro_login{
+    width: 160px;
     float: right;
-    padding: 5px;
+    padding: 15px;
     margin-top: 10px;
     background: gainsboro;
     border: solid 0.5px;
     border-radius: 10px;
 }
 .validar_form_login{
-        text-align: left;
+    text-align: left;
 }
 
 .boton {
@@ -94,4 +95,12 @@ body{
     text-align: center;
 }
 
+.img_index{
+    height: 100px;
+    float: left;
+    padding-right: 50px;
+}
 
+#comentario{
+    clear:both;
+}

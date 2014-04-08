@@ -1,12 +1,7 @@
 <?php
 namespace controladores;
 
-abstract class carrito_objeto 
-	extends \core\Controlador
-		implements \controladores\carrito_interface {
-
-	
-	
+abstract class carrito_objeto extends \core\Controlador implements \controladores\carrito_interface {
 	
 	public function meter(array $datos=array()) {
 		
@@ -15,8 +10,12 @@ abstract class carrito_objeto
 			$carrito = $this->recuperar();
 			$carrito->meter($datos["values"]);
 			
-		}	
-		header("Location: {$_SESSION["expositor_actual"]}");
+		}
+		if ( \core\Configuracion::$url_registrar_anterior){
+                    header("Location: {$_SESSION["url"]["anterior"]}");
+                }else{
+                    header("Location: ".URL_ROOT);
+                }
 		
 	}
 	
@@ -49,7 +48,7 @@ abstract class carrito_objeto
 			
 		}	
 		
-		header("Location: {$_SESSION["expositor_actual"]}");
+		header("Location: {$_SESSION["url"]["anterior"]}");
 		
 	}
 	
@@ -100,7 +99,7 @@ abstract class carrito_objeto
 		
 		$carrito = $this->recuperar();
 		$carrito->vaciar();
-		header("Location: {$_SESSION["expositor_actual"]}");
+		header("Location: {$_SESSION["url"]["anterior"]}");
 	}
 	
 	

@@ -35,7 +35,7 @@ engine=myisam
 
 create table if not exists 3da2_articulos
 (id integer auto_increment
-,referencia integer(5) zerofill unsigned not null default 0
+,referencia integer(5) zerofill unsigned not null unique
 ,nombre varchar(50) unique not null comment 'titulo del juego de mesa'
 ,autor varchar(50)
 ,editorial varchar(30)
@@ -49,10 +49,10 @@ create table if not exists 3da2_articulos
 ,num_max_jug integer
 ,edad_min integer default 3 comment 'por contener piezas pequeñas generalmente'
 ,duracion varchar(10) comment 'minutos aproximados de duracion de una partida'
+,precio decimal(12,2) not null default 0.00 comment 'precio en € con IVA incluido'
+,unds_stock integer
 ,resenha varchar(300) comment 'breve reseña sobre el juego de mesa'
 ,descripcion varchar(1000) comment 'podrá ser una palabra para luego traducirla en el diccionario'
-,precio decimal(12,2) null comment 'precio en € con IVA incluido'
-,unds_stock integer
 ,primary key(id)
 ,unique(nombre)
 ,foreign key(categoria_id) references 3da2_categorias(id)
@@ -141,7 +141,7 @@ values
 ,('Carcassone'                  ,'Klaus-Jürgen Wrede'           ,2001,'Devir'           ,4,'Medieval Historia'               ,2,5                    ,8      ,null       ,21.95,18, null, null)
 ,('Formula Dé'                  ,'Lauren Lavaur & Eric Randall' ,1996,'Euro games'      ,4,'Motor'                  ,2,10                   ,null,null       ,39.90,6, null, null)
 ,('Blood Bowl Team Manager'     ,'Jay Little'                   ,2010,'edge'            ,3,null                     ,2,4                    ,null,null        ,31.95,11, null, null)
-,('Spartacus'                   ,'John Kovaleski'               ,2012,'GaleForce'       ,4,'Roma Historia'                   ,2,4                    ,18,120             ,32.95,12, 'Un juego de tablero dinámico ambientado en la Roma antigua en el que participarás en conspiraciones traicioneras, pujas y combates sangrientos entre Gladiadores en la Arena del Circo.', null)
+,('Spartacus'                   ,'John Kovaleski'               ,2012,'GaleForce'       ,4,'Roma Historia'                   ,3,4                    ,18,120             ,32.95,12, 'Un juego de tablero dinámico ambientado en la Roma antigua en el que participarás en conspiraciones traicioneras, pujas y combates sangrientos entre Gladiadores en la Arena del Circo.', null)
 ,('Small World'                 ,'Philippe Keyaerts'            ,2010,'Days of wonder'  ,4,null                     ,2,5                    ,null,null       ,41.95,11, null, null)
 ,('Small World underground'     ,'Philippe Keyaerts'            ,2011,'Days of wonder'  ,4,null                     ,2,5                    ,null,null        ,39.95,9, null, null)
 ,('Demarrage'                   ,'Rob Bontenbal'                ,1972,'Jumbo'           ,4,'Ciclismo'               ,2,4                    ,null,60         ,19.95,3, null, null)

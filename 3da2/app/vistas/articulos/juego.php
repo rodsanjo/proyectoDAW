@@ -3,9 +3,9 @@
     <h2 class='nombre_articulo' title='<?php echo $datos['articulo']['nombre'] ?>'><?php echo $datos['articulo']['nombre'] ?></h2>
     
     <?php
-    \core\HTML_Tag::a_boton("boton", array("articulos", "form_modificar"), "Modificar");
+    echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_modificar", $datos['articulo']['id']), "Modificar");
     $fila = $datos['articulo'];
-    $img = ($fila["foto"]) ? "<img src='".URL_ROOT."recursos/imagenes/articulos/".$fila["foto"]."' width='200px' />" :"";
+    $img = ($fila["foto"]) ? "<img src='".URL_ROOT."recursos/imagenes/articulos/".$fila["foto"]."' width='200px'style='float:left' />" :"";
     $num_max_jug = isset($fila['num_max_jug'])?$fila['num_max_jug']:null;
     if(is_null($num_max_jug) || $num_max_jug == $fila['num_min_jug']){
         $num_max_jug ='';
@@ -18,19 +18,31 @@
     $resenha = ((isset($fila['resenha']) and strlen($fila['resenha'])) ? $fila['resenha'] : ''); 
     $descripcion = ((isset($fila['descripcion']) and strlen($fila['descripcion'])) ? $fila['descripcion'] : ''); 
     echo "<div class='text_justificado'>
-            <p>$resenha</p>
-            $img
-            <p>&nbsp;</p>
-            <p>Edad: {$fila['edad_min']}+</p>
-            <p>Jugadores: $rangoJug</p>
-            <p>Duración: $duracion</p>
-            <p>$descripcion</p>
+        
+        <p>$resenha</p>
+        $img
+        <p>&nbsp;</p>
+        <p>Edad: {$fila['edad_min']}+</p>
+        <p>Jugadores: $rangoJug</p>
+        <p>Duración: $duracion</p>
+        <p>$descripcion</p>
         </div>
+        <form method='post' action='".\core\URL::generar('carrito/meter')."' >
+            <input type='hidden' name='articulo_id' value='{$fila['id']}' />
+            <tr>
+                <td><input type='hidden' readonly='readonly' name='nombre' value='{$fila['nombre']}' /></td>
+                <td><input type='hidden' readonly='readonly' name='precio' value='{$fila['precio']}' /></td>
+                <td><input type='text'  name='unidades' value='1' size='2'/></td>
+                <td>
+                    <input name='accion' type='submit' value='añadir' />
+                </td>
+            </tr>
+        </form>
     ";
 
     //Introdución de comentarios
     if( \core\Usuario::tiene_permiso('articulo', 'form_comentario')){
-        echo "¡Danos tu opinión!
+        echo "<div id='comentario' > ¡Danos tu opinión!
             <form class='form_comentario' name='form_comentario' method='post' 
                 action='".\core\URL::generar('articulos/validar_form_comentario')."' 
                 onsubmit='return (form_comentario.comentario.value.length>0)'>
@@ -43,7 +55,7 @@
                 <textarea type='text' id='comentario' name='comentario' maxlength='500' cols='50' rows='5'></textarea>      
                 ".\core\HTML_Tag::span_error('errores_validacion', $datos)."
                 <input type='submit' value='Enviar'/>
-            </form>
+            </form></div>
         ";
     }
 

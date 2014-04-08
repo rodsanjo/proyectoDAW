@@ -41,7 +41,7 @@ engine=myisam
 
 create table if not exists 3da2_articulos
 (id integer auto_increment
-,referencia integer(5) zerofill unsigned not null default 0
+,referencia integer(5) zerofill unsigned not null unique
 ,nombre varchar(50) unique not null comment 'titulo del juego de mesa'
 ,autor varchar(50)
 ,editorial varchar(30)
@@ -55,10 +55,10 @@ create table if not exists 3da2_articulos
 ,num_max_jug integer
 ,edad_min integer default 3 comment 'por contener piezas pequeñas generalmente'
 ,duracion varchar(10) comment 'minutos aproximados de duracion de una partida'
+,precio decimal(12,2) not null default 0.00 comment 'precio en € con IVA incluido'
+,unds_stock integer
 ,resenha varchar(300) comment 'breve reseña sobre el juego de mesa'
 ,descripcion varchar(1000) comment 'podrá ser una palabra para luego traducirla en el diccionario'
-,precio decimal(12,2) null comment 'precio en € con IVA incluido'
-,unds_stock integer
 ,primary key(id)
 ,unique(nombre)
 ,foreign key(categoria_id) references 3da2_categorias(id)

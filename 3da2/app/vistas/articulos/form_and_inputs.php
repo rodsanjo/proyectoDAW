@@ -1,19 +1,23 @@
 
-<form method='post' name='<?php echo \core\Array_Datos::contenido("form_name", $datos); ?>' action="<?php echo \core\URL::generar($datos['controlador_clase'].'/validar_'.$datos['controlador_metodo']); ?>" >
+<form method='post' name='<?php echo \core\Array_Datos::contenido("form_name", $datos); ?>' action="<?php echo \core\URL::generar($datos['controlador_clase'].'/validar_'.$datos['controlador_metodo']); ?>" enctype='multipart/form-data' onsubmit="return validarForm();">
     <fieldset><legend>Datos artículo</legend>
 	<?php echo \core\HTML_Tag::form_registrar($datos["form_name"], "post"); ?>
 	
 	<input id='id' name='id' type='hidden' value='<?php echo \core\Array_Datos::values('id', $datos); ?>' />
 	
-        Nombre*: <input id='nombre' name='nombre' type='text' size='15'  maxlength='50' value='<?php echo \core\Array_Datos::values('nombre', $datos); ?>'/>
+        Nombre*: <input id='nombre' name='nombre' type='text' size='50'  maxlength='50' value='<?php echo \core\Array_Datos::values('nombre', $datos); ?>'/>
 	<?php echo \core\HTML_Tag::span_error('nombre', $datos); ?>
 	<br />
-        
-        Referencia: <input id='referencia' name='referencia' type='text' size='3'  maxlength='5' value='<?php echo \core\Array_Datos::values('referencia', $datos); ?>'/>
-	<?php echo \core\HTML_Tag::span_error('simbolo_quimico', $datos); ?>
+     
+        Precio: <input id='precio' name='precio' type='text' size='3'  maxlength='12' value='<?php echo \core\Array_Datos::values('precio', $datos); ?>'/>
+        €
+	<?php echo \core\HTML_Tag::span_error('precio', $datos); ?>
 	<br />
         
-        Autor: <input id='autor' name='autor' type='text' size='15'  maxlength='50' value='<?php echo \core\Array_Datos::values('autor', $datos); ?>'/>
+        <input id='referencia' name='referencia' type='hidden' size='3'  maxlength='5' value='<?php echo \core\Array_Datos::values('referencia', $datos); ?>'/>
+	<?php echo \core\HTML_Tag::span_error('referencia', $datos); ?>
+        
+        Autor: <input id='autor' name='autor' type='text' size='50'  maxlength='50' value='<?php echo \core\Array_Datos::values('autor', $datos); ?>'/>
 	<?php echo \core\HTML_Tag::span_error('autor', $datos); ?>
 	<br />
         
@@ -29,11 +33,11 @@
 	<?php echo \core\HTML_Tag::span_error('num_min_jug', $datos); ?>
 	<br />
         
-        Número de jugadores máximo: <input id='num_max_jug' name='num_max_jug' type='text' size='1'  maxlength='2' value='<?php echo \core\Array_Datos::values('num_max_jug', $datos); ?>'/>
+        Número de jugadores máximo: <input id='num_max_jug' name='num_max_jug' type='text' size='1'  maxlength='2' value='<?php echo \core\Array_Datos::values('num_max_jug', $datos); ?>' onblur="validar_num_max_jug();"/>
 	<?php echo \core\HTML_Tag::span_error('num_max_jug', $datos); ?>
 	<br />
         
-        Duración: <input id='duracion' name='duracion' type='text' size='15'  maxlength='10' value='<?php echo \core\Array_Datos::values('duracion', $datos); ?>'/>
+        Duración: <input id='duracion' name='duracion' type='text' size='3'  maxlength='8' value='<?php echo \core\Array_Datos::values('duracion', $datos); ?>'/> (expresado en minutos o un intervalo Ej: 45-60)
 	<?php echo \core\HTML_Tag::span_error('duracion', $datos); ?>
 	<br />
         
@@ -55,7 +59,7 @@
         
         <br/>
         Categoría:
-        <select id='categoria' name="categoria">
+        <select id='categoria_id' name="categoria_id">
             <?php
                 $sql = 'select * from 3da2_categorias';
                 $datos['categorias'] = \core\sgbd\mysqli::execute($sql);
@@ -63,12 +67,13 @@
                     echo "<option disabled='true' selected='selected'>Seleccione una categoría</option>";
                 }
                 foreach ($datos['categorias'] as $key => $categoria) {
-                    $value = "value = '$key'";
-                    $selected = (\core\datos::values('categoria_id', $datos) == $categoria['categoria']) ? " selected='selected' " : "";
+                    $value = "value = '{$categoria['id']}'";
+                    $selected = (\core\datos::values('categoria_id', $datos) == $categoria['id']) ? " selected='selected' " : "";
                     echo "<option $value $selected>{$categoria['categoria']}</option>\n";
                 }
             ?>
         </select>
+        <?php echo \core\HTML_Tag::span_error('categoria_id', $datos); ?>
         <br/>
         
         Temática:
@@ -78,26 +83,50 @@
         <textarea id="resenha" name="resenha" maxlength='300' cols="50" rows="3"></textarea>
         <br/>
         Descripción:<br/>
-        <textarea id="descripcion" name="descripcion" maxlength='500' cols="50" rows="5"></textarea>
+        <textarea id="descripcion" name="descripcion" maxlength='1000' cols="80" rows="8"></textarea>
         <br/>
-        
-        Precio: <input id='precio' name='precio' type='text' size='10'  maxlength='12' value='<?php echo \core\Array_Datos::values('precio', $datos); ?>'/>
-	<?php echo \core\HTML_Tag::span_error('precio', $datos); ?>
-	<br />
         
         Unidades en stock: <input id='unds_stock' name='unds_stock' type='text' size='3'  maxlength='5' value='<?php echo \core\Array_Datos::values('unds_stock', $datos); ?>'/>
 	<?php echo \core\HTML_Tag::span_error('unds_stock', $datos); ?>
 	<br />
         
-        Fecha de salida: <input id='fecha_salida' name='fecha_salida' type='date' maxlength='10' value='<?php echo \core\Array_Datos::values('fecha_salida', $datos); ?>'/>
-	<?php echo \core\HTML_Tag::span_error('fecha_salida', $datos); ?>
-	<br />
         *Campos obligatorios
 	<br />
 	<?php echo \core\HTML_Tag::span_error('errores_validacion', $datos); ?>
 	
 	<input type='submit' value='Enviar'/>
-	<input name="limpiar" type='reset' value='Limpiar'/>
+	<input name="restablecer" type='reset' value='Restabler'/>
         <button type='button' onclick='window.location.assign("<?php echo \core\URL::generar($datos['controlador_clase']); ?>");'>Cancelar</button>
     </fieldset>
 </form>
+
+<script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/validaciones.js"></script>
+
+<script type="text/javascript">
+    var ok = false;
+    var f = <?php echo \core\Array_Datos::contenido("form_name", $datos); ?>
+    function validar_num_max_jug(){
+        var num_max_jug = f.num_max_jug.value;
+        var num_min_jug = f.num_min_jug.value;
+        alert(num_min_jug+" - "+num_max_jug);
+	var patron=/^\d{2}$/;
+	if(!patron.test(num_max_jug)){
+            document.getElementById("error_num_max_jug").innerHTML="Debe escribir solo números";                
+            ok = false;
+	}else if(num_max_jug<num_min_jug){           
+            document.getElementById("error_num_max_jug").innerHTML="Debe ser igual o mayor al número mínimo de jugadores";
+            ok = false;
+        }else{
+            document.getElementById("error_num_max_jug").innerHTML="";
+	}
+    }
+    
+    function validarForm(){
+	ok=true;
+	
+	validar_num_max_jug();
+	
+	//ok=false;	//Si devolvemos false, no se envia el formulario
+	return ok;
+    }
+</script>
