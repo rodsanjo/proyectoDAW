@@ -72,7 +72,7 @@ namespace core {
 			'server'   => 'localhost',
 			'user'     => 'daw2_user',
 			'password' => 'daw2_user',
-			'db_name'  => 'test',
+			'db_name'  => 'daw2',
 			'prefix_'  => '3da2_'
 		);
 

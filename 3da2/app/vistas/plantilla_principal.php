@@ -71,6 +71,7 @@
         <div id="sendero_migas_pan">
             <?php echo \controladores\sendero::ver(); ?>
         </div>
+        
         <div id="sidebar_right">
             <form class="form_buscar" method='post' action='<?php echo \core\URL::generar("articulos/busqueda"); ?>' onsubmit='return(document.getElementById("buscar_nombre").value.length>0);'>
                 <input type='submit' value='Buscar' title='Buscar'/>
@@ -83,33 +84,27 @@
                         <?php echo \core\HTML_Tag::form_registrar("form_login", "post"); ?>
                         Usuario:<br/><input type='text' id='login' name='login' value='<?php echo \core\Datos::values('login', $datos) ?>'/><br/>
                         Contraseña:<br/><input type='password' id='password' name='password' value='<?php echo \core\Datos::values('password', $datos) ?>'/><br/>
-                        <input type='submit' value='Entrar' />
+                        <input type='submit' value='Log in' id="destacado_l"/>
                     </form>
                 <?php
                     if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_insertar_externo")) {
-                                        echo " <a href='".\core\URL::generar("usuarios/form_insertar_externo")."'>Regístrate</a>";
-                                }
+                        echo "
+                            <a id='destacado_r' href='".\core\URL::generar("usuarios/form_insertar_externo")."'>Sign up</a>    
+                        ";
+                    }
                 }else{ 
                 ?>
 
-                <div style="text-align: left; float: right;">
+                <div style="text-align: center;">
                     Usuario:
                     <?php 
                         echo "<b>".\core\Usuario::$login."</b><br/>";
-                        if (\core\Usuario::$login != 'anonimo') {
-                            echo " <a href='".\core\URL::generar("usuarios/desconectar")."'>Desconectar</a>";
-                        }
-                        else {
-                            if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_login")) {
-                                    echo " <a href='".\core\URL::generar("usuarios/form_login")."'>Conectar</a>";
-                            }
-                            if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_insertar_externo")) {
-                                    echo " <a href='".\core\URL::generar("usuarios/form_insertar_externo")."'>Regístrate</a>";
-                            }
-                        }	
-                    } ?>
-                    
+                        echo " <a href='".\core\URL::generar("usuarios/desconectar")."'>Desconectar</a>";
+                    ?>
                 </div>
+                     <?php } ?>
+                    
+                
             </div>
             <div id='carrito'>
                 <?php
@@ -119,11 +114,14 @@
             </div>
             
         </div>
+        
         <div id="view_content">
             <?php
                 echo $datos['view_content'];
             ?>
         </div>
+        
+        
     </div>
     <div id="pie">
         <hr/><div>© 3da2<br/>

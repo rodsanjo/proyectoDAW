@@ -16,6 +16,17 @@ h2>i{
     text-shadow:1px 0 2px red /*#FF0000*/;
 }
 
+#destacado_r{
+    text-align: right;
+    color: purple;
+    font-weight: bold; 
+}
+#destacado_l{
+    text-align: left;
+    color: purple;
+    font-weight: bold; 
+}
+
 .teu{
 	margin: auto;	/* para centrar la página */
 	width: 1050px;	/* para que el ancho sea fijo */
@@ -60,23 +71,24 @@ h2>i{
 }
 #sidebar_right > div{
     text-align: right;
-    width: 160px;
+    width: 180px;
 }
 .form_buscar{
     width: 200px;
     padding: 5px;
-    background: aquamarine;
+    background: green;
     margin-right: 0px;
     border-radius: 10px;
 }
 #cuadro_login{
     width: 160px;
-    float: right;
+    /*float: right;*/
+    overflow: hidden;
     padding: 15px;
     margin-top: 10px;
     background: gainsboro;
     border: solid 0.5px;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 .validar_form_login{
     text-align: left;
@@ -119,6 +131,10 @@ h2>i{
     color: green;
     float: left;
 }
-.carrito {
+#carrito {
     width: 50px;
+}
+
+.align_right{
+    text-align: right;
 }

@@ -1,7 +1,7 @@
 /*
- * @file: 3da2_tables.sql
+ * @file: 3da2_users_permisos.sql
  * @author: jergo23@gmail.com
- * @since: 2014 marzo
+ * @since: 2014 abril
 */
 drop database if exists daw2;
 create database daw2;
@@ -194,9 +194,9 @@ character set utf8 collate utf8_general_ci
 insert into 3da2_roles
   (rol			, descripcion) values
   ('administradores'	,'Administradores de la aplicación')
-, ('empleados'           ,'Empleados de la tienda')
+, ('empleados'           ,'Empleados de la tienda. Solo los administradores pueden otorgar este rol')
 , ('usuarios'		,'Todos los usuarios incluido anónimo')
-, ('usuarios_logueados'	,'Todos los usuarios excluido anónimo')
+, ('usuarios_logueados'	,'Todos los usuarios excluido anónimo. Algunas opciones no estarán disponibles para los empleados')
 ;
 
 
@@ -207,6 +207,7 @@ insert into 3da2_usuarios
 , ('jorge', 'jergo23@gmail.com', md5('jorge00'), now())
 , ('juan', 'juan@email.com', md5('juan00'), now())
 , ('anais', 'anais@email.com', md5('anais00'), now())
+, ('lola', 'lola@email.es', md5('lola00'), now())
 ;
 
 insert into 3da2_metodos
@@ -273,17 +274,20 @@ insert into 3da2_roles_permisos
 
 , ('usuarios_logueados' ,'usuarios'	,'desconectar')
 , ('usuarios_logueados' ,'usuarios'	,'form_cambiar_password')
+, ('usuarios_logueados' ,'carrito'	,'*')
 
 , ('empleados'          ,'articulos'	,'form_insertar')
 , ('empleados'          ,'articulos'	,'form_modificar')
 , ('empleados'          ,'articulos'	,'form_borrar')
+, ('empleados'          ,'usuarios'	,'desconectar')
+, ('empleados'          ,'usuarios'	,'form_cambiar_password')
 
 ;
 
 insert into 3da2_usuarios_roles
   (login	,rol) values
   ('admin'	,'administradores')
-,('jorge'       ,'empleados')
+, ('jorge'      ,'empleados')
 -- , ('anonimo'	,'usuarios')
 -- , ('juan'	,'usuarios')
 -- , ('juan'	,'usuarios_logueados')

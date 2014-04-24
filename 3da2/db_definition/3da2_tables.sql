@@ -41,7 +41,7 @@ engine=myisam
 
 create table if not exists 3da2_articulos
 (id integer auto_increment
-,referencia integer(5) zerofill unsigned not null unique
+,referencia integer(5) zerofill unsigned not null unique default 0
 ,nombre varchar(50) unique not null comment 'titulo del juego de mesa'
 ,autor varchar(50)
 ,editorial varchar(30)

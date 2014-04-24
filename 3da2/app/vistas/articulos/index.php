@@ -10,10 +10,12 @@
 <div>
     <h3>Artículos disponibles:</h3>
     
+    <div class="align_right">
     <?php
-    echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar un nuevo artículo");
+//    echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar un nuevo artículo");
     echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_insertar"), "insertar un nuevo artículo");
     ?>
+    </div>
     
     <form method='post' action='<?php echo \core\URL::actual()."document.getElementById(ordenar_por).innerHTML"; ?>'
         <p>Ordenar por:
@@ -52,7 +54,7 @@
                     <td><input type='hidden' readonly='readonly' name='nombre' value='{$fila['nombre']}' /></td>
                     <td><input type='hidden' readonly='readonly' name='precio' value='{$fila['precio']}' /></td>
                     ";
-                    if (\core\Usuario::$login != 'anonimo' && \core\Usuario::$login != 'empleado') {
+                    if (\core\Usuario::$login != 'anonimo' && ! \core\Usuario::$empleado ) {
                     echo "<td><input type='text'  name='unidades' value='1' size='2'/></td>
                     <td>
                         <input name='accion' type='submit' value='añadir' />
@@ -62,14 +64,15 @@
                     
                 </tr>
             </form>"
-                
+              
+            ."<div class='align_right'>"
             //.\core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_modificar", $fila['id']), "Modificar")
             .\core\HTML_Tag::a_boton("boton", array("articulos", "form_modificar", $fila['id']), "Modificar")
             //<a class='boton' href='?menu={$datos['controlador_clase']}&submenu=form_modificar&id={$fila['id']}' >modificar</a>
             //.\core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")
             .\core\HTML_Tag::a_boton("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")
             //<a class='boton' href='".\core\URL::generar("articulos/form_borrar/{$fila["id"]}")."' >borrar</a>
-        ."<hr/>";
+        ."<hr/></div>";
         //<p>Precio: <b class='precio'>".\core\Conversiones::decimal_punto_a_coma_y_miles($fila['precio'])." €</b></p>
   
     }
@@ -97,14 +100,16 @@
     ?>
     <br/>
     
-    <a class='boton' href='<?php echo $href1 ?>' title="primero"><<</a>
-    <a class='boton' href='<?php echo $href2 ?>' title="anterior"><</a>
-    <?php echo 'Artículos'; ?>
-    <a class='boton' href='<?php echo $href3 ?>' title="siguiente">></a>
-    <a class='boton' href='<?php echo $href4 ?>' title="último">>></a>
-    
-    <span title="total"><?php echo $num_total_juegos; ?></span>
-    
-    <br/>
-    <a class='boton' href='<?=$datos["url_volver"]?>' >Volver</a>
+    <div style="text-align: center;">
+        <a class='boton' href='<?php echo $href1 ?>' title="primero"><<</a>
+        <a class='boton' href='<?php echo $href2 ?>' title="anterior"><</a>
+        <?php echo 'Artículos'; ?>
+        <a class='boton' href='<?php echo $href3 ?>' title="siguiente">></a>
+        <a class='boton' href='<?php echo $href4 ?>' title="último">>></a>
+
+        <!--<span title="total"><?php echo $num_total_juegos; ?></span>-->
+
+        <br/>
+        <a class='boton' style="text-align: right;" href='<?=$datos["url_volver"]?>' >Volver</a>
+    </div>
 </div>

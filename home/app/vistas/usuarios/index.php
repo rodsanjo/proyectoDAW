@@ -6,9 +6,7 @@
 		<thead>
 			<tr>
 				<th>login</th>
-				<th>email</th>
-				<th>fecha alta</th>
-				<th>fecha confirmación alta</th>
+				<th>email <br/> fecha alta</th>
 				<th>clave confirmación</th>
 				
 				<th>acciones</th>
@@ -21,9 +19,7 @@
 				echo "
 					<tr>
 						<td>{$fila['login']}</td>
-						<td>{$fila['email']}</td>
-						<td>{$fila['fecha_alta']}</td>	
-						<td>{$fila['fecha_confirmacion_alta']}</td>	
+						<td>{$fila['email']}<br/>{$fila['fecha_alta']}</td>		
 						<td>{$fila['clave_confirmacion']}</td>	
 						<td><center>"
 //							<a class='boton' onclick='submit_post_request_form(\"".\core\URL::generar("usuarios/form_modificar")."\", {$fila['id']});' >modificar</a>
@@ -39,7 +35,7 @@
 			}
 			echo "
 				<tr>
-					<td colspan='5'></td>
+					<td colspan='3'></td>
 						<td><a class='boton' href='".\core\URL::generar("usuarios/form_insertar_interno")."' >insertar</a></td>
 				</tr>
 			";
