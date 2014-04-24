@@ -1,10 +1,30 @@
+<script type="text/javascript">
+    function ordenar_por(url){
+        tipo_ordenacion = document.getElementById(ordenar_por).innerHTML;
+        alert(tipo_ordenacion);
+        return url += tipo_ordenacion;
+    }
+   
+</script>
+
 <div>
     <h3>Artículos disponibles:</h3>
     
     <?php
     echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar un nuevo artículo");
     echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_insertar"), "insertar un nuevo artículo");
-
+    ?>
+    
+    <form method='post' action='<?php echo \core\URL::actual()."document.getElementById(ordenar_por).innerHTML"; ?>'
+        <p>Ordenar por:
+            <select id='ordenar_por' name="categoria_id" onchange="ordenar_por(<?php echo \core\URL::actual(); ?>);">
+                <option value='nombre' selected='selected'>Nombre</option>
+                <option value='precio' >Precio</option>
+            </select>    
+        </p>
+    </form>
+    
+    <?php
     foreach ($datos['filas'] as $key => $fila){ //cada fila corresponde a un juego de mesa        
         $img = ($fila["foto"]) ? "<img class='img_index' src='".URL_ROOT."recursos/imagenes/articulos/".$fila["foto"]."' alt='{$fila['nombre']}' title='{$fila['nombre']}' />" :"";
         $num_max_jug = isset($fila['num_max_jug'])?$fila['num_max_jug']:null;
@@ -31,10 +51,15 @@
                 <tr>
                     <td><input type='hidden' readonly='readonly' name='nombre' value='{$fila['nombre']}' /></td>
                     <td><input type='hidden' readonly='readonly' name='precio' value='{$fila['precio']}' /></td>
-                    <td><input type='text'  name='unidades' value='1' size='2'/></td>
+                    ";
+                    if (\core\Usuario::$login != 'anonimo' && \core\Usuario::$login != 'empleado') {
+                    echo "<td><input type='text'  name='unidades' value='1' size='2'/></td>
                     <td>
                         <input name='accion' type='submit' value='añadir' />
-                    </td>
+                    </td>";
+                    }
+        echo "
+                    
                 </tr>
             </form>"
                 

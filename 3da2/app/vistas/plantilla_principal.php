@@ -78,31 +78,39 @@
             </form>
             
             <div id="cuadro_login">
-                <form class="validar_form_login" method='post' action='<?php echo \core\URL::generar("usuarios/form_login_validar"); ?>' >
-                    <?php echo \core\HTML_Tag::form_registrar("form_login", "post"); ?>
-                    Usuario:<br/><input type='text' id='login' name='login' value='<?php echo \core\Datos::values('login', $datos) ?>'/><br/>
-                    Contraseña:<br/><input type='password' id='password' name='password' value='<?php echo \core\Datos::values('password', $datos) ?>'/><br/>
-                    <input type='submit' value='Entrar' />
-                </form>            
-            </div>
-            <div style="clear: both;">
-                Usuario:
-                <?php 
-                    echo "<b>".\core\Usuario::$login."</b><br/>";
-                    if (\core\Usuario::$login != 'anonimo') {
-                        echo " <a href='".\core\URL::generar("usuarios/desconectar")."'>Desconectar</a>";
-                    }
-                    else {
-                        if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_login")) {
-                                echo " <a href='".\core\URL::generar("usuarios/form_login")."'>Conectar</a>";
-                        }
-                        if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_insertar_externo")) {
-                                echo " <a href='".\core\URL::generar("usuarios/form_insertar_externo")."'>Regístrate</a>";
-                        }
-                    }	
+                <?php if (\core\Usuario::$login == 'anonimo') { ?>
+                    <form class="validar_form_login" method='post' action='<?php echo \core\URL::generar("usuarios/form_login_validar"); ?>' >
+                        <?php echo \core\HTML_Tag::form_registrar("form_login", "post"); ?>
+                        Usuario:<br/><input type='text' id='login' name='login' value='<?php echo \core\Datos::values('login', $datos) ?>'/><br/>
+                        Contraseña:<br/><input type='password' id='password' name='password' value='<?php echo \core\Datos::values('password', $datos) ?>'/><br/>
+                        <input type='submit' value='Entrar' />
+                    </form>
+                <?php
+                    if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_insertar_externo")) {
+                                        echo " <a href='".\core\URL::generar("usuarios/form_insertar_externo")."'>Regístrate</a>";
+                                }
+                }else{ 
                 ?>
+
+                <div style="text-align: left; float: right;">
+                    Usuario:
+                    <?php 
+                        echo "<b>".\core\Usuario::$login."</b><br/>";
+                        if (\core\Usuario::$login != 'anonimo') {
+                            echo " <a href='".\core\URL::generar("usuarios/desconectar")."'>Desconectar</a>";
+                        }
+                        else {
+                            if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_login")) {
+                                    echo " <a href='".\core\URL::generar("usuarios/form_login")."'>Conectar</a>";
+                            }
+                            if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_insertar_externo")) {
+                                    echo " <a href='".\core\URL::generar("usuarios/form_insertar_externo")."'>Regístrate</a>";
+                            }
+                        }	
+                    } ?>
+                    
+                </div>
             </div>
-            
             <div id='carrito'>
                 <?php
                     echo self::incluir("carrito", "ver");

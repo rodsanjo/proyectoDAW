@@ -194,7 +194,7 @@ character set utf8 collate utf8_general_ci
 insert into 3da2_roles
   (rol			, descripcion) values
   ('administradores'	,'Administradores de la aplicación')
-,('empleados'           ,'Empleados de la tienda')
+, ('empleados'           ,'Empleados de la tienda')
 , ('usuarios'		,'Todos los usuarios incluido anónimo')
 , ('usuarios_logueados'	,'Todos los usuarios excluido anónimo')
 ;
@@ -240,6 +240,25 @@ insert into 3da2_metodos
 , ('usuarios_permisos'	,'index')
 , ('usuarios_permisos'	,'form_modificar')
 
+, ('contacto'   ,'*')
+, ('contacto'   ,'index')
+
+, ('articulos'	,'*')
+, ('articulos'	,'index')
+, ('articulos'	,'juego')
+, ('articulos'	,'busqueda')
+, ('articulos'	,'form_insertar')
+, ('articulos'	,'form_modificar')
+, ('articulos'	,'form_borrar')
+
+, ('carrito'		,'*')
+, ('carrito'		,'comprar')
+, ('carrito'		,'meter')
+, ('carrito'		,'modificar')
+, ('carrito'		,'pagar')
+, ('carrito'		,'vaciar')
+, ('carrito'		,'ver')
+
 ;
 
 insert into 3da2_roles_permisos
@@ -247,16 +266,24 @@ insert into 3da2_roles_permisos
   ('administradores'	,'*'            ,'*')
 , ('usuarios'		,'inicio'	,'*')
 , ('usuarios'		,'mensajes'	,'*')
+, ('usuarios'		,'contacto'	,'*')
+, ('usuarios'          ,'articulos'	,'index')
+, ('usuarios'          ,'articulos'	,'juego')
+, ('usuarios'          ,'articulos'	,'busqueda')
+
 , ('usuarios_logueados' ,'usuarios'	,'desconectar')
 , ('usuarios_logueados' ,'usuarios'	,'form_cambiar_password')
-, ('empleados'          ,'usuarios'	,'desconectar')
-, ('empleados'          ,'usuarios'	,'form_cambiar_password')
+
+, ('empleados'          ,'articulos'	,'form_insertar')
+, ('empleados'          ,'articulos'	,'form_modificar')
+, ('empleados'          ,'articulos'	,'form_borrar')
+
 ;
 
 insert into 3da2_usuarios_roles
   (login	,rol) values
   ('admin'	,'administradores')
-,('jorge'   ,'empleados')
+,('jorge'       ,'empleados')
 -- , ('anonimo'	,'usuarios')
 -- , ('juan'	,'usuarios')
 -- , ('juan'	,'usuarios_logueados')

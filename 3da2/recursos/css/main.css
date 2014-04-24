@@ -12,6 +12,10 @@ body{
 	margin-bottom: 20px;
 }
 
+h2>i{
+    text-shadow:1px 0 2px red /*#FF0000*/;
+}
+
 .teu{
 	margin: auto;	/* para centrar la página */
 	width: 1050px;	/* para que el ancho sea fijo */
@@ -47,6 +51,7 @@ body{
 #view_content{
     margin-top: 40px;
     margin-left: 20%;
+    padding-right: 25%;
 }
 
 #sidebar_right{
@@ -55,7 +60,7 @@ body{
 }
 #sidebar_right > div{
     text-align: right;
-    /*width: 160px;*/
+    width: 160px;
 }
 .form_buscar{
     width: 200px;
@@ -80,10 +85,11 @@ body{
 .boton {
     margin: 5px 5px;
     padding: 2px;
-    line-height: 170%;
-    background-color: lightgray;
-    border: 1px solid black;
-    text-decoration: none;       
+    line-height: 200%;
+    background-color: wheat;
+    border: 1px solid brown;
+    text-decoration: none;
+    border-radius: 30%;
     cursor:pointer;
 }
 .menu_adm{
@@ -103,4 +109,16 @@ body{
 
 #comentario{
     clear:both;
+}
+
+/* CARRITO */
+#carrito_lateral{
+    font-size: 80%;
+}
+.car_nxart{
+    color: green;
+    float: left;
+}
+.carrito {
+    width: 50px;
 }

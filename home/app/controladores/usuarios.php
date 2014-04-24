@@ -137,7 +137,7 @@ class usuarios extends \core\Controlador {
 			$datos['desconexion_razon'] = null;
 	
 		if ($datos['desconexion_razon'] === null) {
-			$datos['mensaje'] = 'Adiós';
+			$datos['mensaje'] = 'Esperamos verle de vuelta pronto. ¡Hasta la próxima!';
 		}
 		elseif ($datos['desconexion_razon'] == 'inactividad') {
 			$datos['mensaje'] = 'Has superado el tiempo de inactividad que es de <b>'.\core\Configuracion::$sesion_minutos_inactividad.'</b> minutos.';
