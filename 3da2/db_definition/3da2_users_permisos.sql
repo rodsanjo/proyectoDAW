@@ -281,6 +281,7 @@ insert into 3da2_roles_permisos
 , ('empleados'          ,'articulos'	,'form_borrar')
 , ('empleados'          ,'usuarios'	,'desconectar')
 , ('empleados'          ,'usuarios'	,'form_cambiar_password')
+, ('empleados'          ,'usuarios'	,'index')
 
 ;
 

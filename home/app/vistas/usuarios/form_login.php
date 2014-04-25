@@ -4,8 +4,8 @@
 
 		<?php echo \core\HTML_Tag::form_registrar("form_login", "post"); ?>
 
-		Login: <input type='text' id='login' name='login' maxsize='50' value='<?php echo \core\Datos::values('login', $datos) ?>'/><span class='requerido'>Requerido</span><?php echo \core\HTML_Tag::span_error('login', $datos); ?><br />
-		Password: <input type='password' id='password' name='password' maxsize='50' value='<?php echo \core\Datos::values('password', $datos) ?>'/><span class='requerido'>Requerido</span><?php echo \core\HTML_Tag::span_error('password', $datos); ?><br />
+		Login: <input type='text' id='login' name='login' maxsize='50' value='<?php echo \core\Datos::values('login', $datos) ?>'/><?php echo \core\HTML_Tag::span_error('login', $datos); ?><br />
+		Password: <input type='password' id='password' name='password' maxsize='50' value='<?php echo \core\Datos::values('password', $datos) ?>'/><?php echo \core\HTML_Tag::span_error('password', $datos); ?><br />
 		<br />	
 
 		<?php echo \core\HTML_Tag::span_error('validacion', $datos);?><br />

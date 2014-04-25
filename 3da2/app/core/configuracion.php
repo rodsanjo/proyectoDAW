@@ -40,7 +40,7 @@ namespace core {
 		// Regeneración de id de cookie de session al cambiar de usuario
 		public static $regenerar_session_id = false;
 		// Control acceso a recursos
-		public static $control_acceso_recursos = true;
+		public static $control_acceso_recursos = false;
 
 		// Gestión de inactividad para usuario logueados
 		public static $sesion_minutos_inactividad = 20; // num >= 0. 0 Implica sin control

@@ -16,12 +16,12 @@ h2>i{
     text-shadow:1px 0 2px red /*#FF0000*/;
 }
 
-#destacado_r{
+.destacado_r{
     text-align: right;
     color: purple;
     font-weight: bold; 
 }
-#destacado_l{
+.destacado_l{
     text-align: left;
     color: purple;
     font-weight: bold; 
@@ -86,6 +86,7 @@ h2>i{
     overflow: hidden;
     padding: 15px;
     margin-top: 10px;
+    margin-bottom: 10px;
     background: gainsboro;
     border: solid 0.5px;
     border-radius: 15px;

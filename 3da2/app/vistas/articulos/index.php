@@ -54,7 +54,8 @@
                     <td><input type='hidden' readonly='readonly' name='nombre' value='{$fila['nombre']}' /></td>
                     <td><input type='hidden' readonly='readonly' name='precio' value='{$fila['precio']}' /></td>
                     ";
-                    if (\core\Usuario::$login != 'anonimo' && ! \core\Usuario::$empleado ) {
+                    if ( \core\Usuario::$login != 'anonimo' && ! \modelos\roles::es_empleado(\core\Usuario::$login)) {
+                    //if (\core\Usuario::$login != 'anonimo' && ! \core\Usuario::$empleado ) {
                     echo "<td><input type='text'  name='unidades' value='1' size='2'/></td>
                     <td>
                         <input name='accion' type='submit' value='añadir' />

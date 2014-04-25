@@ -205,6 +205,7 @@ class articulos extends \core\Controlador{
                 if ( ! $validacion = \modelos\Datos_SQL::table(self::$tabla)->insert($datos["values"])) // Devuelve true o false
                     $datos["errores"]["errores_validacion"]="No se han podido grabar los datos en la bd.";
                 else {
+                    var_dump($datos);
                     self::mover_files($datos["values"]["id"],$datos);
                 }
             }
@@ -239,9 +240,9 @@ class articulos extends \core\Controlador{
     public function form_modificar(array $datos = array()) {
 
         $datos["form_name"] = __FUNCTION__;
-        
-        //self::request_come_by_post();   //Si viene por POST sigue adelante
 
+        //self::request_come_by_post();   //Si viene por POST sigue adelante
+        
         if ( ! isset($datos["errores"])) { // Si no es un reenvío desde una validación fallida
             $validaciones=array(
                 "id" => "errores_requerido && errores_numero_entero_positivo && errores_referencia:id/".self::$tabla."/id"
@@ -322,12 +323,13 @@ class articulos extends \core\Controlador{
 
 
     public function form_borrar(array $datos=array()) {
-
+        
         $datos["form_name"] = __FUNCTION__;
 
         //self::request_come_by_post();
 
         $validaciones= \modelos\articulos::$validaciones_delete;
+        
         if ( ! $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos)) {
             $datos['mensaje'] = 'Datos erróneos para identificar el artículo a borrar';
             $datos['url_continuar'] = \core\URL::http('?menu='.self::$tabla.'');
@@ -652,13 +654,23 @@ class articulos extends \core\Controlador{
 
     }
     
-    private static function mover_manual($id) {
+    /**
+     * Guarda un archivo pdf en nuestros recursos
+     * @param type $id
+     * @param type $articulo_nombre = null
+     * @return type
+     */
+    private static function mover_manual($id, $articulo_nombre = null) {
 
         // Ahora hay que añadir la manual
         $extension = substr($_FILES["manual"]["type"], stripos($_FILES["manual"]["type"], "/")+1);
-        $nombre = (string)$id;
-        $nombre = "art".str_repeat("0", 5 - strlen($nombre)).$nombre;
-        $manual_path = PATH_APPLICATION."recursos".DS."imagenes".DS."articulos".DS.$nombre.".".$extension;
+        if($articulo_nombre){
+            $nombre = str_replace(" ", "-", $articulo_nombre);
+        }else{
+            $nombre = (string)$id;
+            $nombre = "art".str_repeat("0", 5 - strlen($nombre)).$nombre;
+        }
+        $manual_path = PATH_APPLICATION."recursos".DS."ficheros".DS."manuales".DS.$nombre.".".$extension;
 //					echo __METHOD__;echo $_FILES["manual"]["tmp_name"];  echo $manual_path; exit;
         // Si existe el fichero lo borramos
         if (is_file($manual_path)) {

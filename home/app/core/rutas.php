@@ -71,7 +71,8 @@ class Rutas {
 			$patron[0] = "/^[\w\-]+$/i"; // controlador
 			$patron[1] = "/^[\w\-]+$/i"; // método
                         $patron[2] = "/^[\w\-!?,:*]+$/i"; // titulo juego de mesa, vale cualquier caracter con el *
-			$patron[3] = "/^[\w\-]+$/i"; // id
+                        $patron[3] = "/.*/"; // id y nonbre de ficheros
+			//$patron[3] = "/^[\w\-]+$/i"; // id
 			$patron[4] = "/.*/"; // id y otros
 			foreach ($parametros as $key => $value) {
 				// Si el parámetro se ha recibido no se añade

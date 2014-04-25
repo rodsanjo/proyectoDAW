@@ -48,11 +48,11 @@
         Foto: <input id='foto' name='foto' type='file' size='100'  maxlength='50' value='<?php echo \core\Array_Datos::values('foto', $datos); ?>'/>
 	<?php echo \core\HTML_Tag::span_error('foto', $datos); ?>
 	<br />
-        
-        Video: <input id='video' name='video' type='file' size='100'  maxlength='50' value='<?php echo \core\Array_Datos::values('video', $datos); ?>'/>
-	<?php echo \core\HTML_Tag::span_error('video', $datos); ?>
+<!--        
+        Video: <input id='video' name='video' type='file' size='100'  maxlength='50' value='<?php //echo \core\Array_Datos::values('video', $datos); ?>'/>
+	<?php //echo \core\HTML_Tag::span_error('video', $datos); ?>
 	<br />
-        
+        -->
         Manual:<input id='manual' name='manual' type='file' size='100'  maxlength='50' value='<?php echo \core\Array_Datos::values('manual', $datos); ?>'/>
 	<?php echo \core\HTML_Tag::span_error('manual', $datos); ?>
 	<br />

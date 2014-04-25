@@ -31,7 +31,7 @@ class Usuario extends \core\Clase_Base {
 		if (isset($_SESSION['usuario']['login'])) {
 			self::$login = $_SESSION['usuario']['login'];
 			self::$id = $_SESSION['usuario']['id'];
-                        self::$empleado = $_SESSION['usuario']['empleado'];
+                        //self::$empleado = $_SESSION['usuario']['empleado'];
 			self::sesion_control_tiempos();	
 		}
 		else {
@@ -77,13 +77,14 @@ class Usuario extends \core\Clase_Base {
 		$_SESSION["usuario"]["id"] = $id;
 		$_SESSION["usuario"]["sesion_fh_inicio"] = $_SERVER["REQUEST_TIME"];
                 
+                /*
                 //Para que los empleados no tengan la opción de crear un carrito de la compra
                 $sql = 'select * from 3da2_usuarios_roles where login = "'.$login.'" and rol = "empleados" ';
                 if ( count( \modelos\Modelo_SQL::execute($sql) ) ){
                     $_SESSION['usuario']['empleado'] = true;
                 }else{
                     $_SESSION['usuario']['empleado'] = false;
-                }
+                }*/
 		
 		// Borramos los permisos del usuario anterior y 
 		// recuperamos los permisos del nuevo usuario
