@@ -12,18 +12,19 @@
     
     <div class="align_right">
     <?php
-//    echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar un nuevo artículo");
+    echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar un nuevo artículo");
     echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_insertar"), "insertar un nuevo artículo");
     ?>
     </div>
     
-    <form method='post' action='<?php echo \core\URL::actual()."document.getElementById(ordenar_por).innerHTML"; ?>'
+    <form method='post' action='<?php echo \core\URL::generar("articulos/index"); ?>'>
         <p>Ordenar por:
-            <select id='ordenar_por' name="categoria_id" onchange="ordenar_por(<?php echo \core\URL::actual(); ?>);">
+            <select id='ordenar_por' name="ordenar_por" onchange="ordenar_por(<?php echo \core\URL::actual(); ?>);">
                 <option value='nombre' selected='selected'>Nombre</option>
                 <option value='precio' >Precio</option>
-            </select>    
-        </p>
+            </select>  
+            <input type="submit" value="Ordenar"/>
+        </p>       
     </form>
     
     <?php
