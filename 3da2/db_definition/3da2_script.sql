@@ -66,8 +66,8 @@ create table if not exists 3da2_comentarios_articulo
 ,articulo_nombre varchar(50) not null
 ,usuario_login varchar(20) not null
 ,comentario varchar(300) not null
-,fecha_comentario datetime default now()
-,fecha_ult_edicion timestamp 
+,fecha_comentario timestamp default now()
+,fecha_ult_edicion datetime
 ,num_ediciones integer default 0
 ,primary key(id)
 ,foreign key(usuario_login) references 3da2_usuarios(login) on delete set default on update cascade

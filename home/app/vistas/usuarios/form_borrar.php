@@ -6,11 +6,11 @@
 		<input id='id'  name='id' type='hidden' value='<?php echo \core\Array_Datos::values('id', $datos); ?>' />
 
 		Login: <input id='login' name='login' type='text' size='30'  maxlength='30' autocomplete='off' value='<?php echo \core\Array_Datos::values("login", $datos); ?>'/>
-		<span class='requerido'>Requerido</span><?php echo \core\HTML_Tag::span_error('login', $datos); ?>
+		<?php echo \core\HTML_Tag::span_error('login', $datos); ?>
 		<br />
 
 		Email: <input id='email' name='email' type='text' size='100' maxlength='100' autocomplete='off' value='<?php echo \core\Array_Datos::values('email', $datos); ?>'/>
-		<span class='requerido'>Requerido</span><?php echo \core\HTML_Tag::span_error('email', $datos); ?>
+		<?php echo \core\HTML_Tag::span_error('email', $datos); ?>
 		<br />
 
 		

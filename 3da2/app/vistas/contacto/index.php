@@ -10,7 +10,7 @@
     
 <h1 class="titulo">CONTACTO</h1>
 <p>Si quiere poenrse en contacto con nostros para cualquier consulta, puede hacerlo
-    a través de nuestro correo electrónico: <a href="mailto:email@3da2.es">email@3da2.es</a>
+    a través de nuestro correo electrónico: <a href="mailto:3da2@rodsanjo.esy.es">3da2@rodsanjo.esy.es</a>
     o bien mediante el siguiente formulario y le contestaremos lo antes posible.
 </p>
 <form onsubmit="return validarForm();" name="formulario" action="pagina.php" method="post" enctype="multipart/form-data">

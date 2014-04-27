@@ -16,6 +16,11 @@ h2>i{
     text-shadow:1px 0 2px red /*#FF0000*/;
 }
 
+.mensaje{
+    text-align: justify;
+    width: 560px;
+}
+
 .destacado_r{
     text-align: right;
     color: purple;
@@ -41,6 +46,10 @@ h2>i{
 	background: /*wheat*/rgba(200,200,15,0.5);
 }
 
+#central_head{
+    float: right;
+}
+
 #idioma{
     font-family: sans-serif, arial, verdana;
 }
@@ -53,6 +62,8 @@ h2>i{
     float: left;
     font-family: arial;
     font-size: 80%;
+    margin-top: 10px;
+    margin-left: 30px;
 }
 
 .precio{

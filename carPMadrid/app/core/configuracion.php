@@ -60,8 +60,8 @@ namespace core {
 		public static $form_insertar_externo_catcha = false;
 
 		// Contactos
-		public static $email_info = "info@esmvcphp.es";
-		public static $email_noreply = "noreply@esmvcphp.es";
+		public static $email_info = "info@home.es";
+		public static $email_noreply = "noreply@home.es";
 
 
 		// Base de datos

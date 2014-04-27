@@ -6,9 +6,8 @@
         Purpose of the stylesheet follows.
 */
 #menu_up{
-    float: left;
-    margin-left: 20%;
-    margin-right: 15%;
+    margin-left: 0%;
+    margin-right: 0%;
 }
 
 @font-face {

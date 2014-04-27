@@ -28,5 +28,11 @@ Alemán|German
 Español|Spanish
 Inglés|English
 Portugués|Portuguese
+Polaco|Polish
 Contactar|Contact
 parrafo1|Welcome to my library where you can find out some fascinating books. Some of them are highly recommended reading, although it depends on the tastes of every reader to achieve an interesting reading, getting immersion in each adventure.
+Conectarse|Log in
+Desconectarse|Log out
+Registrarse|Sign up
+Usuario|Login
+Contrasenha|Password

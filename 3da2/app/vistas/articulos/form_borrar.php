@@ -4,6 +4,7 @@
     <script type='text/javascript'>
         var formulario = <?php echo \core\Array_Datos::contenido("form_name", $datos); ?>;
         window.document.getElementById("nombre").readOnly='readonly';
+        window.document.getElementById("precio").readOnly='readonly';
         window.document.getElementById("referencia").readOnly='readonly';
         window.document.getElementById("autor").readOnly='readonly';
         window.document.getElementById("editorial").readOnly='readonly';
@@ -19,7 +20,6 @@
         window.document.getElementById("tematica").readOnly='readonly';
         document.getElementById("resenha").style.display = "block";
         window.document.getElementById("descripcion").readOnly='readonly';
-        window.document.getElementById("precio").readOnly='readonly';
         window.document.getElementById("unds_stock").readOnly='readonly';
         formulario.restablecer.style.display = "none";                
     </script>

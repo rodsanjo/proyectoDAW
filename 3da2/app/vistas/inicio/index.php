@@ -17,7 +17,7 @@
 </p>
 <div class="slideshow" style="float:left">
     <?php 
-        include PATH_APPLICATION_APP."vistas/partes/image_slide.php";
+        include PATH_APP."vistas/partes/image_slide.php";
     ?> 
 </div>
 

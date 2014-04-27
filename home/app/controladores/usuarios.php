@@ -216,10 +216,10 @@ class usuarios extends \core\Controlador {
 	
 		if ( ! isset($datos["errores"])) {
 			//Comprobar que la petición se ha recibido por post.
-			if ( \core\HTTP_Requerimiento::method() != "POST" ) {
-				$datos['mensaje'] = "Petición invalida";
-				return \core\Distribuidor::cargar_controlador("mensajes", "mensaje",$datos);
-			}
+//			if ( \core\HTTP_Requerimiento::method() != "POST" ) {
+//				$datos['mensaje'] = "Petición invalida";
+//				return \core\Distribuidor::cargar_controlador("mensajes", "mensaje",$datos);
+//			}
 			// Recuperar fila de la base de datos
 			// Primero buscamos el valor del id que se habrá recibido
 			$validaciones = array(
@@ -229,9 +229,9 @@ class usuarios extends \core\Controlador {
 				return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Usuario no identificado o no existente."));
 			}
 			// Debe recibirse por post
-			if (\core\HTTP_Requerimiento::method() != "POST") {
-				return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Utiliza los elementos del menú y botones de la aplicación."));
-			}
+//			if (\core\HTTP_Requerimiento::method() != "POST") {
+//				return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Utiliza los elementos del menú y botones de la aplicación."));
+//			}
 			$clausulas = array("where" => " id = {$datos["values"]["id"]} ");
 			$filas = \modelos\Modelo_SQL::table("usuarios")->select($clausulas );
 			$datos["values"] = $filas[0];
@@ -274,11 +274,11 @@ class usuarios extends \core\Controlador {
 
 	public function form_borrar(array $datos = array())	{
 		
-		if ( \core\HTTP_Requerimiento::method() != "POST" ) {
-			$datos['mensaje'] = "Petición invalida. Usa el menú y los botones de la aplicación";
-			return \core\Distribuidor::cargar_controlador("mensajes", "mensaje",$datos);
-				
-		}
+//		if ( \core\HTTP_Requerimiento::method() != "POST" ) {
+//			$datos['mensaje'] = "Petición invalida. Usa el menú y los botones de la aplicación";
+//			return \core\Distribuidor::cargar_controlador("mensajes", "mensaje",$datos);
+//				
+//		}
 		
 		$validaciones = array(
 				"id" => "errores_requerido && errores_referencia:id/usuarios/id"
@@ -287,9 +287,9 @@ class usuarios extends \core\Controlador {
 			return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Usuario no identificado o no existente."));
 		}
 		// Debe recibirse por post
-		if (\core\HTTP_Requerimiento::method() != "POST") {
-			return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Utiliza los elementos del menú y botones de la aplicación."));
-		}
+//		if (\core\HTTP_Requerimiento::method() != "POST") {
+//			return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Utiliza los elementos del menú y botones de la aplicación."));
+//		}
 		$clausulas = array("where" => " id = {$datos["values"]["id"]} ");
 		$filas = \modelos\Modelo_SQL::tabla("usuarios")->select($clausulas);
 		$datos["values"] = $filas[0];
@@ -307,9 +307,9 @@ class usuarios extends \core\Controlador {
 	public function form_borrar_validar(array $datos = array())	{
 		
 		// Debe recibirse por post
-		if (\core\HTTP_Requerimiento::method() != "POST") {
-			return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Utiliza los elementos del menú y botones de la aplicación."));
-		}
+//		if (\core\HTTP_Requerimiento::method() != "POST") {
+//			return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Utiliza los elementos del menú y botones de la aplicación."));
+//		}
 		$validaciones = array(
 				"id" => "errores_requerido && errores_referencia:id/usuarios/id"
 		);
@@ -441,18 +441,18 @@ class usuarios extends \core\Controlador {
 		$validacion_catcha = true; // Iniciamos la variable.
 		
 		if ( \core\Configuracion::$form_insertar_externo_catcha) {
-					require_once(PATH_APP.'lib/php/recaptcha-php-1.11/recaptchalib.php');
-					$privatekey = "6Lem1-sSAAAAAPfnSmYe5wyruyuj1B7001AJ3CBh";
-					$resp = recaptcha_check_answer ($privatekey,
-												  $_SERVER["REMOTE_ADDR"],
-												  $_POST["recaptcha_challenge_field"],
-												  $_POST["recaptcha_response_field"]);
+                    require_once(PATH_APP.'lib/php/recaptcha-php-1.11/recaptchalib.php');
+                    $privatekey = "6Lem1-sSAAAAAPfnSmYe5wyruyuj1B7001AJ3CBh";
+                    $resp = recaptcha_check_answer ($privatekey,
+                        $_SERVER["REMOTE_ADDR"],
+                        $_POST["recaptcha_challenge_field"],
+                        $_POST["recaptcha_response_field"]);
 
-					if (!$resp->is_valid) {
-							$validacion_catcha = false;
-							$datos['errores']['validacion'] = 'Error de intruducción del captcha.';
-//							\core\Distribuidor::cargar_controlador("usuarios", "form_login", $datos);
-					}
+                    if (!$resp->is_valid) {
+                        $validacion_catcha = false;
+                        $datos['errores']['validacion'] = 'Error de intruducción del captcha.';
+//                        \core\Distribuidor::cargar_controlador("usuarios", "form_login", $datos);
+                    }
 
 		}
 		
@@ -469,10 +469,10 @@ class usuarios extends \core\Controlador {
 			$message = "
 <html>
 <head>
-  <title>Confirmación cuenta en esmvcphp</title>
+  <title>Confirmación cuenta en ".TITULO."</title>
 </head>
 <body>
-	<h3>Confirmación cuenta en esmvcphp</h3>
+	<h3>Confirmación cuenta en ".TITULO."</h3>
 	<p>Login: <b>{$datos['values']['login']}</b> Password: <b>$password</b></p>
 	<p>Para confirmar tu registro en la aplicación ".TITULO." pulsa en el siguiente hipervínculo o sino cópialo en la ventana de direcciones de tu navegador. <a href='$url' target='_blank' >$url</a>
 	</p>
@@ -485,7 +485,7 @@ class usuarios extends \core\Controlador {
 			$additional_headers .= 'X-Mailer: PHP/' . phpversion();
 			
 			if ( $envio_email = mail($to, $subject, $message, $additional_headers))  {
-				$datos["mensaje"] .= "Se ha enviado un correo electrónico a la cuenta de email que has aportado. Haz la confirmación pinchando en vínculo que se te ha enviado, pinchando en el enlace que se envía <a href='$url' target='_blank'>$url</a>. ";
+				$datos["mensaje"] .= "<div class='mensaje'><p>Se ha enviado un correo electrónico a la cuenta de email que has aportado.</p> <p>Haz la confirmación pinchando en vínculo que se te ha enviado, o directamente mediante el siguiente pinchando en el siguiente vínculo:</p> <a href='$url' target='_blank'>$url</a></div>";
 			}
 			else {
 				// Si falla el envío del email
@@ -514,8 +514,8 @@ class usuarios extends \core\Controlador {
 		$validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos);
 		
 		if (( !isset($datos["errores"]["email"]) && !isset($datos["errores"]["email2"])) && ($datos["values"]["email"] != $datos["values"]["email2"]) ) {
-				$datos["errores"]["email2"] = "La repetición del email no coincide.";
-				$validacion = false;
+                        $datos["errores"]["email2"] = "La repetición del email no coincide.";
+                        $validacion = false;
 		}
 		if (( !isset($datos["errores"]["password"]) && !isset($datos["errores"]["password2"])) && ($datos["values"]["password"] != $datos["values"]["password2"]) ) {
 				$datos["errores"]["password2"] = "La repetición del password no coincide.";

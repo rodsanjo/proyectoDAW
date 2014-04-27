@@ -369,10 +369,11 @@ class Validaciones  {
     public static function errores_fecha_hora($cadena){
             $mensaje="";
             if ($cadena!=null) {
-                    $cadena=str_replace(array(' ', '-', '.', ',', ':'), '/', $cadena);
+                    $cadena=str_replace(array('  ',' ', '-', '.', ',', ':'), '/', $cadena); //MySQL deja dos espacios en blanco entre la fecha y la hora por eso 'bb'
                     /* Para que sea mas facil y ahorrar comprobaciones cambiamos por / todos los signos que pone en el array, de esta manera la fecha siempre sera del tipo dd/mm/aaaa */
                     $patron_fecha_hora="/^\d{1,2}\/\d{1,2}\/\d{4}\/\d{2}\/\d{2}\/\d{2}/";
                     $encuentros=array();
+                    //var_dump($cadena);
                     if (preg_match($patron_fecha_hora, $cadena, $encuentros)) {
                             $numeros = explode('/', $encuentros[0]); //con explode convertimos en subcadenas el array cadena, cada subcadena esta formada por la division que hace el caracter.
                             if (!mktime ($numeros[3], $numeros[4], $numeros[5], $numeros[1], $numeros[0], $numeros[2]))
@@ -643,17 +644,18 @@ class Validaciones  {
     public static function errores_email($cadena) {
             $mensaje = null;
             if($cadena!=null) {
-                    $patron= '/^([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}@([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}(\.[a-z]{2,4})$/i';
-                    $encontrados=array();
-                    if(preg_match($patron, $cadena, $encontrados)) { // Hay encuentros
-                            if (self::$depuracion) {print("encuentros: "); print_r($encontrados);}
-                            if ($cadena!=$encontrados[0])
-                                    $mensaje.="El email es incorrecto. Formato cuenta@servidor.net ";
-                    }
-                    else {
-                            if (self::$depuracion) {print("encuentros: "); print_r($encontrados);}
-                            $mensaje.="El email es incorrecto. Formato cuenta@servidor.net ";
-                    }
+                //$patron= '/^([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}@([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}(\.[a-z]{2,4})$/i';
+                $patron= '/^([a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}@([a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}(\.[a-z]{2,4})$/i';
+                $encontrados=array();
+                if(preg_match($patron, $cadena, $encontrados)) { // Hay encuentros
+                        if (self::$depuracion) {print("encuentros: "); print_r($encontrados);}
+                        if ($cadena!=$encontrados[0])
+                                $mensaje.="El email es incorrecto. Formato cuenta@servidor.net ";
+                }
+                else {
+                        if (self::$depuracion) {print("encuentros: "); print_r($encontrados);}
+                        $mensaje.="El email es incorrecto. Formato cuenta@servidor.net ";
+                }
             }
 
             return $mensaje;

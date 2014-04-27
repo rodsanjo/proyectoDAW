@@ -13,7 +13,7 @@ class articulos extends \core\Controlador{
      * @param array $datos
      */
     public function index(array $datos=array()) {
-        
+
         $clausulas['where'] = 'categoria_id <> 1';
         if(isset($_REQUEST['p3'])){
             $sql = 'select id from 3da2_categorias where categoria like "%'.$_REQUEST['p3'].'%"';
@@ -36,6 +36,9 @@ class articulos extends \core\Controlador{
         $next_grp = isset($_REQUEST['p4'])?$_REQUEST['p4']:0;
         $next_art = $next_grp * self::$num_arts_por_pag;
         $clausulas['order_by'] = 'nombre';
+        if(isset($datos['values']['ordenar_por']) && $datos['values']['ordenar_por'] != null){
+            $clausulas['order_by'] = $datos['values']['ordenar_por'];
+        }
         $clausulas['limit'] = $next_art.",".self::$num_arts_por_pag;
         //$datos["filas"] = \modelos\self::$tabla::select($clausulas, "self::$tabla"); // Recupera todas las filas ordenadas
         $datos["filas"] = \modelos\Modelo_SQL::table(self::$tabla)->select($clausulas); // Recupera todas las filas ordenadas        
@@ -99,13 +102,13 @@ class articulos extends \core\Controlador{
     public function busqueda(array $datos=array())	{	
 
         $validaciones = array(
-            "nombre" => "errores_texto"
+            "buscar_nombre" => "errores_texto"
         );
         if ( ! $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos)) {
             $datos["errores"]["errores_validacion"]="Corrige los errores.";
         }
         else {
-            if ( ! strlen($datos["values"]["nombre"])) {
+            if ( ! strlen($datos["values"]["buscar_nombre"])) {
                 header("Location: ".\core\URL::generar("inicio"));
                 return;
             }
@@ -117,7 +120,7 @@ class articulos extends \core\Controlador{
             //$datos["filas"] = \modelos\self::$tabla::select($clausulas, "self::$tabla"); // Recupera todas las filas ordenadas
             $datos["filas"] = \modelos\Modelo_SQL::table(self::$tabla)->select($clausulas); // Recupera todas las filas ordenadas
 
-            $busqueda = isset($datos["values"]["nombre"])?$datos["values"]["nombre"]:'';
+            $busqueda = isset($datos["values"]["buscar_nombre"])?$datos["values"]["buscar_nombre"]:'';
             $_SESSION['busqueda'] = $busqueda; 
             
             $clausulas["where"] = "nombre like '%$busqueda%' ";
@@ -205,8 +208,8 @@ class articulos extends \core\Controlador{
                 if ( ! $validacion = \modelos\Datos_SQL::table(self::$tabla)->insert($datos["values"])) // Devuelve true o false
                     $datos["errores"]["errores_validacion"]="No se han podido grabar los datos en la bd.";
                 else {
-                    var_dump($datos);
-                    self::mover_files($datos["values"]["id"],$datos);
+                    //var_dump($datos);
+                    self::mover_files($datos);
                 }
             }
         }

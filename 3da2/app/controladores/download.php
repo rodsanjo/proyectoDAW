@@ -42,7 +42,7 @@ class download extends \core\Controlador {
                         $sql = 'select * from '.\core\sgbd\mysqli::get_prefix_tabla("articulos").' where manual = "'.$fichero.'"';
                         $fila = \core\sgbd\mysqli::execute($sql);
                         //var_dump($fila[0]);   //Al descomentar el var_dump da fallo ladescarga.
-                        $nombre_descarga = str_replace(" ", "-", $fila[0]['nombre']).'.pdf';
+                        $nombre_descarga = str_replace(" ", "-", $fila[0]['nombre']).'_reglamento.pdf';
                                                 
 			header("Content-type: " . \modelos\ficheros::get_mime_type($extension));
 			header('Content-Disposition: attachment; filename="'.$nombre_descarga.'"');

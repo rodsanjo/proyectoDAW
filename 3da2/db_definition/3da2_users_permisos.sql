@@ -32,7 +32,7 @@ drop table if exists 3da2_usuarios;
 create table if not exists 3da2_usuarios
 (id integer unsigned not null auto_increment
 ,login varchar(20) unique not null
-,email varchar(100) unique not null
+,email varchar(100) not null comment 'No lo pongo unique para poder hacer pruebas'
 ,password char(40) not null
 ,fecha_alta timestamp not null default current_timestamp()
 ,fecha_confirmacion_alta datetime default null

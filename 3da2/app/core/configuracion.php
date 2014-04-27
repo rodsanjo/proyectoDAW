@@ -40,7 +40,7 @@ namespace core {
 		// Regeneración de id de cookie de session al cambiar de usuario
 		public static $regenerar_session_id = false;
 		// Control acceso a recursos
-		public static $control_acceso_recursos = false;
+		public static $control_acceso_recursos = true;
 
 		// Gestión de inactividad para usuario logueados
 		public static $sesion_minutos_inactividad = 20; // num >= 0. 0 Implica sin control
@@ -60,8 +60,8 @@ namespace core {
 		public static $form_insertar_externo_catcha = false;
 
 		// Contactos
-		public static $email_info = "info@esmvcphp.es";
-		public static $email_noreply = "noreply@esmvcphp.es";
+		public static $email_info = "3da2@rodsanjo.esy.es";
+		public static $email_noreply = "3da2@rodsanjo.esy.es";
 
 
 		// Base de datos
@@ -77,13 +77,13 @@ namespace core {
 		);
 
 		// hostinger
-//    public static $db = array(
-//            'server'   => 'mysql.hostinger.es',
-//            'user'     => 'u684343090_daw2',
-//            'password' => 'u684343090_daw2',
-//            'db_name'   => 'u684343090_daw2',
-//            'prefix_'  => 'daw2_'
-//    );
+//                public static $db = array(
+//                        'server'   => 'mysql.hostinger.es',
+//                        'user'     => 'u513745123_3da2',
+//                        'password' => 'u513745123_3da2',
+//                        'db_name'   => 'u513745123_3da2',
+//                        'prefix_'  => '3da2_'
+//                );
 
 
 
