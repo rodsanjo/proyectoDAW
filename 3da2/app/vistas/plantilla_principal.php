@@ -7,7 +7,7 @@
     <link href="<?php echo URL_ROOT ?>favicon_3da2.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="<?php echo URL_ROOT ?>favicon_3da2.ico" rel="icon" type="image/x-icon" />    
     
-    <meta name="Description" content="Explicación de la página: se explican los diferentes tipos de materiales para la construccci�n" />
+    <meta name="Description" content="Explicación de la página: tienda online de juegos de mesa" />
     <meta name="Keywords" content="juegos de mesa, ocio,board game, rol, frikis, dados" />
     <meta name="Generator" content="con qué se ha hecho" />
     <meta name="Origen" content="3da2" />
@@ -161,16 +161,16 @@ heredoc;
 	
     <div id='globals'>
         <?php
-            var_dump($datos);
-            print "<pre>"; 
-                print_r($GLOBALS);
-                print("\$_GET "); print_r($_GET);
-                print("\$_POST ");print_r($_POST);
+//            var_dump($datos);
+//            print "<pre>"; 
+//                print_r($GLOBALS);
+//                print("\$_GET "); print_r($_GET);
+//                print("\$_POST ");print_r($_POST);
 //                print("\$_COOKIE ");print_r($_COOKIE);
 //                print("\$_REQUEST ");print_r($_REQUEST);
 //    		print("\$_SESSION ");print_r($_SESSION);
 //                print("\$_SERVER ");print_r($_SERVER);
-            print "</pre>";
+//            print "</pre>";
 //            print("xdebug_get_code_coverage() ");
 //            var_dump(xdebug_get_code_coverage());
         ?>

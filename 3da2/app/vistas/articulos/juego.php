@@ -45,13 +45,13 @@
         </form>
     ";
                 
-    //Descarga:
+    //Descarga reglamento:
     if (\core\Usuario::$login != 'anonimo'){
         $datos["carpeta"] = 'manuales';       
         $metodo = ($datos["carpeta"] == "js") ? "js" : "file";
         //No funciona en amigable:
         //$manual = ($fila["manual"]) ? "<a href='".\core\URL::generar("download/$metodo/manuales/{$fila["manual"]}")."'>Descargar reglamento</a>" : ""; //No funciona en amigable           
-        $manual = ($fila["manual"]) ? "<a href='".URL_ROOT."?p1=download&p2=$metodo&p3=manuales&p4={$fila["manual"]}' >Descargar reglamento</a>" : "";            
+        $manual = ($fila["manual"]) ? "<a href='".URL_ROOT."?p1=download&p2=$metodo&p3=manuales&p4={$fila["manual"]}' >Descargar reglamento</a>" : "Reglamento no disponible";            
         echo $manual;
     }
 

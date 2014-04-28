@@ -7,7 +7,7 @@ class usuarios extends \modelos\Modelo_SQL {
 	/* Rescritura de propiedades de validación */
 	public static $validaciones_insert = array(
 		'login' => 'errores_requerido && errores_login && errores_unicidad_insertar:login/usuarios/login',
-		'email' => 'errores_requerido && errores_email && errores_unicidad_insertar:email/usuarios/email',
+		'email' => 'errores_requerido && errores_email', // && errores_unicidad_insertar:email/usuarios/email',
 		'email2' => 'errores_requerido && errores_email',
 		'password' => 'errores_requerido && errores_password',
 		'password2' => 'errores_requerido && errores_password',
@@ -21,7 +21,7 @@ class usuarios extends \modelos\Modelo_SQL {
 	public static $validaciones_update = array(
 		"id" => "errores_requerido && errores_numero_entero_positivo && errores_referencia:id/usuarios/id",
 		'login' => 'errores_requerido && errores_login && errores_unicidad_modificar:id,login/usuarios/id,login',
-		'email' => 'errores_requerido && errores_email && errores_unicidad_modificar:id,email/usuarios/id,email',
+		'email' => 'errores_requerido && errores_email', // && errores_unicidad_modificar:id,email/usuarios/id,email',
 		// fecha_alta: si no se aporta se crea en mysql.
 		"fecha_alta" => "errores_fecha_hora",
 		// fecha_confirmacion_alta: Sí debe ser aportada en la inserción interna

@@ -22,6 +22,7 @@
             <select id='ordenar_por' name="ordenar_por" onchange="ordenar_por(<?php echo \core\URL::actual(); ?>);">
                 <option value='nombre' selected='selected'>Nombre</option>
                 <option value='precio' >Precio</option>
+                <option value='precio desc' >Precio descendente</option>
             </select>  
             <input type="submit" value="Ordenar"/>
         </p>       
@@ -83,7 +84,7 @@
     $num_grupo = isset($_REQUEST['p4'])?$_REQUEST['p4']:'';
     $num_total_juegos = $datos["num_total_juegos"][0]['num_total_juegos'];
     $ult_grupo = floor($num_total_juegos/\controladores\articulos::$num_arts_por_pag);
-    var_dump($num_total_juegos);
+    //var_dump($num_total_juegos);
     if($ult_grupo > 1 && $num_total_juegos%\controladores\articulos::$num_arts_por_pag == 0){    //Evto el cero por indeterminación y el 1 por ser primo
         $ult_grupo--; 
     }elseif($ult_grupo == 1 && $num_total_juegos == \controladores\articulos::$num_arts_por_pag){    //Evita el 1
@@ -109,7 +110,7 @@
         <a class='boton' href='<?php echo $href3 ?>' title="siguiente">></a>
         <a class='boton' href='<?php echo $href4 ?>' title="último">>></a>
 
-        <!--<span title="total"><?php echo $num_total_juegos; ?></span>-->
+        <!--<span title="total"><?php //echo $num_total_juegos; ?></span>-->
 
         <br/>
         <a class='boton' style="text-align: right;" href='<?=$datos["url_volver"]?>' >Volver</a>

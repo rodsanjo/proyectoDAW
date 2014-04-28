@@ -150,3 +150,8 @@ h2>i{
 .align_right{
     text-align: right;
 }
+
+.input_error{
+    color: red;
+    font-size: 85%;
+}

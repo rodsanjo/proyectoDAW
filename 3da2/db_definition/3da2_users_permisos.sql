@@ -260,6 +260,8 @@ insert into 3da2_metodos
 , ('carrito'		,'vaciar')
 , ('carrito'		,'ver')
 
+, ('download'		,'file')
+
 ;
 
 insert into 3da2_roles_permisos
@@ -275,6 +277,7 @@ insert into 3da2_roles_permisos
 , ('usuarios_logueados' ,'usuarios'	,'desconectar')
 , ('usuarios_logueados' ,'usuarios'	,'form_cambiar_password')
 , ('usuarios_logueados' ,'carrito'	,'*')
+, ('usuarios_logueados' ,'download'		,'file')
 
 , ('empleados'          ,'articulos'	,'form_insertar')
 , ('empleados'          ,'articulos'	,'form_modificar')
@@ -282,6 +285,7 @@ insert into 3da2_roles_permisos
 , ('empleados'          ,'usuarios'	,'desconectar')
 , ('empleados'          ,'usuarios'	,'form_cambiar_password')
 , ('empleados'          ,'usuarios'	,'index')
+, ('empleados' ,'download'		,'file')
 
 ;
 

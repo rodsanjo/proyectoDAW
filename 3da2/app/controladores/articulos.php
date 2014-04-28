@@ -36,9 +36,13 @@ class articulos extends \core\Controlador{
         $next_grp = isset($_REQUEST['p4'])?$_REQUEST['p4']:0;
         $next_art = $next_grp * self::$num_arts_por_pag;
         $clausulas['order_by'] = 'nombre';
-        if(isset($datos['values']['ordenar_por']) && $datos['values']['ordenar_por'] != null){
-            $clausulas['order_by'] = $datos['values']['ordenar_por'];
+        
+        //Ordenamos por lo que venga en $_REQUEST['ordenar_por']  mejorar No funciona al pasar a otra seccion
+        if(isset($_REQUEST['ordenar_por']) && $_REQUEST['ordenar_por'] != null){
+            $clausulas['order_by'] = \core\Array_Datos::contenido("ordenar_por", $_REQUEST);
+            $_SESSION['usuario']['order_by'] = $clausulas['order_by'];
         }
+
         $clausulas['limit'] = $next_art.",".self::$num_arts_por_pag;
         //$datos["filas"] = \modelos\self::$tabla::select($clausulas, "self::$tabla"); // Recupera todas las filas ordenadas
         $datos["filas"] = \modelos\Modelo_SQL::table(self::$tabla)->select($clausulas); // Recupera todas las filas ordenadas        
