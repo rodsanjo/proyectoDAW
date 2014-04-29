@@ -4,7 +4,7 @@ namespace controladores;
 
 class usuarios extends \core\Controlador {
 	
-
+    private static $tabla_users = 'usuarios';
 	
 	public function index(array $datos = array()) {
 		
@@ -372,9 +372,9 @@ class usuarios extends \core\Controlador {
 				return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Usuario no identificado o no existente."));
 			}
 			// Debe recibirse por post
-			if (\core\HTTP_Requerimiento::method() != "POST") {
-				return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Utiliza los elementos del menú y botones de la aplicación."));
-			}
+//			if (\core\HTTP_Requerimiento::method() != "POST") {
+//				return $this->cargar_controlador("mensajes", "mensaje", array("mensaje" => "Utiliza los elementos del menú y botones de la aplicación."));
+//			}
 			$clausulas = array(
 				"columnas" => "id, login"
 				,"where" => " id = {$datos["values"]["id"]} "
@@ -396,24 +396,47 @@ class usuarios extends \core\Controlador {
 	
 	public function form_cambiar_password_validar(array $datos = array()) {
 		
-		if ( $validacion = ! \core\Validaciones::errores_validacion_request(\modelos\usuarios::$validaciones_password_update, $datos)) {
-			if ($datos["values"]["password"] != $datos["values"]["password2"]) {
+            
+            //Comprobación de la contraseña anterior
+            $clausulas['where'] = "login = '".\core\Usuario::$login."'";
+            $datos["filas"] = \modelos\Modelo_SQL::tabla(self::$tabla_users)->select($clausulas);
+            $old_password = $datos['filas'][0]['password'];
+            $datos['values']['login'] = $datos["filas"][0]['login'];    //chapucilla para mantener el login en $datos
+            $datos['values']['id'] = $datos["filas"][0]['id'];    //chapucilla para mantener el login en $datos
+            
+            $password_old = (isset($_POST['password_old']) && $_POST['password_old'] != null)? $_POST['password_old'] : '';
+            
+            if(md5($password_old) != $old_password ){
+                    $validacion = false;
+                    $datos["errores"]["password_old"] = "La contraseña es incorrecta.";
+            }else{
+                if ( $validacion = ! \core\Validaciones::errores_validacion_request(\modelos\usuarios::$validaciones_password_update, $datos)) {
+			
+                    if ($datos["values"]["password"] != $datos["values"]["password2"]) {
 				$validacion = false;
 				$datos["errores"]["password2"] = "El valor repetido no coincide.";
-			}
-			else {
+                    }else {
 				unset($datos["values"]["password2"]);
+                                $datos['values']['password'] = md5($datos['values']['password']);
+                                
 				if ( $validacion = \modelos\modelo_SQL::table("usuarios")->update($datos["values"])) {
 					$_SESSION["alerta"] = "Se ha modificado correctamente la contraseña.";
-					\core\HTTP_Respuesta::set_header_line("Location", \core\URL::generar("usuarios"));
-					\core\HTTP_Respuesta::enviar();
+					if( \core\Usuario::$login != admin){
+                                            \core\HTTP_Respuesta::set_header_line("Location", \core\URL::generar("inicio"));
+                                            \core\HTTP_Respuesta::enviar();
+                                            
+                                        }else{
+                                            \core\HTTP_Respuesta::set_header_line("Location", \core\URL::generar("usuarios"));
+                                            \core\HTTP_Respuesta::enviar();                                        
+                                        }
 				}
 			}
 		
 		}
-		if ( ! $validacion) {
-			\core\Distribuidor::cargar_controlador("usuarios", "form_cambiar_password", $datos);
-		}
+            }
+            if ( ! $validacion) {
+                    \core\Distribuidor::cargar_controlador("usuarios", "form_cambiar_password", $datos);
+            }
 		
 	}
 	
@@ -593,10 +616,28 @@ class usuarios extends \core\Controlador {
 		}	
 	} // Fin de método
 	
+        /**
+         * Función que ofrecera al usuario un menú que le permitirá modificar sus datos
+         * @author jergo
+         * @param array $datos
+         */
+	public static function modificar_datos(array $datos = array()){
+            
+            $clausulas['where'] = "login = '".\core\Usuario::$login."'";
+            
+            $datos["filas"] = \modelos\Modelo_SQL::tabla(self::$tabla_users)->select($clausulas);
+            
+            //Otra forma:
+            //$tabla = \core\Modelo_SQL::get_prefix_tabla(self::$tabla_users);
+            //$sql = "select * from $tabla where ".$clausulas['where'];
+            //$datos["filas"] = \modelos\Modelo_SQL::execute($sql);
+            
+            //var_dump($datos);
+            
+            $datos['view_content'] = \core\Vista::generar("modificar_datos", $datos, true);
+            $http_body = \core\Vista_Plantilla::generar("DEFAULT", $datos, true);
+            \core\HTTP_Respuesta::enviar($http_body);
+        }
 	
-	
-	
-	
-	
-	
+
 } // Fin de la clase

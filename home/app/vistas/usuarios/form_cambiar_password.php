@@ -5,19 +5,24 @@
 		
 		<input id='id'  name='id' type='hidden' value='<?php echo \core\Array_Datos::values('id', $datos); ?>' />
 
-		Login: <input id='login' name='login' type='text' size='30'  maxlength='30' autocomplete='off' value='<?php echo \core\Array_Datos::values("login", $datos); ?>'/>
-		<span class='requerido'>Requerido</span><?php echo \core\HTML_Tag::span_error('login', $datos); ?>
+		Login: <input id='login' name='login' type='text' size='20'  maxlength='20' autocomplete='off' value='<?php echo \core\Array_Datos::values("login", $datos); ?>'/>
+		<?php echo \core\HTML_Tag::span_error('login', $datos); ?>
+		<br />
+                
+                Anterior contraseña: <input id='password_old' name='password_old' type='password' size='20'  maxlength='20' autocomplete='off' value=''/>
+		<?php echo \core\HTML_Tag::span_error('password_old', $datos); ?>
 		<br />
 
-		Contraseña: <input id='password' name='password' type='password' size='30'  maxlength='30' autocomplete='off' value='<?php echo \core\Array_Datos::values('password', $datos); ?>'/>
-		<span class='requerido'>Requerido</span><?php echo \core\HTML_Tag::span_error('password', $datos); ?>
+		Nueva contraseña: <input id='password' name='password' type='password' size='20'  maxlength='20' autocomplete='off' value='<?php echo \core\Array_Datos::values('password', $datos); ?>'/>
+		<?php echo \core\HTML_Tag::span_error('password', $datos); ?>
 		<br />
 
-		Repite Contraseña: <input id='password2' name='password2' type='password' size='30'  maxlength='30' autocomplete='off' value='<?php echo \core\Array_Datos::values('password2', $datos); ?>'/>
-		<span class='requerido'>Requerido</span><?php echo \core\HTML_Tag::span_error('password2', $datos); ?>
+		Repita la contraseña: <input id='password2' name='password2' type='password' size='20'  maxlength='20' autocomplete='off' value='<?php echo \core\Array_Datos::values('password2', $datos); ?>'/>
+		<?php echo \core\HTML_Tag::span_error('password2', $datos); ?>
 		<br />
 
 		<br />
+                <small>*Todos los campos son requeridos</small>
 		<?php echo \core\HTML_Tag::span_error('validacion', $datos);?><br />
 		<input type='submit' value='Enviar'>
 		<?php if (\core\Distribuidor::get_metodo_invocado() != "form_borrar" ): ?>

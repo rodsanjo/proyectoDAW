@@ -109,8 +109,13 @@
                     Usuario:
                     <?php 
                         echo "<b>".\core\Usuario::$login."</b><br/>";
-                        echo " <a class='destacado_r' href='".\core\URL::generar("usuarios/desconectar")."'>Sign out</a>";
+                        echo " <a class='destacado_r' href='".\core\URL::generar("usuarios/desconectar")."'>Log out</a>";
                     ?>
+                    <br/><br/>
+                    <form method="post" action="<?php echo \core\URL::generar("usuarios/modificar_datos"); ?>">
+                        <input type="hidden" name="login" value="<?php echo \core\Usuario::$login ?>"/>
+                        <input type="submit" value="Modificar datos"/>
+                    </form>
                 </div>
                      <?php } ?>
                     
@@ -143,7 +148,7 @@
 if (isset($_SESSION["alerta"])) {
     echo <<<heredoc
 <script type="text/javascript" />
-    // alert("{$_SESSION["alerta"]}");
+    alert("{$_SESSION["alerta"]}");
     var alerta = '{$_SESSION["alerta"]}';
 </script>
 heredoc;
@@ -161,16 +166,16 @@ heredoc;
 	
     <div id='globals'>
         <?php
-//            var_dump($datos);
-//            print "<pre>"; 
-//                print_r($GLOBALS);
+            var_dump($datos);
+            print "<pre>"; 
+                print_r($GLOBALS);
 //                print("\$_GET "); print_r($_GET);
 //                print("\$_POST ");print_r($_POST);
 //                print("\$_COOKIE ");print_r($_COOKIE);
 //                print("\$_REQUEST ");print_r($_REQUEST);
 //    		print("\$_SESSION ");print_r($_SESSION);
 //                print("\$_SERVER ");print_r($_SERVER);
-//            print "</pre>";
+            print "</pre>";
 //            print("xdebug_get_code_coverage() ");
 //            var_dump(xdebug_get_code_coverage());
         ?>

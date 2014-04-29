@@ -237,6 +237,8 @@ insert into 3da2_metodos
 , ('usuarios'		,'form_insertar_externo')
 , ('usuarios'		,'form_modificar')
 , ('usuarios'		,'form_borrar')
+, ('usuarios'		,'modificar_datos')
+
 , ('usuarios_permisos'	,'*')
 , ('usuarios_permisos'	,'index')
 , ('usuarios_permisos'	,'form_modificar')
@@ -270,14 +272,17 @@ insert into 3da2_roles_permisos
 , ('usuarios'		,'inicio'	,'*')
 , ('usuarios'		,'mensajes'	,'*')
 , ('usuarios'		,'contacto'	,'*')
+
 , ('usuarios'          ,'articulos'	,'index')
 , ('usuarios'          ,'articulos'	,'juego')
 , ('usuarios'          ,'articulos'	,'busqueda')
 
+, ('usuarios'		,'usuarios'     ,'modificar_datos')
+
 , ('usuarios_logueados' ,'usuarios'	,'desconectar')
 , ('usuarios_logueados' ,'usuarios'	,'form_cambiar_password')
 , ('usuarios_logueados' ,'carrito'	,'*')
-, ('usuarios_logueados' ,'download'		,'file')
+, ('usuarios_logueados' ,'download'     ,'file')
 
 , ('empleados'          ,'articulos'	,'form_insertar')
 , ('empleados'          ,'articulos'	,'form_modificar')
