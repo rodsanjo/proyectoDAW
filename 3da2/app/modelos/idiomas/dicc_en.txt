@@ -14,12 +14,12 @@ Juegos de cartas|Card games
 Solitarios|Solitaire
 Accesorios|Accesories
 Galería|Galery
+Reglamentos|Rules
+Enanos|Dwarves
 Enlaces|Links
 Contacto|Contact
 Revista|Magazine
 Libros|Books
-h1#titulo|Jorge's international library, 
-h2#titulo|Application following the MVC pattern
 Diseñada por|Designed by
 Contacto|Contact
 Fecha última actualización|Last updated date

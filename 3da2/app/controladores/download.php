@@ -38,11 +38,8 @@ class download extends \core\Controlador {
 				exit(\modelos\descargas::get_error());
 			}
 			
-                        //Poner nombre a la descarga:
-                        $sql = 'select * from '.\core\sgbd\mysqli::get_prefix_tabla("articulos").' where manual = "'.$fichero.'"';
-                        $fila = \core\sgbd\mysqli::execute($sql);
-                        //var_dump($fila[0]);   //Al descomentar el var_dump da fallo ladescarga.
-                        $nombre_descarga = str_replace(" ", "-", $fila[0]['nombre']).'_reglamento.pdf';
+                        //Ponemos nombre a la descarga:
+                        $nombre_descarga = self::nombrar_descarga_manual($fichero);
                                                 
 			header("Content-type: " . \modelos\ficheros::get_mime_type($extension));
 			header('Content-Disposition: attachment; filename="'.$nombre_descarga.'"');
@@ -98,6 +95,20 @@ class download extends \core\Controlador {
 		}
 		
 	}
+        
+        /**
+         * Funcion que da el nombre del articulo a la descarga
+         * @author Jorge
+         * @param type $fichero
+         * @return string
+         */
+        private static function nombrar_descarga_manual($fichero){
+            $sql = 'select * from '.\core\sgbd\mysqli::get_prefix_tabla("articulos").' where manual = "'.$fichero.'"';
+            $fila = \core\sgbd\mysqli::execute($sql);
+            //var_dump($fila[0]);   //Al descomentar el var_dump da fallo ladescarga.
+            $nombre_descarga = str_replace(" ", "-", $fila[0]['nombre']).'_reglamento.pdf';
+            return $nombre_descarga;
+        }
 	
 	
 }

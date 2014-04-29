@@ -8,25 +8,26 @@
 </script>
 
 <div>
-    <h3>Artículos disponibles:</h3>
-    
-    <div class="align_right">
-    <?php
-    echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar un nuevo artículo");
-    echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_insertar"), "insertar un nuevo artículo");
-    ?>
+    <div>
+        <h3>Artículos disponibles:</h3>
+        <form method='post' action='<?php echo \core\URL::generar("articulos/index"); ?>'>
+            <p>Ordenar por:
+                <select id='ordenar_por' name="ordenar_por" onchange="ordenar_por(<?php echo \core\URL::actual(); ?>);">
+                    <option value='nombre' selected='selected'>Nombre</option>
+                    <option value='precio' >Precio</option>
+                    <option value='precio desc' >Precio descendente</option>
+                </select>  
+                <input type="submit" value="Ordenar"/>
+            </p>       
+        </form>
     </div>
     
-    <form method='post' action='<?php echo \core\URL::generar("articulos/index"); ?>'>
-        <p>Ordenar por:
-            <select id='ordenar_por' name="ordenar_por" onchange="ordenar_por(<?php echo \core\URL::actual(); ?>);">
-                <option value='nombre' selected='selected'>Nombre</option>
-                <option value='precio' >Precio</option>
-                <option value='precio desc' >Precio descendente</option>
-            </select>  
-            <input type="submit" value="Ordenar"/>
-        </p>       
-    </form>
+    <div class="align_right">
+        <?php
+        echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar un nuevo artículo");
+        echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_insertar"), "insertar un nuevo artículo");
+        ?>
+    </div>
     
     <?php
     foreach ($datos['filas'] as $key => $fila){ //cada fila corresponde a un juego de mesa        

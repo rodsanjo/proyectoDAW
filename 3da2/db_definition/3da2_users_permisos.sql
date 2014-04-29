@@ -42,6 +42,17 @@ create table if not exists 3da2_usuarios
 engine=myisam
 character set utf8 collate utf8_general_ci
 ;
+
+insert into 3da2_usuarios 
+  (login, email, password, fecha_confirmacion_alta) values
+  ('admin', 'admin@3da2.com', md5('admin00'), now())
+, ('anonimo', 'anonimo@email.com', md5(''), now())
+, ('jorge', 'jergo23@gmail.com', md5('jorge00'), now())
+, ('juan', 'juan@email.com', md5('juan00'), now())
+, ('anais', 'anais@email.com', md5('anais00'), now())
+, ('lola', 'lola@email.es', md5('lola00'), now())
+;
+
 /*
 create table if not exists 3da2_usuarios
 (id integer unsigned not null auto_increment primary key
@@ -200,22 +211,12 @@ insert into 3da2_roles
 ;
 
 
-insert into 3da2_usuarios 
-  (login, email, password, fecha_confirmacion_alta) values
-  ('admin', 'admin@3da2.com', md5('admin00'), now())
-, ('anonimo', 'anonimo@email.com', md5(''), now())
-, ('jorge', 'jergo23@gmail.com', md5('jorge00'), now())
-, ('juan', 'juan@email.com', md5('juan00'), now())
-, ('anais', 'anais@email.com', md5('anais00'), now())
-, ('lola', 'lola@email.es', md5('lola00'), now())
-;
-
 insert into 3da2_metodos
   (controlador          ,metodo) values
   ('*'			,'*')
 , ('inicio'		,'*')
 , ('inicio'		,'index')
-, ('mensajes'		, '*')
+, ('mensajes'		,'*')
 , ('roles'		,'*')
 , ('roles'		,'index')
 , ('roles'		,'form_borrar')
@@ -245,6 +246,7 @@ insert into 3da2_metodos
 
 , ('contacto'   ,'*')
 , ('contacto'   ,'index')
+, ('contacto'   ,'enviar_mail')
 
 , ('articulos'	,'*')
 , ('articulos'	,'index')
@@ -254,15 +256,22 @@ insert into 3da2_metodos
 , ('articulos'	,'form_modificar')
 , ('articulos'	,'form_borrar')
 
-, ('carrito'		,'*')
-, ('carrito'		,'comprar')
-, ('carrito'		,'meter')
-, ('carrito'		,'modificar')
-, ('carrito'		,'pagar')
-, ('carrito'		,'vaciar')
-, ('carrito'		,'ver')
+, ('carrito'	,'*')
+, ('carrito'	,'comprar')
+, ('carrito'	,'meter')
+, ('carrito'	,'modificar')
+, ('carrito'	,'pagar')
+, ('carrito'	,'vaciar')
+, ('carrito'	,'ver')
 
-, ('download'		,'file')
+, ('download'	,'file')
+
+, ('galeria'    ,'*')
+, ('galeria'	,'index')
+, ('galeria'	,'carpeta')
+
+, ('enlaces'	,'*')
+, ('enlaces'	,'index')
 
 ;
 
@@ -272,15 +281,16 @@ insert into 3da2_roles_permisos
 , ('usuarios'		,'inicio'	,'*')
 , ('usuarios'		,'mensajes'	,'*')
 , ('usuarios'		,'contacto'	,'*')
+, ('usuarios'          ,'enlaces'	,'*')
+, ('usuarios'          ,'galeria'	,'*')
 
 , ('usuarios'          ,'articulos'	,'index')
 , ('usuarios'          ,'articulos'	,'juego')
 , ('usuarios'          ,'articulos'	,'busqueda')
 
-, ('usuarios'		,'usuarios'     ,'modificar_datos')
-
 , ('usuarios_logueados' ,'usuarios'	,'desconectar')
 , ('usuarios_logueados' ,'usuarios'	,'form_cambiar_password')
+, ('usuarios_logueados'	,'usuarios'     ,'modificar_datos')
 , ('usuarios_logueados' ,'carrito'	,'*')
 , ('usuarios_logueados' ,'download'     ,'file')
 
@@ -289,8 +299,9 @@ insert into 3da2_roles_permisos
 , ('empleados'          ,'articulos'	,'form_borrar')
 , ('empleados'          ,'usuarios'	,'desconectar')
 , ('empleados'          ,'usuarios'	,'form_cambiar_password')
+, ('empleados'		,'usuarios'     ,'modificar_datos')
 , ('empleados'          ,'usuarios'	,'index')
-, ('empleados' ,'download'		,'file')
+, ('empleados'          ,'download'	,'file')
 
 ;
 

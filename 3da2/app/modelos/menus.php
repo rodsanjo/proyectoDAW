@@ -43,7 +43,10 @@ class Menus{    //la clase se tiene que llamar igual que el archivo
             ,"Solitarios"=>"articulos,index,solitarios,Solitarios" 
         )
         ,"Accesorios" => "articulos,index/accesorios,Accesorios"
-        ,"Galería" => "galeria,index,Galeria de imagenes"
+        ,"Galería" => array(
+            "Reglamentos"=>"galeria,carpeta,manuales,Reglamentos"
+            ,"Enanos"=>"galeria,carpeta,krasnale,Enanos"
+        )
         ,"Enlaces" => "enlaces,index,Enlaces de interés"
         ,"Contacto" => "contacto,index,Contacto"
     );

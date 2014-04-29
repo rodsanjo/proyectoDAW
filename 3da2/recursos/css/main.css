@@ -57,6 +57,11 @@ h2>i{
     width:30px;
    
 }
+#idioma a{
+    width:30px;
+   display: none;
+}
+
 
 #sendero_migas_pan{
     float: left;
@@ -154,4 +159,19 @@ h2>i{
 .input_error{
     color: red;
     font-size: 85%;
+}
+
+.krasnal{
+    float: left;
+    margin: 3px;
+    text-align: center;
+}
+
+.krasnal img{
+    background:;
+}
+.krasnal center{
+    border:solid 1px;
+    border-radius: 20px;
+    margin-bottom: 10px;
 }

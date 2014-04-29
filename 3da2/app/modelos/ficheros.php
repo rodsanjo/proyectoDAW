@@ -39,7 +39,7 @@ class ficheros {
 	 */
 	public static function get_ficheros($carpeta) {
 		
-		$directorio = PATH_APP."ficheros";
+		$directorio = PATH_APPLICATION."recursos/ficheros";
 
 		$ficheros = array();
 		
@@ -73,5 +73,19 @@ class ficheros {
 		return (array_key_exists($extension,$mime_types) ? $mime_types[$extension] : null);
 		
 	}
+        
+        /**
+         * Consigue el titulo del articulo cuyo archivo es guardado en nuestra DB con un nombre generico
+         * @author Jorge
+         * @param type $fichero
+         * @return type string
+         */
+        public static function get_titulo_articulo($fichero){
+            $nombre_tabla = 'articulos';
+            $tabla = \core\Modelo_SQL::get_prefix_tabla($nombre_tabla);
+            $sql = 'select * from '.$tabla.' where manual = "'.$fichero.'"';
+            $titulos = \core\Modelo_SQL::execute($sql);
+            return $titulos[0]['nombre'];
+        }
 	
 }

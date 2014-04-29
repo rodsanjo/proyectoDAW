@@ -10,7 +10,7 @@
     de esta manera podrás escoger mejor cuál será tu elección a la hora de adquirir un nuevo juego de mesa,
     y poder tener una descripción más detallada del producto, para un posible regalo o para disfrute propio
     con los amigos y familiares.
-    Además encontraras accesorios para poder completar tus juegos, y por qué no crear los tuyos propios.
+    Además encontrarás accesorios para poder completar tus juegos, y por qué no crear los tuyos propios.
     Si tienes algún juego creado por ti, hadnoslo saber a través de nuestro formulario de contacto.
     Podremos ayudarte para publicitarlo en nuestra página y ayudarte en su futura distribución.
     ¡Aceptamos las grandes ideas! y  estamos deseando de conocerlas y que en compañia podamos pasar un buen rato.
