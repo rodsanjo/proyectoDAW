@@ -2,21 +2,22 @@
 	<h2>Alta de un nuevo usuario</h2>
 	<?php //echo __FILE__; var_dump($datos); ?>
 	<form name="formulario"  method='post' action="<?php echo \core\URL::generar("usuarios/".\core\Distribuidor::get_metodo_invocado()."_validar"); ?>" >
-		
+	    <fieldset>
+            <legend>Formulario de alta</legend>
 		<input id='id'  name='id' type='hidden' value='<?php echo \core\Array_Datos::values('id', $datos); ?>' />
 
 		<label id="labelLogin" for="login">Login:</label>
-                <input id='login' name='login' type='text' size='20'  maxlength='20' autocomplete='off' value='<?php echo \core\Array_Datos::values("login", $datos); ?>'/>
+                <input id='login' name='login' type='text' size='20'  maxlength='20' value='<?php echo \core\Array_Datos::values("login", $datos); ?>'/>
 		<?php echo \core\HTML_Tag::span_error('login', $datos); ?>
 		<br />
 
 		Email:
-                <input id='email' name='email' type='text' size='50' maxlength='100' autocomplete='off' value='<?php echo \core\Array_Datos::values('email', $datos); ?>'/>
+                <input id='email' name='email' type='text' size='50' maxlength='100' value='<?php echo \core\Array_Datos::values('email', $datos); ?>'/>
 		<?php echo \core\HTML_Tag::span_error('email', $datos); ?>
 		<br />
 
 		Repita el email:
-                <input id='email' name='email2' type='text' size='50' maxlength='100' autocomplete='off' value='<?php echo \core\Array_Datos::values('email2', $datos); ?>'/>
+                <input id='email' name='email2' type='text' size='50' maxlength='100' value='<?php echo \core\Array_Datos::values('email2', $datos); ?>'/>
 		<?php echo \core\HTML_Tag::span_error('email2', $datos); ?>
 		<br />
 
@@ -30,7 +31,7 @@
 		<br />
                 
                 DNI:
-                <input onblur="return validarDNI(document.formulario.dni.value);" type="text" name="dni" value="" size="10" maxlength="8" />
+                <input onblur="return validarDNI(document.formulario.dni.value);" type="text" name="dni" value="" size="10" maxlength="8"  autocomplete='off'/>
                 -<input type="text" name="letraDNI" readonly="readonly" size="1"/>
                 <span id="error_dni" class='input_error'></span><br/>
 
@@ -62,7 +63,8 @@
 			<input type='reset' value='Limpiar'>
 		<?php endif; ?>
 			<input type='button' value='Cancelar' onclick='window.location.assign("<?php echo \core\Datos::contenido("url_cancelar", $datos); ?>");'/>
-	</form>
+            </fieldset>
+        </form>
 
 	
 </div>

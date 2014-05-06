@@ -40,6 +40,9 @@ class ficheros {
 	public static function get_ficheros($carpeta) {
 		
 		$directorio = PATH_APPLICATION."recursos/ficheros";
+                if($_REQUEST["p3"] == 'krasnale'){
+                    $directorio = PATH_APPLICATION."recursos/imagenes";
+                }                   
 
 		$ficheros = array();
 		

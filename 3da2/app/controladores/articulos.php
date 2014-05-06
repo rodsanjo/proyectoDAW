@@ -15,6 +15,7 @@ class articulos extends \core\Controlador{
     public function index(array $datos=array()) {
 
         $clausulas['where'] = 'categoria_id <> 1';
+        //$clausulas['where'] = isset($_REQUEST['categoria']) ? 'categoria_id like "%'.$_REQUEST['categoria'].'%"' : (isset($_REQUEST['p3']) ? 'categoria_id like "%'.$_REQUEST['p3'].'%"' : 'categoria_id <> 1' );
         if(isset($_REQUEST['p3'])){
             $sql = 'select id from 3da2_categorias where categoria like "%'.$_REQUEST['p3'].'%"';
             $categoria_id = \modelos\Modelo_SQL::execute($sql);
@@ -38,10 +39,15 @@ class articulos extends \core\Controlador{
         $clausulas['order_by'] = 'nombre';
         
         //Ordenamos por lo que venga en $_REQUEST['ordenar_por']  mejorar No funciona al pasar a otra seccion
+        $order_by = isset($_REQUEST['ordenar_por'])?$_REQUEST['ordenar_por']:'nombre';
+        $order_by = isset($_REQUEST['p5'])?$_REQUEST['p5']:$order_by;
+        $clausulas['order_by'] = $order_by;
+        /*
         if(isset($_REQUEST['ordenar_por']) && $_REQUEST['ordenar_por'] != null){
             $clausulas['order_by'] = \core\Array_Datos::contenido("ordenar_por", $_REQUEST);
             $_SESSION['usuario']['order_by'] = $clausulas['order_by'];
         }
+         */
 
         $clausulas['limit'] = $next_art.",".self::$num_arts_por_pag;
         //$datos["filas"] = \modelos\self::$tabla::select($clausulas, "self::$tabla"); // Recupera todas las filas ordenadas

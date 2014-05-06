@@ -43,16 +43,6 @@ engine=myisam
 character set utf8 collate utf8_general_ci
 ;
 
-insert into 3da2_usuarios 
-  (login, email, password, fecha_confirmacion_alta) values
-  ('admin', 'admin@3da2.com', md5('admin00'), now())
-, ('anonimo', 'anonimo@email.com', md5(''), now())
-, ('jorge', 'jergo23@gmail.com', md5('jorge00'), now())
-, ('juan', 'juan@email.com', md5('juan00'), now())
-, ('anais', 'anais@email.com', md5('anais00'), now())
-, ('lola', 'lola@email.es', md5('lola00'), now())
-;
-
 /*
 create table if not exists 3da2_usuarios
 (id integer unsigned not null auto_increment primary key
@@ -210,6 +200,17 @@ insert into 3da2_roles
 , ('usuarios_logueados'	,'Todos los usuarios excluido anónimo. Algunas opciones no estarán disponibles para los empleados')
 ;
 
+insert into 3da2_usuarios 
+  (login, email, password, fecha_confirmacion_alta) values
+  ('admin', 'admin@3da2.com', md5('admin00'), now())
+, ('anonimo', 'anonimo@email.com', md5(''), now())
+, ('jorge', 'jergo23@gmail.com', md5('jorge00'), now())
+, ('juan', 'juan@email.com', md5('juan00'), now())
+, ('anais', 'anais@email.com', md5('anais00'), now())
+, ('lola', 'lola@email.es', md5('lola00'), now())
+, ('joseraul', 'albatros260@gmail.com', 'L$kXp+*rSJJ}^2)4MkN$cnvEo#pDFm', now())
+, ('Beto', 'sonbeto@gmail.com', 'amLo]UKBb0*0XfcNK^PZjtkaG{TzfZ', now())
+;
 
 insert into 3da2_metodos
   (controlador          ,metodo) values
@@ -272,6 +273,9 @@ insert into 3da2_metodos
 
 , ('enlaces'	,'*')
 , ('enlaces'	,'index')
+, ('enlaces'	,'form_anexar')
+, ('enlaces'	,'form_modificar')
+, ('enlaces'	,'form_borrar')
 
 ;
 
@@ -281,7 +285,7 @@ insert into 3da2_roles_permisos
 , ('usuarios'		,'inicio'	,'*')
 , ('usuarios'		,'mensajes'	,'*')
 , ('usuarios'		,'contacto'	,'*')
-, ('usuarios'          ,'enlaces'	,'*')
+, ('usuarios'          ,'enlaces'	,'index')
 , ('usuarios'          ,'galeria'	,'*')
 
 , ('usuarios'          ,'articulos'	,'index')
@@ -302,6 +306,7 @@ insert into 3da2_roles_permisos
 , ('empleados'		,'usuarios'     ,'modificar_datos')
 , ('empleados'          ,'usuarios'	,'index')
 , ('empleados'          ,'download'	,'file')
+, ('empleados'          ,'enlaces'	,'*')
 
 ;
 
@@ -309,6 +314,7 @@ insert into 3da2_usuarios_roles
   (login	,rol) values
   ('admin'	,'administradores')
 , ('jorge'      ,'empleados')
+, ('Beto'       ,'empleados')
 -- , ('anonimo'	,'usuarios')
 -- , ('juan'	,'usuarios')
 -- , ('juan'	,'usuarios_logueados')

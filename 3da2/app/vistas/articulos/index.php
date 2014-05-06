@@ -11,13 +11,15 @@
     <div>
         <h3>Artículos disponibles:</h3>
         <form method='post' action='<?php echo \core\URL::generar("articulos/index"); ?>'>
+            <input type="hidden" name="categoria" value="<?php echo isset($_REQUEST['p3']) ? $_REQUEST['p3'] : ''; ?>"/>
+            <input type="hidden" name="seccion" value="<?php echo isset($_REQUEST['p4']) ? $_REQUEST['p4'] : ''; ?>"/>
             <p>Ordenar por:
                 <select id='ordenar_por' name="ordenar_por" onchange="ordenar_por(<?php echo \core\URL::actual(); ?>);">
                     <option value='nombre' selected='selected'>Nombre</option>
                     <option value='precio' >Precio</option>
                     <option value='precio desc' >Precio descendente</option>
                 </select>  
-                <input type="submit" value="Ordenar"/>
+                <input type="submit" value="Ordenar" title="Solo se mostrarán los <?php echo \controladores\articulos::$num_arts_por_pag; ?> primeros artículos sin diferenciar categoría"/>
             </p>       
         </form>
     </div>
@@ -81,11 +83,17 @@
   
     }
     
+//    $categoria = isset($_REQUEST['categoria'])?$_REQUEST['categoria']:'seccion';
     $categoria = isset($_REQUEST['p3'])?$_REQUEST['p3']:'seccion'; //'seccion' no vale para nada, solo para que p3 no quede vacio a la vista del usuario
+    
     $num_grupo = isset($_REQUEST['p4'])?$_REQUEST['p4']:'';
+    
+//    $order_by = isset($_REQUEST['ordenar_por'])?$_REQUEST['ordenar_por']:'';
+//    $order_by = isset($_REQUEST['p5'])?$_REQUEST['p5']:$order_by;
+    
     $num_total_juegos = $datos["num_total_juegos"][0]['num_total_juegos'];
     $ult_grupo = floor($num_total_juegos/\controladores\articulos::$num_arts_por_pag);
-    //var_dump($num_total_juegos);
+    var_dump($num_total_juegos);
     if($ult_grupo > 1 && $num_total_juegos%\controladores\articulos::$num_arts_por_pag == 0){    //Evto el cero por indeterminación y el 1 por ser primo
         $ult_grupo--; 
     }elseif($ult_grupo == 1 && $num_total_juegos == \controladores\articulos::$num_arts_por_pag){    //Evita el 1

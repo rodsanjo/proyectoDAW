@@ -34,7 +34,7 @@ class usuarios extends \core\Controlador {
 			\core\HTTP_Respuesta::enviar($http_body);
 		}
 		else {
-			$datos["mensaje"] = "El usuario actual es <b>".\core\Usuario::$login."</b>. Para cambiar de usuario debes desconectarte primero." ;
+			$datos["mensaje"] = "El usuario actual es <b>".\core\Usuario::$login."</b>. Para cambiar de usuario debe desconectarse primero." ;
 			$this->cargar_controlador('mensajes', 'mensaje', $datos);
 		}
 		
@@ -47,7 +47,7 @@ class usuarios extends \core\Controlador {
             if (\core\Usuario::$login != "anonimo") {
                 exit(__METHOD__.__LINE__);
 
-                $datos["mensaje"] = "Ya te encuentras conectado. Utiliza el menú para navegar.";
+                $datos["mensaje"] = "Ya se encuentras conectado. Utilice el menú para navegar.";
                 \core\Distribuidor::cargar_controlador("mensajes", "mensaje", $datos);
             }elseif ( ! \core\HTML_Tag::form_autenticar("form_login", "post")) {
                     // El formulario no se ha enviado con anterioridad desde el servidor
@@ -89,7 +89,7 @@ class usuarios extends \core\Controlador {
                         $datos['errores']['validacion'] = 'Error en login o password';
                         \core\Distribuidor::cargar_controlador("usuarios", "form_login", $datos);
                     }elseif ($respuesta == 'existe_autenticado') {
-                        $datos['mensaje'] = "Falta confimación del usuario {$datos['values']['login']}. Consulta tu correo electrónico" ;
+                        $datos['mensaje'] = "Falta confimación del usuario {$datos['values']['login']}. Consulte su correo electrónico" ;
                         $this->cargar_controlador('mensajes', 'mensaje', $datos);
                     }elseif ($respuesta == 'existe_autenticado_confirmado') {
                         $datos['login'] = $datos['values']['login'];
@@ -98,14 +98,14 @@ class usuarios extends \core\Controlador {
                         $filas = \modelos\Modelo_SQL::table("usuarios")->select($clausulas);
 
                         \core\Usuario::nuevo($datos['values']['login'], $filas[0]['id']);
-                        $datos["mensaje"] = "Bienvenido la aplicación: <b>{$datos['values']['login']}</b>." ;
+                        $datos["mensaje"] = "Bienvenido a ".TITULO.": <b>{$datos['values']['login']}</b>." ;
                         $this->cargar_controlador('mensajes', 'mensaje', $datos);
 
                     }elseif ($respuesta == 'autenticado_en_ACL') {
 
                         $datos['login'] = $datos['values']['login'];
                         \core\Usuario::nuevo($datos['values']['login']);
-                        $datos["mensaje"] = "Bienvenido la aplicación: <b>{$datos['values']['login']}</b>." ;
+                        $datos["mensaje"] = "Bienvenido a ".TITULO.": <b>{$datos['values']['login']}</b>." ;
                         $this->cargar_controlador('mensajes', 'mensaje', $datos);
 
                     }else{
@@ -140,10 +140,10 @@ class usuarios extends \core\Controlador {
 			$datos['mensaje'] = 'Esperamos verle de vuelta pronto. ¡Hasta la próxima!';
 		}
 		elseif ($datos['desconexion_razon'] == 'inactividad') {
-			$datos['mensaje'] = 'Has superado el tiempo de inactividad que es de <b>'.\core\Configuracion::$sesion_minutos_inactividad.'</b> minutos.';
+			$datos['mensaje'] = 'Ha superado el tiempo de inactividad que es de <b>'.\core\Configuracion::$sesion_minutos_inactividad.'</b> minutos.';
 		}
 		elseif ($datos['desconexion_razon'] == 'tiempo_sesion_agotado') {
-			$datos['mensaje'] = 'Has agotado el tiempo de tu sesión que es de <b>'.\core\Configuracion::$sesion_minutos_inactividad.'</b> minutos.<br />Vuelve a conectarte para seguir trabajando.';	 
+			$datos['mensaje'] = 'Ha agotado el tiempo de su sesión que es de <b>'.\core\Configuracion::$sesion_minutos_inactividad.'</b> minutos.<br />Vuelve a conectarse para seguir trabajando.';	 
 		}
 		
 		//$datos['url_continuar'] = \core\URL::generar("inicio");	
@@ -196,7 +196,7 @@ class usuarios extends \core\Controlador {
 			elseif ($respuesta == 'existe_autenticado_confirmado') {
 					$datos['login'] = $datos['values']['login'];
 					\core\Usuario::nuevo($datos['values']['login']);
-					$datos["mensaje"] = "Bienvenido la aplicación: <b>{$datos['values']['login']}</b>." ;
+					$datos["mensaje"] = "Bienvenido a ".TITULO.": <b>{$datos['values']['login']}</b>." ;
 					$this->cargar_controlador('mensajes', 'mensaje', $datos);
 			}
 			else {
@@ -496,10 +496,10 @@ class usuarios extends \core\Controlador {
 </head>
 <body>
 	<h3>Confirmación cuenta en ".TITULO."</h3>
-	<p>Login: <b>{$datos['values']['login']}</b> Password: <b>$password</b></p>
-	<p>Para confirmar tu registro en la aplicación ".TITULO." pulsa en el siguiente hipervínculo o sino cópialo en la ventana de direcciones de tu navegador. <a href='$url' target='_blank' >$url</a>
+	<p>Login: <b>{$datos['values']['login']}</b><br/> Password: <b>$password</b></p>
+	<p>Bienvenido a ".TITULO.". Para confirmar su registro pulse en el siguiente hipervínculo:<br/><a href='$url' target='_blank' >$url</a>
 	</p>
-	<p>Si no funciona el hipervínculo, cópialo y pégalo en la barra de direcciones de tu navegador.</p>
+	<p>En caso de n funcionar puede copiar y pegar el hipervínculo en la barra de direcciones de su navegador.</p>
 </body>
 </html>";
 			$additional_headers = "From: ".  \core\Configuracion::$email_noreply . "\r\n";
@@ -508,11 +508,11 @@ class usuarios extends \core\Controlador {
 			$additional_headers .= 'X-Mailer: PHP/' . phpversion();
 			
 			if ( $envio_email = mail($to, $subject, $message, $additional_headers))  {
-				$datos["mensaje"] .= "<div class='mensaje'><p>Se ha enviado un correo electrónico a la cuenta de email que has aportado.</p> <p>Haz la confirmación pinchando en vínculo que se te ha enviado, o directamente mediante el siguiente pinchando en el siguiente vínculo:</p> <a href='$url' target='_blank'>$url</a></div>";
+				$datos["mensaje"] .= "<div class='mensaje'><p>Se ha enviado un correo electrónico a la cuenta de email aportada.</p> <p>Para confimar su alta, consulte su correo electrónico y haga click en el vínculo que se le ha enviado. Si no lo encuentra en la bandeja de entrada revise su su spam, por favor.</p></div>";
 			}
 			else {
 				// Si falla el envío del email
-				$datos["mensaje"] .= "No se ha podido enviar el correo electrónico. Tu cuenta está pendiente de confirmar por email, pinchando en el enlace que se envía <a href='$url' target='_blank'>$url</a>";
+				$datos["mensaje"] .= "No se ha podido enviar el correo electrónico. Su cuenta está pendiente de confirmar por email, pinchando en el enlace que se envía <a href='$url' target='_blank'>$url</a>";
 			}
 						
 			$this->cargar_controlador('mensajes', 'mensaje', $datos);
@@ -590,7 +590,7 @@ class usuarios extends \core\Controlador {
 			
 			if (count($filas)) {
 				// El usuario esta confirmado previamente
-				$datos['mensaje'] = "Este proceso de confirmación lo realizaste en una fecha anterior: ".\core\Conversiones::fecha_hora_mysql_a_es($filas[0]['fecha_confirmacion_alta']);
+				$datos['mensaje'] = "Este proceso de confirmación lo realizazó en una fecha anterior: ".\core\Conversiones::fecha_hora_mysql_a_es($filas[0]['fecha_confirmacion_alta']);
 				\core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
 				return;
 			}

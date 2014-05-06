@@ -1,7 +1,8 @@
 <div>
-    <?php echo \core\HTML_Tag::a_boton("boton", array("carrito"), "ver carrito"); ?>
-    <button id='btn_carrito' onclick='<?php echo \core\URL::generar("carrito"); ?>' >Ver carrito</button>
-    <button id='btn_carrito' onclick='$("#carrito_detalles").css("display","block");' >Carrito</button>
+    <center>
+        <?php echo \core\HTML_Tag::a_boton("boton1", array("carrito"), "Ver contenido del carrito"); ?>
+        <button id='btn_desplegar_carrito' onclick='$("#carrito_detalles").css("display","block");' >V Mostrar/Ocultar V</button>
+    </center>
         
     <?php
     $articulos = $datos["carrito"]->get_articulos();
@@ -10,9 +11,7 @@
     ?>
     <div id='carrito_detalles' >
     <?php if ($articulos) : ?>
-	<form method='post' action='<?php echo \core\URL::generar("carrito/vaciar"); ?>'>
-            <button type='submit'>Vaciar Carrito</button>
-	</form>
+	
         <button onclick='$("#carrito_detalles").css("display","none");'>Ocultar</button>
         <div id="carrito_lateral">
             <?php
@@ -41,7 +40,10 @@
             
         </div>
         
-	<button type='button' onclick='window.location.assign("<?php echo \core\URL::generar("carrito/comprar")?>");' >Comprar</button>
+	<form id="form_vaciar_carrito" method='post' action='<?php echo \core\URL::generar("carrito/vaciar"); ?>'>
+            <button  id="boton_vaciar_carrito"type='submit'>Vaciar Carrito</button>
+	</form>
+        <button id="boton_comprar" type='button' onclick='window.location.assign("<?php echo \core\URL::generar("carrito/comprar")?>");' >Comprar</button>
 <?php else : 
 	echo "<b><span class='car_nxart'>Total</span>
             ".number_format(self::ejecutar("carrito","valor"),2,",",".")." €</b>";

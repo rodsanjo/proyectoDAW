@@ -1,6 +1,6 @@
 
 <form method='post' name='<?php echo \core\Array_Datos::contenido("form_name", $datos); ?>' action="<?php echo \core\URL::generar($datos['controlador_clase'].'/validar_'.$datos['controlador_metodo']); ?>" enctype='multipart/form-data' onsubmit="return validarForm();">
-    <fieldset><legend>Datos artículo</legend>
+    <fieldset><legend>Datos del artículo</legend>
 	<?php echo \core\HTML_Tag::form_registrar($datos["form_name"], "post"); ?>
 	
 	<input id='id' name='id' type='hidden' value='<?php echo \core\Array_Datos::values('id', $datos); ?>' />

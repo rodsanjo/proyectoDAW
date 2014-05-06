@@ -231,6 +231,36 @@ class Validaciones  {
             );
 		
     }
+    
+    /**
+     *  Valida que la cadena no esté vacía
+     *  @autor jergo23@gmail.com
+    */
+    public static function errores_notnull($cadena) {
+
+            $mensaje = null; // Ningún error de validación
+
+            if ( $cadena == null || strlen($cadena) < 1) {
+                    $mensaje = "Campo requerido. Esta entrada es obligatoria, no puede quedarse vacía.";
+            }
+
+            return $mensaje;
+    }
+    
+    /**
+     *  Valida que la cadena no tenga punto y coma ";"
+     *  @autor jergo23@gmail.com
+    */
+    public function errores_punto_y_coma($cadena = null){
+        $mensaje = null;
+        if($cadena != null || strlen($cadena)>0){
+            $patron = '/;/';
+            if(preg_match($patron, $cadena)){
+                $mensaje = 'No se admite ";" en el campo.';
+            }          
+        }
+        return $mensaje;
+    }
 
     /**
      *  Valida que la cadena no esté vacía
@@ -693,6 +723,22 @@ class Validaciones  {
 	public static function errores_lista_valores($cadena, array $opciones) {
 		return self::errores_selector($cadena, $opciones);
 	}
+
+    /**
+     *  Impide que el usuario introduzca saltos de línea
+     *  @autor jergo23@gmail.com
+    */
+    public function errores_salto_linea($cadena = null){
+        $mensaje = null;
+        if($cadena != null || strlen($cadena)>0){
+            $patron = '/\\\r\\\n/';
+            if(preg_match($patron, $cadena)){
+                $mensaje = 'No se admiten los saltos de línea.';
+            }          
+        }
+        return $mensaje;
+    }
+
 
 	
 

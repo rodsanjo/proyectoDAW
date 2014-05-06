@@ -45,21 +45,11 @@
 <body>
     <div id="encabezado">
         <div class="teu">
-            <img width="15%" style="float: left;" src="<?php echo URL_ROOT; ?>recursos/imagenes/logo.jpg" title="logo: 3da2" alt="logo: 3da2"/>
-            <div id="central_head" style="float: left;">
-                <img width="20%" src="<?php echo URL_ROOT; ?>recursos/imagenes/logo_letras.jpg" title="3da2" alt="3da2"/>
-                <div id="menu_up" >
-                    <?php 
-                        include PATH_APPLICATION."app/vistas/partes/menu_up.php";
-                    ?>
-                </div>
-                <div id="sendero_migas_pan">
-                    <?php echo \controladores\sendero::ver(); ?>
-                </div>
+            <div id="titulo_cabecera">
+                <?php 
+                include PATH_APPLICATION_APP."vistas/partes/titulo_cabecera.php";
+                ?>
             </div>
-            <!--- inicio codigo relojesflash.com--->
-            <table><tr><td><a href="http://www.relojesflash.com" title="relojes web"><embed style="margin: 15px;" src="http://www.relojesflash.com/swf/clock2015.swf" wmode="transparent" type="application/x-shockwave-flash" height="100" width="100"><param name=wmode value=transparent></embed></a></td></tr></table>
-            <!--- fin codigo relojesflash.com--->
         </div>
         
         <div id="idioma">
@@ -80,46 +70,15 @@
         </div>
         
         <div id="sidebar_right">
-            <form class="form_buscar" method='post' action='<?php echo \core\URL::generar("articulos/busqueda"); ?>' onsubmit='return(document.getElementById("buscar_nombre").value.length>0);'>
-                <input type='submit' value='Buscar' title='Buscar'/>
-                <input type='text' id='buscar_nombre' name='buscar_nombre' title='Introduzca el nombre o parte del nombre del articulo a buscar'/>        
-            </form>
-            
-            <div id="cuadro_login">
-                <?php if( isset($_GET['p2']) && $_GET['p2'] == 'desconectar' ){
-                        echo "<a class='destacado_l' href='".\core\URL::generar("usuarios/form_login")."'>Log in</a>";
-                        echo "<br/><br/><a class='destacado_r' href='".\core\URL::generar("usuarios/form_insertar_externo")."'>Sign up</a>";
-                    } else if (\core\Usuario::$login == 'anonimo') { ?>
-                        <form class="validar_form_login" method='post' action='<?php echo \core\URL::generar("usuarios/form_login_validar"); ?>' >
-                            <?php echo \core\HTML_Tag::form_registrar("form_login", "post"); ?>
-                            Usuario:<br/><input type='text' id='login' name='login' value='<?php echo \core\Datos::values('login', $datos) ?>'/><br/>
-                            Contraseña:<br/><input type='password' id='password' name='password' value='<?php echo \core\Datos::values('password', $datos) ?>'/><br/>
-                            <input type='submit' value='Log in' class="destacado_l"/>
-                        </form>
-                <?php
-                    if ((\core\Usuario::$login == "anonimo") && ! (\core\Distribuidor::get_controlador_instanciado() == "usuarios" && \core\Distribuidor::get_metodo_invocado() == "form_insertar_externo")) {
-                        echo "
-                            <a class='destacado_r' href='".\core\URL::generar("usuarios/form_insertar_externo")."'>Sign up</a>    
-                        ";
-                    }
-                }else{ 
+            <div id="buscar">
+                <?php 
+                    include PATH_APPLICATION_APP."vistas/partes/buscar.php";
                 ?>
-
-                <div style="text-align: center;">
-                    Usuario:
-                    <?php 
-                        echo "<b>".\core\Usuario::$login."</b><br/>";
-                        echo " <a class='destacado_r' href='".\core\URL::generar("usuarios/desconectar")."'>Log out</a>";
-                    ?>
-                    <br/><br/>
-                    <form method="post" action="<?php echo \core\URL::generar("usuarios/modificar_datos"); ?>">
-                        <input type="hidden" name="login" value="<?php echo \core\Usuario::$login ?>"/>
-                        <input type="submit" value="Modificar datos"/>
-                    </form>
-                </div>
-                     <?php } ?>
-                    
-                
+            </div>       
+            <div id="cuadro_login">
+                <?php 
+                    include PATH_APPLICATION_APP."vistas/partes/cuadro_login.php";
+                ?>  
             </div>
             <div id='carrito'>
                 <?php
