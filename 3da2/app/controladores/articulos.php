@@ -95,7 +95,7 @@ class articulos extends \core\Controlador{
             $datos['articulo'] = $filas[0];
             
             $clausulas['where'] = " articulo_nombre like '%$articulo_nombre%' ";
-            $clausulas['order by'] = 'fecha_comentario asc';
+            $clausulas['order by'] = 'fecha_comentario desc';
             $datos["comentarios"] = \modelos\Modelo_SQL::table(self::$tabla2)->select($clausulas);
         }
         

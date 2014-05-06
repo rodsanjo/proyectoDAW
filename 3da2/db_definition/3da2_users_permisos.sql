@@ -208,7 +208,7 @@ insert into 3da2_usuarios
 , ('juan', 'juan@email.com', md5('juan00'), now())
 , ('anais', 'anais@email.com', md5('anais00'), now())
 , ('lola', 'lola@email.es', md5('lola00'), now())
-, ('joseraul', 'albatros260@gmail.com', 'L$kXp+*rSJJ}^2)4MkN$cnvEo#pDFm', now())
+, ('joseraul', 'albatros260@gmail.com', '80d46626da16fb73c8e5d14135b4a094', now())
 , ('Beto', 'sonbeto@gmail.com', 'amLo]UKBb0*0XfcNK^PZjtkaG{TzfZ', now())
 ;
 
@@ -256,6 +256,7 @@ insert into 3da2_metodos
 , ('articulos'	,'form_insertar')
 , ('articulos'	,'form_modificar')
 , ('articulos'	,'form_borrar')
+, ('articulos'	,'form_comentario')
 
 , ('carrito'	,'*')
 , ('carrito'	,'comprar')
@@ -297,6 +298,7 @@ insert into 3da2_roles_permisos
 , ('usuarios_logueados'	,'usuarios'     ,'modificar_datos')
 , ('usuarios_logueados' ,'carrito'	,'*')
 , ('usuarios_logueados' ,'download'     ,'file')
+, ('usuarios_logueados' ,'articulos'	,'form_comentario')
 
 , ('empleados'          ,'articulos'	,'form_insertar')
 , ('empleados'          ,'articulos'	,'form_modificar')

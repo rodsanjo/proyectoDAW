@@ -155,19 +155,24 @@ h2>i{
 }
 
 /* CARRITO */
+#carrito_index{
+    font-size: 95%;
+}
 #carrito_lateral{
     font-size: 80%;
-
+    display: block;
 }
 .car_nxart{
     color: green;
     float: left;
 }
 #carrito {
-    width: 180px;
-    margin-left: 15px;
-    background: navajowhite;
-    border: 1px solid red;
+    width: 200px;
+    margin-left: 0px;
+    padding: 5px;
+    background: rgba(200,200,15,0.5);
+    border: 1px solid white;
+    border-radius: 10px;
 }
 #boton_vaciar_carrito{
     float: left;
@@ -178,7 +183,7 @@ h2>i{
 }
 
 #btn_desplegar_carrito{
-    background: plum;
+    background: darkseagreen;
 }
 
 .align_right{
@@ -221,4 +226,52 @@ h2>i{
 }
 #enlaces dd{
    padding-top: 5px;
+}
+#descarga_manual{
+    clear: both;
+}
+#cuadro_comentario{
+    clear: both;
+    background: khaki;
+    margin-top:10px;
+    padding: 10px;
+    border-radius: 20px 20px 0 0;
+}
+#comentarios{
+    clear: both;
+    background: gainsboro;
+    padding: 1px 10px 10px 10px;
+    border-radius: 0px 0px 30px 30px;
+}
+#texto_comentario{
+    background: white;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 25px;
+}
+#media_articulo {
+    width: 210px;
+    padding: 5px;
+    margin-bottom: 10px;
+    background: rgba(200,200,15,1);
+    float: left;
+    overflow: hidden;
+    border-radius: 10px 0px 40% 10px;
+}
+#media_articulo * {
+    padding-left: 5px;
+}
+#datos_articulo{ 
+    padding: 25px;
+    margin-bottom: 10px;
+    background-color: rgba(200,200,15,0.5);
+    overflow: auto;
+    border-radius: 0px 10px 10px 30%;
+}
+#resenha_articulo{
+    background: darkseagreen;
+    color: yellow;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 20px 20px 0 0;
 }

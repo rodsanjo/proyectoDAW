@@ -34,5 +34,11 @@ $(document).ready(function(){
             $("span#opcion_rec").slideToggle();
         }                
     );
+    $("#btn_desplegar_carrito").click(
+        function(){
+            $("#carrito_lateral").slideToggle();  
+        }
+    );
+        
     
 });

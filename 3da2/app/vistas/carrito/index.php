@@ -5,11 +5,8 @@
         //var_dump($articulos);
         //var_export($articulos);
     ?>
-    <div id='carrito_detalles' >
+    <div id='carrito_index' >
     <?php if ($articulos) :?>
-	<form method='post' action='<?php echo \core\URL::generar("carrito/vaciar"); ?>'>
-            <button type='submit'>Vaciar Carrito</button>
-	</form>
         
         <!--<table border="1">-->
         <table>
@@ -56,7 +53,13 @@
                 ?>
             </tbody>
 	</table>
-    <button type='button' onclick='window.location.assign("<?php echo \core\URL::generar("carrito/comprar")?>");' >Comprar</button>
+        
+        
+    <form id="form_vaciar_carrito" method='post' action='<?php echo \core\URL::generar("carrito/vaciar"); ?>'>
+        <button  id="boton_vaciar_carrito"type='submit'>Vaciar Carrito</button>
+    </form>
+    <button id="boton_comprar" type='button' onclick='window.location.assign("<?php echo \core\URL::generar("carrito/comprar")?>");' >Comprar</button>
+
     <?php else :  ?>
 	<h2>Carrito vacío.</h2>
     <?php endif; ?>    

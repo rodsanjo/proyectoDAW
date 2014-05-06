@@ -45,6 +45,11 @@
 	<?php echo \core\HTML_Tag::span_error('edad_min', $datos); ?>
 	<br />
         
+        <?php
+            $check = isset($datos['values']['foto']) ? "<img src='".URL_ROOT."recursos/imagenes/check.jpg' width='15px'/>" : "<img src='".URL_ROOT."recursos/imagenes/no_check.jpg' width='15px'/>";
+            echo $check;
+        ?>
+        
         Foto: <input id='foto' name='foto' type='file' size='100'  maxlength='50' value='<?php echo \core\Array_Datos::values('foto', $datos); ?>'/>
 	<?php echo \core\HTML_Tag::span_error('foto', $datos); ?>
 	<br />
@@ -53,6 +58,11 @@
 	<?php //echo \core\HTML_Tag::span_error('video', $datos); ?>
 	<br />
         -->
+        
+        <?php
+            $check = isset($datos['values']['manual']) ? "<img src='".URL_ROOT."recursos/imagenes/check.jpg' width='15px'/>" : "<img src='".URL_ROOT."recursos/imagenes/no_check.jpg' width='15px'/>";
+            echo $check;
+        ?>
         Manual:<input id='manual' name='manual' type='file' size='100'  maxlength='50' value='<?php echo \core\Array_Datos::values('manual', $datos); ?>'/>
 	<?php echo \core\HTML_Tag::span_error('manual', $datos); ?>
 	<br />
@@ -80,10 +90,10 @@
         <input id="tematica" name="tematica" type='text' maxlength='20'/>
         <br/>
         Reseña:<br/>
-        <textarea id="resenha" name="resenha" maxlength='300' cols="50" rows="3"></textarea>
+        <textarea id="resenha" name="resenha" maxlength='300' cols="50" rows="3"><?php echo \core\Array_Datos::values('resenha', $datos); ?></textarea>
         <br/>
         Descripción:<br/>
-        <textarea id="descripcion" name="descripcion" maxlength='1000' cols="80" rows="8"></textarea>
+        <textarea id="descripcion" name="descripcion" maxlength='1000' cols="80" rows="8"><?php echo \core\Array_Datos::values('descripcion', $datos); ?></textarea>
         <br/>
         
         Unidades en stock: <input id='unds_stock' name='unds_stock' type='text' size='3'  maxlength='5' value='<?php echo \core\Array_Datos::values('unds_stock', $datos); ?>'/>
