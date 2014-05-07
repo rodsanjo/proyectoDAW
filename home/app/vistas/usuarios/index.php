@@ -6,9 +6,8 @@
 		<thead>
 			<tr>
 				<th>login</th>
-				<th>email <br/> fecha alta</th>
-				<th>clave confirmación</th>
-				
+				<th>email</th>
+                                <th>fecha alta <br/> fecha confirmación</th>				
 				<th>acciones</th>
 			</tr>
 		</thead>
@@ -16,22 +15,22 @@
 			<?php
 			foreach ($datos['filas'] as $fila)
 			{
-				echo "
-					<tr>
-						<td>{$fila['login']}</td>
-						<td>{$fila['email']}<br/>{$fila['fecha_alta']}</td>		
-						<td>{$fila['clave_confirmacion']}</td>	
-						<td><center>"
+                            echo "
+                                <tr>
+                                    <td>{$fila['login']}</td>
+                                    <td>{$fila['email']}</td>		
+                                    <td>{$fila['fecha_alta']}<br/>{$fila['fecha_confirmacion_alta']}</td>	
+                                    <td><center>"
 //							<a class='boton' onclick='submit_post_request_form(\"".\core\URL::generar("usuarios/form_modificar")."\", {$fila['id']});' >modificar</a>
-							.\core\HTML_Tag::a_boton("boton", array("usuarios", "form_modificar", $fila['id']), "modificar")."<br/>"
+                                        .\core\HTML_Tag::a_boton("boton", array("usuarios", "form_modificar", $fila['id']), "modificar")."<br/>"
 //							."<a class='boton' onclick='submit_post_request_form(\"".\core\URL::generar("usuarios/form_borrar")."\", {$fila['id']});' >borrar</a>"
-							.\core\HTML_Tag::a_boton("boton", array("usuarios", "form_borrar", $fila['id']), "borrar")."<br/>"
+                                        .\core\HTML_Tag::a_boton("boton", array("usuarios", "form_borrar", $fila['id']), "borrar")."<br/>"
 //							<a class='boton' onclick='submit_post_request_form(\"".\core\URL::generar("usuarios/form_cambiar_password")."\", {$fila['id']});' >modificar password</a>
-							.\core\HTML_Tag::a_boton("boton", array("usuarios_permisos", "index", $fila['login']), "permisos&nbsp;asignados")."<br/>"
-							.\core\HTML_Tag::a_boton("boton", array("usuarios_roles", "index", $fila['login']), "roles&nbsp;asignados").
-						"</center></td>
-					</tr>
-					";
+                                        .\core\HTML_Tag::a_boton("boton", array("usuarios_permisos", "index", $fila['login']), "permisos&nbsp;asignados")."<br/>"
+                                        .\core\HTML_Tag::a_boton("boton", array("usuarios_roles", "index", $fila['login']), "roles&nbsp;asignados").
+                                    "</center></td>
+                                </tr>
+                                ";
 			}
 			echo "
 				<tr>

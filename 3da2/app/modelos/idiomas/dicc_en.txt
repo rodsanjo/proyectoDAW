@@ -1,10 +1,9 @@
-key|text
+key|word
 title|3da2 boardgames
 Bienvenido|Welcome
+Bienvenido a|Welcome to
 saludo1|Welcome to 3da2
 Seleccinar|Select
-leyenda_menu|Menu - Navigation bar
-saludo2|Welcome on the application following the MVC pattern.
 Saludo|Greeting
 Inicio|Home
 Juegos de mesa|Boardgames
@@ -35,4 +34,13 @@ Conectarse|Log in
 Desconectarse|Log out
 Registrarse|Sign up
 Usuario|Login
-Contrasenha|Password
+Contraseña|Password
+Enviar|Send
+Cancelar|Cancel
+Restablecer|Restore
+Baúl|Chest
+Mostrar|Show
+Ocultar|Hide
+Artículos|Articles
+Volver|Come back
+Subir|Go up

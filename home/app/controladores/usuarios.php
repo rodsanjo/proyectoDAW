@@ -105,7 +105,7 @@ class usuarios extends \core\Controlador {
 
                         $datos['login'] = $datos['values']['login'];
                         \core\Usuario::nuevo($datos['values']['login']);
-                        $datos["mensaje"] = "Bienvenido a ".TITULO.": <b>{$datos['values']['login']}</b>." ;
+                        $datos["mensaje"] = iText('Bienvenido a', 'dicc')." ".TITULO.": <b>{$datos['values']['login']}</b>." ;
                         $this->cargar_controlador('mensajes', 'mensaje', $datos);
 
                     }else{

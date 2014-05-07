@@ -104,9 +104,9 @@
 	<br />
 	<?php echo \core\HTML_Tag::span_error('errores_validacion', $datos); ?>
 	
-	<input type='submit' value='Enviar'/>
-	<input name="restablecer" type='reset' value='Restabler'/>
-        <button type='button' onclick='window.location.assign("<?php echo \core\URL::generar($datos['controlador_clase']); ?>");'>Cancelar</button>
+	<input type='submit' value='<?php echo \core\Idioma::text('Enviar', 'dicc'); ?>'/>
+        <input name="restablecer" type='reset' value='<?php echo iText('Restablecer', 'dicc'); ?>'/>
+        <button type='button' onclick='window.location.assign("<?php echo \core\URL::generar($datos['controlador_clase']); ?>");'><?php echo \core\Idioma::text('Cancelar', 'dicc'); ?></button>
     </fieldset>
 </form>
 

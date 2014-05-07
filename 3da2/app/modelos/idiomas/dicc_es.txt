@@ -1,10 +1,9 @@
-key|text
+key|word
 title|3da2 juegos de mesa
 Bienvenido|
+Bienvenido a|
 saludo1|Bienvenido a 3da2
 Seleccinar|
-leyenda_menu|Menú - Barra de navegación
-saludo2|Bienvenido a la aplicación realizada siguiendo el patrón MVC.
 Saludo|
 Inicio|
 Juegos de mesa|
@@ -38,3 +37,12 @@ Desconectarse|
 Registrarse|
 Usuario|
 Contraseña|
+Enviar|
+Cancelar|
+Restablecer|
+Baúl|
+Mostrar|
+Ocultar|
+Artículos|
+Volver|
+Subir|

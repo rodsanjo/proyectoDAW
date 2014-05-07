@@ -172,10 +172,11 @@ class Validaciones  {
                                     $resultado_validador=self::$validador($resultados_validacion["values"][$parametro]);
                             }
                             if ($resultado_validador) {// La variable $validador contienen el nombre de un método de validación o validador
-                                    if (isset($resultados_validacion["errores"][$parametro]))
-                                            $resultados_validacion["errores"][$parametro].=" --php: $validador: ".$resultado_validador;
-                                    else
-                                            $resultados_validacion["errores"][$parametro]=" --php: $validador:  ".$resultado_validador;
+                                    if (isset($resultados_validacion["errores"][$parametro])){
+                                            $resultados_validacion["errores"][$parametro].= $resultado_validador;//." --php: $validador: ";
+                                    }else{
+                                            $resultados_validacion["errores"][$parametro]= $resultado_validador;//." --php: $validador:  ";
+                                    }
                             }
                     }
             }
@@ -186,7 +187,7 @@ class Validaciones  {
                     echo "<!-- ";
             }
             if (count($resultados_validacion["errores"])) {
-                    $resultados_validacion["errores"]['validacion'] = 'Corrige los errores.';
+                    $resultados_validacion["errores"]['validacion'] = \core\Idioma::text("mensajeGlobal", "dict_error");;
             }
 
             if (is_array($datos)) { // Si se aporta $datos y es array
@@ -241,7 +242,7 @@ class Validaciones  {
             $mensaje = null; // Ningún error de validación
 
             if ( $cadena == null || strlen($cadena) < 1) {
-                    $mensaje = "Campo requerido. Esta entrada es obligatoria, no puede quedarse vacía.";
+                    $mensaje = \core\Idioma::text("notnull", "dict_error");
             }
 
             return $mensaje;
@@ -271,7 +272,7 @@ class Validaciones  {
             $mensaje = null; // Ningún error de validación
 
             if ( $cadena == null || strlen($cadena) < 1) {
-                    $mensaje = "Esta entrada es obligatoria, no puede quedarse vacía.";
+                    $mensaje = \core\Idioma::text("notnull", "dict_error");
             }
 
             return $mensaje;
@@ -287,7 +288,7 @@ class Validaciones  {
     public static function errores_texto($cadena=null) {
             $mensaje = null;
             if ($cadena != null && ! strlen($cadena)) {
-                            $mensaje = "-php- Debe ser una cadena con un carácter como mínimo.";
+                            $mensaje = \core\Idioma::text("texto", "dict_error");
             }
             return $mensaje;
     }
@@ -299,7 +300,7 @@ class Validaciones  {
             if ($cadena != null && strlen($cadena)) {
                             $patron = "/\;/";
                             if (preg_match($patron, $cadena)) {
-                                    $mensaje = "No se puede utilizar el ; .";
+                                    $mensaje = iText('prohibido_punto_y_coma', 'dict_error');
                             }
             }
             return $mensaje;
@@ -321,7 +322,7 @@ class Validaciones  {
             if ($cadena != null ) {
                     $patron = '/[^0-9]/'; // equivalente a '/\D/'
                     if (preg_match($patron, $cadena)) {
-                            $mensaje.="Contiene caracteres no válidos. Sólo se admiten números positivos sin signo. ";
+                            $mensaje.= iText('entero_positivo', 'dict_error');
                     }
             }
 
@@ -365,7 +366,7 @@ class Validaciones  {
             if ( ! is_null($cadena) && strlen($cadena)) {
                     $patron="/^((\d{1,3}(\.\d{3}){0,}|\d{1,})(\,\d{1,2}){0,1})$/i";
                     if( ! preg_match($patron, $cadena))
-                            $mensaje ="-php- Error: El número puede escribirse con separador de miles(.) y coma decimal(,) y máximo dos decimales";
+                            $mensaje = iText('precio', 'dict_error');
             }
             return $mensaje ;		
     }
@@ -384,7 +385,7 @@ class Validaciones  {
             if ( ! is_null($cadena) && strlen($cadena)) {
                     $patron="/^(\d{0,})(([\.\,]\d{0,}){0,1})$/i";
                     if( ! preg_match($patron, $cadena))
-                            $mensaje ='-php- Error: El número debe escribirse usando "." o"," como separador decimal y sin separador de miles';
+                            $mensaje = iText('decimal', 'dict_error');
             }
             return $mensaje ;		
     }
@@ -432,7 +433,7 @@ class Validaciones  {
                 $patron_fecha="/^\d{1,2}\-\d{1,2}\-\d{4}$/";
                 $patron_fecha_mysql="/^\d{4}\-\d{1,2}\-\d{1,2}$/";
                 if ( ! preg_match($patron_fecha, $cadena) && ! preg_match($patron_fecha_mysql, $cadena)) {                            
-                    $mensaje="La fecha es errónea. Escribala en formato dd-mm-aaaa o dd/mm/aaaa, por favor.";
+                    $mensaje= iText('fecha', 'dict_error');
                 }
             }
             if ($mensaje=="") $mensaje=false;
@@ -450,7 +451,7 @@ class Validaciones  {
             if ($cadena != null && strlen($cadena) ){
                     $patron = "/^(_{0,2}[a-z]{1}\w{0,})$/i";
                     if ( ! preg_match($patron, $cadena) ) {
-                            $mensaje = "Contiene caracteres no válidos. Sólo se admiten letras, números y _ , y no puede comenzar por número. ";
+                            $mensaje = iText('fecha', 'dict_error');
                     }
             }
 
@@ -505,7 +506,7 @@ class Validaciones  {
                     }
                     $filas = \modelos\Datos_SQL::select($parametros, $tabla);
                     if ($filas && count($filas))
-                            $mensaje.="El/Los valor/es aportado/s <b>[ $valores_aportados ]</b> ya existe/n en la base de datos. Escribe un valor no existente.";
+                            $mensaje.= iText('unicidad_parte1', 'dict_error')." <b>[ $valores_aportados ]</b> ".iText('unicidad_parte2', 'dict_error');
             }
 
             return $mensaje;

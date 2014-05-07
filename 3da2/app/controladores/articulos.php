@@ -95,7 +95,7 @@ class articulos extends \core\Controlador{
             $datos['articulo'] = $filas[0];
             
             $clausulas['where'] = " articulo_nombre like '%$articulo_nombre%' ";
-            $clausulas['order by'] = 'fecha_comentario desc';
+            $clausulas['order_by'] = 'fecha_comentario desc';
             $datos["comentarios"] = \modelos\Modelo_SQL::table(self::$tabla2)->select($clausulas);
         }
         
@@ -418,8 +418,8 @@ class articulos extends \core\Controlador{
                 elseif ( ! preg_match("/image/", $_FILES["foto"]["type"])) {
                     $datos["errores"]["foto"] = "El fichero no es una imagen.";
                 }
-                elseif ($_FILES["foto"]["size"] > 1024*1024) {
-                    $datos["errores"]["foto"] = "El tamaño de la foto debe ser menor que 1MB.";
+                elseif ($_FILES["foto"]["size"] > 300*300) {
+                    $datos["errores"]["foto"] = "El tamaño de la foto debe ser menor que 85kB.";
                 }
                 if (isset($datos["errores"]["foto"])) {
                     $validacion = false;
@@ -432,8 +432,8 @@ class articulos extends \core\Controlador{
             elseif ( ! preg_match("/pdf/", $_FILES["manual"]["type"])) {
                 $datos["errores"]["manual"] = "El fichero no es un pdf.";
             }
-            elseif ($_FILES["manual"]["size"] > 1024*1024) {
-                $datos["errores"]["manual"] = "El tamaño del archivo no puede superar 1MB.";
+            elseif ($_FILES["manual"]["size"] > 1024*1024*3) {
+                $datos["errores"]["manual"] = "El tamaño del archivo no puede superar 2MB.";
             }
             if (isset($datos["errores"]["manual"])) {
                 $validacion = false;

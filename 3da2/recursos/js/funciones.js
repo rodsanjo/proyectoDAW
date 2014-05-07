@@ -36,7 +36,7 @@ $(document).ready(function(){
     );
     $("#btn_desplegar_carrito").click(
         function(){
-            $("#carrito_lateral").slideToggle();  
+            $("#carrito_oculto").slideToggle();  
         }
     );
         

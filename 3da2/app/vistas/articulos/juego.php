@@ -56,7 +56,6 @@
 
     echo "
             <div id='datos_articulo'>
-                <p>&nbsp;</p>
                 <p>Edad: {$fila['edad_min']}+</p>
                 <p>Jugadores: $rangoJug</p>
                 <p>Duración: $duracion</p>
@@ -84,7 +83,10 @@
     }
     echo "<div id='comentarios' >
             <h4>Comentarios:</h4>";
-            $array = $datos['comentarios']; 
+            $array = $datos['comentarios'];
+            if( ! count($array)){
+                echo "<center>".iText('¡¡Se el primero!!', 'frases')."</center>";
+            }
             foreach ($array as $key => $comentario) {
                 echo "fecha: ".$comentario['fecha_comentario']."<br/>";
                 echo "<b>".$comentario['usuario_login']."</b> escribió:";

@@ -9,7 +9,7 @@
 
 <div>
     <div>
-        <h3>Artículos disponibles:</h3>
+        <h3 id="titulo">Artículos disponibles:</h3>
         <form method='post' action='<?php echo \core\URL::generar("articulos/index"); ?>'>
             <input type="hidden" name="categoria" value="<?php echo isset($_REQUEST['p3']) ? $_REQUEST['p3'] : ''; ?>"/>
             <input type="hidden" name="seccion" value="<?php echo isset($_REQUEST['p4']) ? $_REQUEST['p4'] : ''; ?>"/>
@@ -93,7 +93,7 @@
     
     $num_total_juegos = $datos["num_total_juegos"][0]['num_total_juegos'];
     $ult_grupo = floor($num_total_juegos/\controladores\articulos::$num_arts_por_pag);
-    var_dump($num_total_juegos);
+    //var_dump($num_total_juegos);
     if($ult_grupo > 1 && $num_total_juegos%\controladores\articulos::$num_arts_por_pag == 0){    //Evto el cero por indeterminación y el 1 por ser primo
         $ult_grupo--; 
     }elseif($ult_grupo == 1 && $num_total_juegos == \controladores\articulos::$num_arts_por_pag){    //Evita el 1
@@ -113,15 +113,15 @@
     <br/>
     
     <div style="text-align: center;">
-        <a class='boton' href='<?php echo $href1 ?>' title="primero"><<</a>
-        <a class='boton' href='<?php echo $href2 ?>' title="anterior"><</a>
-        <?php echo 'Artículos'; ?>
-        <a class='boton' href='<?php echo $href3 ?>' title="siguiente">></a>
-        <a class='boton' href='<?php echo $href4 ?>' title="último">>></a>
+        <a class='boton_flecha_izq' href='<?php echo $href1 ?>' title="primero">   <<   </a>
+        <a class='boton_flecha_izq' href='<?php echo $href2 ?>' title="anterior">  <  </a>
+        <?php echo iText('Artículos', 'dicc'); ?>
+        <a class='boton_flecha_der' href='<?php echo $href3 ?>' title="siguiente">  >  </a>
+        <a class='boton_flecha_der' href='<?php echo $href4 ?>' title="último">   >>   </a>
 
         <!--<span title="total"><?php //echo $num_total_juegos; ?></span>-->
 
         <br/>
-        <a class='boton' style="text-align: right;" href='<?=$datos["url_volver"]?>' >Volver</a>
+        <a class='boton' style="text-align: right;" href='#titulo' ><?php echo iText('Subir', 'dicc'); ?></a><br/>
     </div>
 </div>
