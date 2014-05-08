@@ -433,7 +433,7 @@ class articulos extends \core\Controlador{
                 $datos["errores"]["manual"] = "El fichero no es un pdf.";
             }
             elseif ($_FILES["manual"]["size"] > 1024*1024*3) {
-                $datos["errores"]["manual"] = "El tamaño del archivo no puede superar 2MB.";
+                $datos["errores"]["manual"] = "El tamaño del archivo no puede superar 3MB.";
             }
             if (isset($datos["errores"]["manual"])) {
                 $validacion = false;

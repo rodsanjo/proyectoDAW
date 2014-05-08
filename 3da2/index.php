@@ -33,6 +33,12 @@ define("APPLICATION_FOLDER", str_replace(PATH_ROOT, "", __DIR__));
  */
 define("URL_ROOT", (isset($_SERVER['REQUEST_SCHEME'])?$_SERVER['REQUEST_SCHEME']:($_SERVER['SERVER_PORT']==80?"http":"https"))."://".$_SERVER['SERVER_NAME'].str_replace("index.php", '', $_SERVER['SCRIPT_NAME'])); // Finaliza en DS
 
+/**
+ * URL_ROOT_URI es la url que incluye esquema, servidor y la uri.
+ * ha sido creada por Jorge para que al cambiar de idioma nos mantenga en la misma página, y no vuelva al inicio
+ */
+define("URL_ROOT_URI", (isset($_SERVER['REQUEST_SCHEME'])?$_SERVER['REQUEST_SCHEME']:($_SERVER['SERVER_PORT']==80?"http":"https"))."://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']); // Finaliza en DS
+
 define("URL_APPLICATION_ROOT", URL_ROOT);
 define("URL_HOME_ROOT", dirname(URL_ROOT)."/home/");
 

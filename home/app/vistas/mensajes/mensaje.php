@@ -1,4 +1,4 @@
-<div id='mensaje'>
+<div id='mensaje'><br/><br/>
 <?php
 	if (isset($datos['mensaje'])) {
 		echo "<p>{$datos['mensaje']}</p>";

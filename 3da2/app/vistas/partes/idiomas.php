@@ -10,7 +10,14 @@
         //$src = \core\URL::generar_sin_idioma('recursos/imagenes/banderas').'flag_'.$linea[1].'.png';
         $title = \core\Idioma::text($linea[0],'dicc');
         $lang = $linea[1];
-        $url = \core\URL::generar_sin_idioma("inicio");                    
+        
+        //Para que lleve al inicio
+        $url = \core\URL::generar_sin_idioma("inicio");
+        
+        $url = URL_ROOT_URI;
+        //Debemos reemplazar el idioma de la URI, el actual por el nuevo. Ej /es/ por /en/
+        $url = str_replace( '/'.\core\Idioma::get().'/', '/'.$lang.'/', $url);
+        
         $funcion = 'set_lang("'.$lang.'", "'.$url.'")'; //al cambiar las comillas ' por " y viceversa, no va: "set_lang('".$linea[1]."', '".$url."')";
         echo"
             <a  onclick='$funcion'>

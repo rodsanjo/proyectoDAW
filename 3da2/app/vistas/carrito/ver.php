@@ -53,7 +53,7 @@
 
     </div>
     <center>
-        <?php echo \core\HTML_Tag::a_boton("boton1", array("carrito"), "Ver el contenido del baúl"); ?>
+        <?php echo \core\HTML_Tag::a_boton("boton1", array("carrito"), iText('Ver el contenido del baúl', 'frases') ); ?>
     </center>
 	
 </div>

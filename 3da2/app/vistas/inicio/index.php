@@ -1,9 +1,9 @@
 <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT ?>recursos/css/image_slide.css" />
 <script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/image_slide.js"></script>
 
-<p>
+<h2 id="titulo_seccion">
     <?php echo \core\Idioma::text("saludo1", "frases"); ?>
-</p>
+</h2>
 <p style="text-align: justify;">
     <?php echo iText('parrafo1', 'frases') ?>
 </p>

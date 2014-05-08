@@ -45,7 +45,7 @@ end;
 //
 delimiter ;
 
-
+/* 2 formas, dependiendo de como actue el HOST */
 /*Fecha de comentario*//*Si default now() actua cada vez que se modifica y está en fecha_ult_edicion*/
 drop trigger if exists 3da2_t_poner_fecha_comentario_bi;
 delimiter //
@@ -53,6 +53,17 @@ create trigger 3da2_t_poner_fecha_comentario_bi before insert on 3da2_comentario
 for each row
 begin
     set new.fecha_comentario = now();   /*Como es insert solo actua la primera vez*/
+end;
+
+//
+delimiter ;
+/*Fecha de comentario*//*Si default now() actua solo al insertar y está en fecha_comentario*/
+drop trigger if exists 3da2_t_poner_fecha_ult_edicion_bi;
+delimiter //
+create trigger 3da2_t_poner_fecha_comentario_bi before insert on 3da2_comentarios_articulo
+for each row
+begin
+    set new.fecha_ult_edicion = now();   /*Como es insert solo actua la primera vez*/
 end;
 
 //

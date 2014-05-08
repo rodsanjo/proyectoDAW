@@ -46,3 +46,7 @@ Ocultar|
 Artículos|
 Volver|
 Subir|
+Artículos disponibles|
+Editar|
+Editado|
+Eliminar|

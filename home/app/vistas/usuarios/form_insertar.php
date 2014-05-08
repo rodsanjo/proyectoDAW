@@ -1,7 +1,7 @@
 <div >
 	<h2>Alta de un nuevo usuario</h2>
 	<?php //echo __FILE__; var_dump($datos); ?>
-	<form name="formulario"  method='post' action="<?php echo \core\URL::generar("usuarios/".\core\Distribuidor::get_metodo_invocado()."_validar"); ?>" >
+	<form name="formulario" onsubmit="return validarForm();"  method='post' action="<?php echo \core\URL::generar("usuarios/".\core\Distribuidor::get_metodo_invocado()."_validar"); ?>" >
 	    <fieldset>
             <legend>Formulario de alta</legend>
 		<input id='id'  name='id' type='hidden' value='<?php echo \core\Array_Datos::values('id', $datos); ?>' />

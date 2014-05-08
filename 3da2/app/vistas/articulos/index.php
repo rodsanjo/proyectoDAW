@@ -9,7 +9,7 @@
 
 <div>
     <div>
-        <h3 id="titulo">Artículos disponibles:</h3>
+        <h3 id="titulo_seccion"><?php echo iText('Artículos disponibles', 'dicc'); ?>:</h3>
         <form method='post' action='<?php echo \core\URL::generar("articulos/index"); ?>'>
             <input type="hidden" name="categoria" value="<?php echo isset($_REQUEST['p3']) ? $_REQUEST['p3'] : ''; ?>"/>
             <input type="hidden" name="seccion" value="<?php echo isset($_REQUEST['p4']) ? $_REQUEST['p4'] : ''; ?>"/>
@@ -122,6 +122,6 @@
         <!--<span title="total"><?php //echo $num_total_juegos; ?></span>-->
 
         <br/>
-        <a class='boton' style="text-align: right;" href='#titulo' ><?php echo iText('Subir', 'dicc'); ?></a><br/>
+        <a class='boton' style="text-align: right;" href='#titulo_seccion' ><?php echo iText('Subir', 'dicc'); ?></a><br/>
     </div>
 </div>

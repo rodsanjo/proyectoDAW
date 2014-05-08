@@ -44,3 +44,7 @@ Ocultar|Hide
 Artículos|Articles
 Volver|Come back
 Subir|Go up
+Artículos disponibles|Available articles
+Editar|Edit
+Editado|Edited
+Eliminar|Remove

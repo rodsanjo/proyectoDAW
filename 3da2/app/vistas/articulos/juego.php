@@ -1,6 +1,6 @@
 <div>
     
-    <h2 class='nombre_articulo' title='<?php echo $datos['articulo']['nombre'] ?>'><?php echo $datos['articulo']['nombre'] ?></h2>
+    <h1 id="titulo_seccion" class='nombre_articulo' title='<?php echo $datos['articulo']['nombre'] ?>'><?php echo $datos['articulo']['nombre'] ?></h1>
     
     <?php
     echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_modificar", $datos['articulo']['id']), "Modificar");
@@ -13,7 +13,7 @@
         $num_max_jug ='-'.$num_max_jug;
     }
     $rangoJug = $fila['num_min_jug'].$num_max_jug;
-    $duracion = $fila['duracion'].' min.';
+    $duracion = (isset($fila['duracion'])?$fila['duracion']:"-").' min.';
     $articulo_nombre = str_replace(" ", "-", $fila['nombre']);
     $resenha = ((isset($fila['resenha']) and strlen($fila['resenha'])) ? $fila['resenha'] : ''); 
     $descripcion = ((isset($fila['descripcion']) and strlen($fila['descripcion'])) ? $fila['descripcion'] : ''); 
@@ -35,7 +35,7 @@
                 }
                     echo "</div><br/>
 
-                <form method='post' action='".\core\URL::generar('carrito/meter')."' >
+                <form name='formulario_anhadir' method='post' action='".\core\URL::generar('carrito/meter')."' onsubmit='return hayDisponibilidad();' >
                     <input type='hidden' name='articulo_id' value='{$fila['id']}' />
                     <tr>
                         <td><input type='hidden' readonly='readonly' name='nombre' value='{$fila['nombre']}' /></td>
@@ -50,15 +50,19 @@
                             }
             echo "
                     </tr>
+                    <span id='error_disponibilidad' class='input_error'></span>
                 </form>
         </div>
     ";
-
+            $fila['unds_stock'] == 0 ? $src = "<img src='".URL_ROOT."recursos/imagenes/no_disponible.jpg' />" : $src = '';
     echo "
             <div id='datos_articulo'>
-                <p>Edad: {$fila['edad_min']}+</p>
-                <p>Jugadores: $rangoJug</p>
-                <p>Duración: $duracion</p>
+                <div id='datos_tecnicos'>
+                    $src
+                    <p>Edad: {$fila['edad_min']}+</p>
+                    <p>Jugadores: $rangoJug</p>
+                    <p>Duración: $duracion</p>
+                </div>
                 <p>$descripcion</p>
             </div>
     ";
@@ -85,14 +89,31 @@
             <h4>Comentarios:</h4>";
             $array = $datos['comentarios'];
             if( ! count($array)){
-                echo "<center>".iText('¡¡Se el primero!!', 'frases')."</center>";
+                echo "<center>".iText('SinComentarios', 'frases')."</center>";
             }
+            $ahora = date("Y-m-d H:i:s");   // 2001-03-10 17:16:18 (el formato DATETIME de MySQL)
             foreach ($array as $key => $comentario) {
-                echo "fecha: ".$comentario['fecha_comentario']."<br/>";
-                echo "<b>".$comentario['usuario_login']."</b> escribió:";
+                if ( \core\Usuario::$login == $comentario['usuario_login'] && $comentario['fecha_ult_edicion'] > $ahora - (1/24)){
+                    $editar_comentario = \core\HTML_Tag::a_boton("boton", array("articulos", "form_editar_comentario", $comentario['id']), iText('Editar', 'dicc') );
+                }else{
+                    $editar_comentario = "";
+                }
+                $eliminar_comentario = \core\HTML_Tag::a_boton("boton", array("articulos", "form_eliminar_comentario", $comentario['id']), iText('Eliminar', 'dicc') );
+                $edicion = ($comentario['num_ediciones'] > 0 ) ? '<small>'.iText('Editado', 'dicc').' '.$comentario['num_ediciones'].' veces.</small>' : "" ;
+                echo "<div>
+                        <div class='acciones_comentario'>$editar_comentario $eliminar_comentario</div>
+                        fecha: ".$comentario['fecha_comentario'].'  '.$edicion."<br/>
+                        <b>".$comentario['usuario_login']."</b> escribió:
+                    </div>";
                 echo "<div id='texto_comentario'>{$comentario['comentario']}</div><br/>";
             }
     echo "</div>";
     ?>
     
 </div>
+
+<script type="text/javascript">       
+    var unds_stock = <?php echo $fila['unds_stock']; ?>;   //Me guardo la cantidad de unidades en stock disponibles, que serán usadas en el siguiente javascript 
+</script>
+    
+<script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/validaciones/val_anhadir_juego_a_carrito.js"></script>

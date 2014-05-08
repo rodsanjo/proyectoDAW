@@ -208,8 +208,11 @@ insert into 3da2_usuarios
 , ('juan', 'juan@email.com', md5('juan00'), now())
 , ('anais', 'anais@email.com', md5('anais00'), now())
 , ('lola', 'lola@email.es', md5('lola00'), now())
-, ('joseraul', 'albatros260@gmail.com', '80d46626da16fb73c8e5d14135b4a094', now())
-, ('Beto', 'sonbeto@gmail.com', 'amLo]UKBb0*0XfcNK^PZjtkaG{TzfZ', now())
+;
+insert into 3da2_usuarios 
+  (login, email, password, fecha_alta, fecha_confirmacion_alta, clave_confiramcion) values
+, ('joseraul', 'albatros260@gmail.com', '80d46626da16fb73c8e5d14135b4a094', '2014-05-06', now(), 'jMpQGe*SS-spe}*8#P8Yy)Gt[MxJ[K')
+, ('Beto', 'sonbeto@gmail.com', '', '2014-05-06', now(), 'amLo]UKBb0*0XfcNK^PZjtkaG{TzfZ')
 ;
 
 insert into 3da2_metodos
@@ -245,6 +248,9 @@ insert into 3da2_metodos
 , ('usuarios_permisos'	,'index')
 , ('usuarios_permisos'	,'form_modificar')
 
+, ('usuarios_roles' ,'index')
+, ('usuarios_roles' ,'form_modificar_validar')
+
 , ('contacto'   ,'*')
 , ('contacto'   ,'index')
 , ('contacto'   ,'enviar_mail')
@@ -257,6 +263,8 @@ insert into 3da2_metodos
 , ('articulos'	,'form_modificar')
 , ('articulos'	,'form_borrar')
 , ('articulos'	,'form_comentario')
+, ('articulos'	,'form_editar_comentario')
+, ('articulos'	,'form_eliminar_comentario')
 
 , ('carrito'	,'*')
 , ('carrito'	,'comprar')
@@ -299,6 +307,8 @@ insert into 3da2_roles_permisos
 , ('usuarios_logueados' ,'carrito'	,'*')
 , ('usuarios_logueados' ,'download'     ,'file')
 , ('usuarios_logueados' ,'articulos'	,'form_comentario')
+, ('usuarios_logueados' ,'articulos'	,'form_editar_comentario')
+, ('usuarios_logueados' ,'articulos'	,'form_eliminar_comentario')
 
 , ('empleados'          ,'articulos'	,'form_insertar')
 , ('empleados'          ,'articulos'	,'form_modificar')
@@ -309,6 +319,9 @@ insert into 3da2_roles_permisos
 , ('empleados'          ,'usuarios'	,'index')
 , ('empleados'          ,'download'	,'file')
 , ('empleados'          ,'enlaces'	,'*')
+, ('empleados'          ,'roles'        ,'index')
+, ('empleados'          ,'usuarios_roles' ,'index')
+, ('empleados'          ,'articulos'	,'form_eliminar_comentario')
 
 ;
 

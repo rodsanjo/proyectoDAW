@@ -51,7 +51,7 @@ create table if not exists 3da2_articulos
 ,edad_min integer default 3 comment 'por contener piezas pequeñas generalmente'
 ,duracion varchar(10) comment 'minutos aproximados de duracion de una partida'
 ,precio decimal(12,2) not null default 0.00 comment 'precio en € con IVA incluido'
-,unds_stock integer
+,unds_stock integer default 0
 ,resenha varchar(300) comment 'breve reseña sobre el juego de mesa'
 ,descripcion varchar(1000) comment 'podrá ser una palabra para luego traducirla en el diccionario'
 ,primary key(id)
@@ -97,12 +97,12 @@ delimiter ;
 
 
 /*Fecha de comentario*//*Si default now() actua cada vez que se modifica y está en fecha_ult_edicion*/
-drop trigger if exists 3da2_t_poner_fecha_comentario_bi;
+drop trigger if exists 3da2_t_poner_fecha_ult_edicion_bi;
 delimiter //
 create trigger 3da2_t_poner_fecha_comentario_bi before insert on 3da2_comentarios_articulo
 for each row
 begin
-    set new.fecha_comentario = now();   /*Como es insert solo actua la primera vez*/
+    set new.fecha_ult_edicion = now();   /*Como es insert solo actua la primera vez*/
 end;
 
 //

@@ -16,6 +16,14 @@ h2>i{
     text-shadow:1px 0 2px red /*#FF0000*/;
 }
 
+#titulo_seccion {
+    padding-left: 20px;
+    text-shadow: 200px 5px 3px yellow;
+    background: darkseagreen;
+    border: 2px;
+    border-radius: 20px 80px;
+}
+
 .mensaje{
     text-align: justify;
     width: 560px;
@@ -76,7 +84,7 @@ h2>i{
 }
 
 #view_content{
-    margin-top: 40px;
+    margin-top: -20px;
     margin-left: 20%;
     padding-right: 25%;
 }
@@ -151,7 +159,7 @@ h2>i{
     margin: 3px 3px;
     padding: 3px 7px;
     line-height: 200%;
-    background-color:  lavender;
+    background-color: lavender;
     border: 1px solid grey;
     text-decoration: none;
     border-radius: 5px;
@@ -283,6 +291,9 @@ h2>i{
     padding: 15px;
     border-radius: 25px;
 }
+.acciones_comentario{
+    float: right;
+}
 #media_articulo {
     width: 210px;
     padding: 5px;
@@ -301,6 +312,13 @@ h2>i{
     background-color: rgba(200,200,15,0.5);
     overflow: auto;
     border-radius: 0px 10px 10px 30%;
+}
+#datos_tecnicos{ 
+    color: green;
+}
+#datos_tecnicos img{ 
+    float: right;
+    height: 80px;
 }
 #resenha_articulo{
     background: darkseagreen;

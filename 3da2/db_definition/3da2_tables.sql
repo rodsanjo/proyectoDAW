@@ -56,7 +56,7 @@ create table if not exists 3da2_articulos
 ,edad_min integer default 3 comment 'por contener piezas pequeñas generalmente'
 ,duracion varchar(10) comment 'minutos aproximados de duracion de una partida'
 ,precio decimal(12,2) not null default 0.00 comment 'precio en € con IVA incluido'
-,unds_stock integer
+,unds_stock integer default 0
 ,resenha varchar(300) comment 'breve reseña sobre el juego de mesa'
 ,descripcion varchar(1000) comment 'podrá ser una palabra para luego traducirla en el diccionario'
 ,primary key(id)
