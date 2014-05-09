@@ -36,7 +36,7 @@ engine=myisam
 
 create table if not exists 3da2_articulos
 (id integer auto_increment
-,referencia integer(5) zerofill unsigned not null unique default 0
+,referencia integer(5) zerofill unsigned not null default 0
 ,nombre varchar(50) unique not null comment 'titulo del juego de mesa'
 ,autor varchar(50)
 ,editorial varchar(30)
@@ -63,7 +63,7 @@ engine = myisam default charset=utf8
 
 create table if not exists 3da2_comentarios_articulo
 (id integer auto_increment
-,articulo_nombre varchar(50) not null
+,articulo_id integer not null
 ,usuario_login varchar(20) not null
 ,comentario varchar(300) not null
 ,fecha_comentario timestamp default now()
@@ -71,7 +71,7 @@ create table if not exists 3da2_comentarios_articulo
 ,num_ediciones integer default 0
 ,primary key(id)
 ,foreign key(usuario_login) references 3da2_usuarios(login) on delete set default on update cascade
-,foreign key(articulo_nombre) references 3da2_articulos(articulo) on delete restrict on update cascade
+,foreign key(articulo_id) references 3da2_articulos(id) on delete restrict on update cascade
 )
 engine = myisam default charset=utf8
 ;
@@ -183,13 +183,13 @@ where nombre = 'Spartacus!'
 ;
 
 insert into 3da2_comentarios_articulo
-(articulo_nombre                ,usuario_login      ,comentario) values
-('Demarrage' /*9*/                   ,'juan'        ,'Muy básico, pero divertido')
-,('Bang!'    /*1*/                   ,'jorge'       ,'Fenomenal en grupos variados, gusta a todo el mundo')
-,('Demarrage'/*9*/                   ,'jorge'       ,'Que más se puede pedir')
-,('Demarrage'/*8*/                   ,'juan'        ,'Se queda atrás con respecto a los juegos actuales')
-,('Demarrage'/*9*/                   ,'jorge'       ,'Eso mismo le pasa al Formula Dé, se nota que ya es antiguo')
-,('Formula Dé'/*4*/                   ,'jorge'      ,'A la gente le sigue gustando a pesar de haber nuevos juegos dedicados a la formula1 más elaborados')
+(/*articulo_nombre,*/ articulo_id                ,usuario_login      ,comentario) values
+(/*'Demarrage' */9                   ,'juan'        ,'Muy básico, pero divertido')
+,(/*'Bang!'    */1                   ,'jorge'       ,'Fenomenal en grupos variados, gusta a todo el mundo')
+,(/*'Demarrage'*/9                   ,'jorge'       ,'Que más se puede pedir')
+,(/*'Demarrage'*/8                   ,'juan'        ,'Se queda atrás con respecto a los juegos actuales')
+,(/*'Demarrage'*/9                   ,'jorge'       ,'Eso mismo le pasa al Formula Dé, se nota que ya es antiguo')
+,(/*'Formula Dé'*/4                   ,'jorge'      ,'A la gente le sigue gustando a pesar de haber nuevos juegos dedicados a la formula1 más elaborados')
 ;
 
 

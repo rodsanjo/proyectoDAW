@@ -48,3 +48,4 @@ Artículos disponibles|Available articles
 Editar|Edit
 Editado|Edited
 Eliminar|Remove
+veces|times

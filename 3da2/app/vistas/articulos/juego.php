@@ -1,11 +1,11 @@
 <div>
     
-    <h1 id="titulo_seccion" class='nombre_articulo' title='<?php echo $datos['articulo']['nombre'] ?>'><?php echo $datos['articulo']['nombre'] ?></h1>
+    <h1 class="titulo_seccion" class='nombre_articulo' title='<?php echo $datos['articulo']['nombre'] ?>'><?php echo $datos['articulo']['nombre'] ?></h1>
     
     <?php
     echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_modificar", $datos['articulo']['id']), "Modificar");
     $fila = $datos['articulo'];
-    $img = ($fila["foto"]) ? "<img src='".URL_ROOT."recursos/imagenes/articulos/".$fila["foto"]."' width='200px'style='float:left' />" :"";  
+    $img = ($fila["foto"]) ? "<img src='".URL_ROOT."recursos/imagenes/articulos/".$fila["foto"]."' width='200px' style='float:left' />" :"";  
     $num_max_jug = isset($fila['num_max_jug'])?$fila['num_max_jug']:null;
     if(is_null($num_max_jug) || $num_max_jug == $fila['num_min_jug']){
         $num_max_jug ='';
@@ -30,7 +30,7 @@
                     $metodo = ($datos["carpeta"] == "js") ? "js" : "file";
                     //No funciona en amigable:
                     //$manual = ($fila["manual"]) ? "<a href='".\core\URL::generar("download/$metodo/manuales/{$fila["manual"]}")."'>Descargar reglamento</a>" : ""; //No funciona en amigable           
-                    $manual = ($fila["manual"]) ? "<a href='".URL_ROOT."?p1=download&p2=$metodo&p3=manuales&p4={$fila["manual"]}' >Descargar reglamento</a>" : "Reglamento no disponible";            
+                    $manual = ($fila["manual"]) ? "<a href='".URL_ROOT."?p1=download&p2=$metodo&p3=manuales&p4={$fila["manual"]}' >Descargar reglamento</a>" : iText('Reglamento no disponible', 'frases');            
                     echo $manual;
                 }
                     echo "</div><br/>
@@ -69,17 +69,20 @@
 
     //Introdución de comentarios
     if( \core\Usuario::tiene_permiso('articulos', 'form_comentario')){
-        echo "<div id='cuadro_comentario' > ¡Danos tu opinión!
+        echo "<div id='cuadro_comentario' >".iText('opina', 'frases')."
             <form class='form_comentario' name='form_comentario' method='post' 
                 action='".\core\URL::generar('articulos/validar_form_comentario')."' 
                 onsubmit='return (form_comentario.comentario.value.length>0)'>
                 ".
-                //Si usamos el articulo_id como FK
-                //<input name='articulo_id' type='hidden' value='{$datos['articulo']['id']}'/>
+                
+                //Dos opciones: usando articulo_id o articulo_nombre como FK
                 "
-                <input name='articulo_nombre' type='hidden' value='{$datos['articulo']['nombre']}'/>
-                <input name='usuario_login' type='hidden' value='".\core\Usuario::$login."'/>
-                <textarea type='text' id='comentario' name='comentario' maxlength='500' cols='95' rows='5'></textarea>      
+                <input name='articulo_id' type='hidden' value='{$datos['articulo']['id']}'/>
+                ".
+                //<input name='articulo_nombre' type='hidden' value='{$datos['articulo']['nombre']}'/>
+                
+                "<input name='usuario_login' type='hidden' value='".\core\Usuario::$login."'/>
+                <textarea type='text' id='comentario' name='comentario' maxlength='500' cols='92' rows='5'></textarea>      
                 ".\core\HTML_Tag::span_error('errores_validacion', $datos)."
                 <input type='submit' value='Enviar'/>
             </form></div>
@@ -89,7 +92,7 @@
             <h4>Comentarios:</h4>";
             $array = $datos['comentarios'];
             if( ! count($array)){
-                echo "<center>".iText('SinComentarios', 'frases')."</center>";
+                echo "<center>".iText('sinComentarios', 'frases')."</center>";
             }
             $ahora = date("Y-m-d H:i:s");   // 2001-03-10 17:16:18 (el formato DATETIME de MySQL)
             foreach ($array as $key => $comentario) {
@@ -98,8 +101,12 @@
                 }else{
                     $editar_comentario = "";
                 }
-                $eliminar_comentario = \core\HTML_Tag::a_boton("boton", array("articulos", "form_eliminar_comentario", $comentario['id']), iText('Eliminar', 'dicc') );
-                $edicion = ($comentario['num_ediciones'] > 0 ) ? '<small>'.iText('Editado', 'dicc').' '.$comentario['num_ediciones'].' veces.</small>' : "" ;
+                if( \core\Usuario::tiene_permiso('articulos', 'form_eliminar_comentario')){
+                    $eliminar_comentario = \core\HTML_Tag::a_boton("boton", array("articulos", "form_eliminar_comentario", $comentario['id']), iText('Eliminar', 'dicc') );
+                }else{
+                    $eliminar_comentario = "";
+                }
+                $edicion = ($comentario['num_ediciones'] > 0 ) ? '<small>'.iText('Editado', 'dicc').' '.$comentario['num_ediciones'].' '.iText('veces', 'dicc').'.</small>' : "" ;
                 echo "<div>
                         <div class='acciones_comentario'>$editar_comentario $eliminar_comentario</div>
                         fecha: ".$comentario['fecha_comentario'].'  '.$edicion."<br/>

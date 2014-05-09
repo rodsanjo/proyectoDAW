@@ -1,5 +1,5 @@
 <div >
-	<h2>Listado de roles asignados al usuario <?php echo $datos["login"]; ?></h2>
+	<h2>Listado de roles asignados al usuario <i><?php echo $datos["login"]; ?></i></h2>
 	<?php include "form_and_inputs.php"; ?>
 	<script type='text/javascript'>
 		$(" [type=checkbox] ").attr("disabled", "disabled");

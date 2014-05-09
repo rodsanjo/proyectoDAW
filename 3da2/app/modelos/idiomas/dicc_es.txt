@@ -50,3 +50,4 @@ Artículos disponibles|
 Editar|
 Editado|
 Eliminar|
+veces|

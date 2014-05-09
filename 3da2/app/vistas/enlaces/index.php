@@ -1,5 +1,5 @@
 <div id="enlaces">
-    <h2 class="enlaces">Enlaces</h2>
+    <h2 class="titulo_seccion"><?php echo iText('Enlaces', 'dicc'); ?></h2>
     <?php
         echo \core\HTML_Tag::a_boton("boton", array("enlaces", "form_anexar"), "Incluir un nuevo enlace");
     ?>

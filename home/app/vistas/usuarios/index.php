@@ -35,11 +35,11 @@
 			echo "
 				<tr>
 					<td colspan='3'></td>
-						<td><center><a class='boton' href='".\core\URL::generar("usuarios/form_insertar_interno")."' >insertar</a></center></td>
+						<td><center>".\core\HTML_Tag::a_boton("boton", array("usuarios", "form_insertar_interno"), "Insertar usuario")."</center></td>
 				</tr>
 			";
 			?>
 		</tbody>
 	</table>
-	<?php print("<a class='boton' href='{$datos["url_volver"]}' >volver</a>"); ?>
+	<?php //print("<a class='boton' href='{$datos["url_volver"]}' >volver</a>"); ?>
 </div>

@@ -26,7 +26,8 @@
 		<?php echo \core\HTML_Tag::span_error('password', $datos); ?>
 		<br />
 
-		<?php echo iText('Repita la contraseña', 'frases'); ?>:Repita la contraseña: <input id='password2' name='password2' type='password' size='30'  maxlength='30' autocomplete='off' value='<?php echo \core\Array_Datos::values('password2', $datos); ?>'/>
+		<?php echo iText('Repita la contraseña', 'frases'); ?>:
+                <input id='password2' name='password2' type='password' size='30'  maxlength='30' autocomplete='off' value='<?php echo \core\Array_Datos::values('password2', $datos); ?>'/>
 		<?php echo \core\HTML_Tag::span_error('password2', $datos); ?>
 		<br />
                 

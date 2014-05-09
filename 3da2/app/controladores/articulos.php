@@ -94,9 +94,16 @@ class articulos extends \core\Controlador{
         }else{   
             $datos['articulo'] = $filas[0];
             
-            $clausulas['where'] = " articulo_nombre like '%$articulo_nombre%' ";
+            //Usando articulo_id como FK
+            $articulo_id = $filas[0]['id'];
+            $clausulas['where'] = " articulo_id like '%$articulo_id%' ";
             $clausulas['order_by'] = 'fecha_comentario desc';
             $datos["comentarios"] = \modelos\Modelo_SQL::table(self::$tabla2)->select($clausulas);
+            
+            //Usando articulo_nombre como FK
+//            $clausulas['where'] = " articulo_nombre like '%$articulo_nombre%' ";
+//            $clausulas['order_by'] = 'fecha_comentario desc';
+//            $datos["comentarios"] = \modelos\Modelo_SQL::table(self::$tabla2)->select($clausulas);
         }
         
         //Mostramos los datos a modificar en formato europeo. Convertimos el formato de MySQL a europeo para su visualización
@@ -115,7 +122,7 @@ class articulos extends \core\Controlador{
             "buscar_nombre" => "errores_texto"
         );
         if ( ! $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos)) {
-            $datos["errores"]["errores_validacion"]="Corrige los errores.";
+            $datos["errores"]["errores_validacion"]="Corrija los errores, por favor.";
         }
         else {
             if ( ! strlen($datos["values"]["buscar_nombre"])) {
@@ -158,33 +165,214 @@ class articulos extends \core\Controlador{
         self::request_come_by_post();   //Si viene por POST sigue adelante
         
         $validaciones = array(
-            "articulo_nombre" =>"errores_requerido && errores_texto && errores_unicidad_modificar:id,articulo_nombre/articulos/id,articulo_nombre"
+            "articulo_id" =>"errores_requerido && errores_texto && errores_numero_entero_positivo && errores_referencia:id/".self::$tabla."/id"
+            //"articulo_nombre" =>"errores_requerido && errores_texto && errores_unicidad_modificar:id,articulo_nombre/articulos/id,articulo_nombre"
             ,"usuario_login" => "errores_requerido && errores_texto"
             ,"comentario" => "errores_requerido && errores_texto"
         );                                
 
         if ( ! $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos)){  //validaciones en PHP
-            $datos["errores"]["errores_validacion"]="Corrige los errores.";
+            $datos["errores"]["errores_validacion"]="Corrija los errores, por favor.";
         }else{
 
             if ( ! $validacion = \modelos\Modelo_SQL::insert($datos["values"], self::$tabla2)) // Devuelve true o false
                 $datos["errores"]["errores_validacion"]="No se han podido grabar los datos en la bd.";
         }
         if ( ! $validacion){ //Devolvemos el formulario para que lo intente corregir de nuevo
-            \core\Distribuidor::cargar_controlador(self::$controlador, 'index', $datos);
+            \core\Distribuidor::cargar_controlador(self::$controlador, 'form_comentario', $datos);
         }else{
             // Se ha grabado la modificación. Devolvemos el control al la situacion anterior a la petición del form_modificar
             //$datos = array("alerta" => "Se han grabado correctamente los detalles");
             // Definir el controlador que responderá después de la inserción
             //\core\Distribuidor::cargar_controlador(self::$tabla, 'index', $datos);
             $_SESSION["alerta"] = "Su comentario ha sido enviado";
-            //header("Location: ".\core\URL::generar("self::$controlador/index"));            
+            //header("Location: ".\core\URL::generar("self::$controlador/index"));
             $articulo_nombre = str_replace(" ", "-",$datos['values']['articulo_nombre']);
+     
+            $articulo_id = $datos['values']['articulo_id'];
+            $clausulas['where'] = " id = $articulo_id ";
+            $filas = \modelos\Datos_SQL::select( $clausulas, self::$tabla);
+            $articulo_nombre = $filas[0]['nombre'];
+            $articulo_nombre = str_replace(" ", "-",$articulo_nombre);
+            
+            \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar(self::$controlador."/juego/".$articulo_nombre));
+            \core\HTTP_Respuesta::enviar();
+        }
+    }
+    
+    /**
+     * Muestra el formulario para editar un comentario
+     * @author Jorge Rodriguez <jergo23@gmail.com>
+     * @param array $datos
+     * @return type
+     */
+    public function form_editar_comentario(array $datos=array()) {
+        
+        $datos["form_name"] = __FUNCTION__;
+
+        //self::request_come_by_post();   //Si viene por POST sigue adelante
+        
+        if ( ! isset($datos["errores"])) { // Si no es un reenvío desde una validación fallida
+            $validaciones=array(
+                "id" => "errores_requerido && errores_numero_entero_positivo && errores_referencia:id/".self::$tabla2."/id"
+            );
+            if ( ! $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos)) {
+                $datos['mensaje'] = 'Datos erróneos para identificar el elemento a editar';
+                \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
+                return;
+            }else{
+                $clausulas['where'] = " id = {$datos['values']['id']} ";
+                if ( ! $filas = \modelos\Datos_SQL::select( $clausulas, self::$tabla2)) {
+                    $datos['mensaje'] = 'Error al recuperar la fila de la base de datos';
+                    \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
+                    return;
+                }else{   
+                    $datos['values'] = $filas[0];
+
+                }
+            }
+        }
+                        
+        $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
+        $http_body = \core\Vista_Plantilla::generar('plantilla_principal', $datos);
+        \core\HTTP_Respuesta::enviar($http_body);
+    }
+    /**
+     * Edita un comentario enviado mediante un formulario
+     * @author Jorge Rodriguez "Jergo" <jergo23@gmail.com>
+     * @param array $datos
+     */
+    public function validar_form_editar_comentario(array $datos=array()) {
+        
+        self::request_come_by_post();   //Si viene por POST sigue adelante
+        
+        $validaciones = array(
+            "id" =>"errores_requerido && errores_texto && errores_numero_entero_positivo && errores_referencia:id/".self::$tabla2."/id"
+            //"articulo_nombre" =>"errores_requerido && errores_texto && errores_unicidad_modificar:id,articulo_nombre/articulos/id,articulo_nombre"
+            ,"usuario_login" => "errores_requerido && errores_texto"
+            ,"comentario" => "errores_requerido && errores_texto"
+        );                                
+
+        if ( ! $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos)){  //validaciones en PHP
+            $datos["errores"]["errores_validacion"]="Corrija los errores, por favor.";
+        }else{
+
+            if ( ! $validacion = \modelos\Modelo_SQL::update($datos["values"], self::$tabla2)) // Devuelve true o false
+                $datos["errores"]["errores_validacion"]="No se han podido grabar los datos en la bd.";
+        }
+        if ( ! $validacion){ //Devolvemos el formulario para que lo intente corregir de nuevo
+            \core\Distribuidor::cargar_controlador(self::$controlador, 'editar_comentario', $datos);
+        }else{
+            // Se ha grabado la modificación. Devolvemos el control al la situacion anterior a la petición del form_modificar
+            //$datos = array("alerta" => "Se han grabado correctamente los detalles");
+            // Definir el controlador que responderá después de la inserción
+            //\core\Distribuidor::cargar_controlador(self::$tabla, 'index', $datos);
+            $_SESSION["alerta"] = "Su comentario ha sido editado";
+            //header("Location: ".\core\URL::generar("self::$controlador/index"));
+            $articulo_nombre = str_replace(" ", "-",$datos['values']['articulo_nombre']);
+            
+            //Cogemos el nombre del articulo antes de borrarlo, para luego poder mostrar la misma página
+            $where = ' id = '.$datos['values']['id'];
+            $sql = 'select * from '.\core\Modelo_SQL::get_prefix_tabla(self::$tabla2).' where '.$where;
+            $fila = \core\Modelo_SQL::execute($sql);
+            
+            $articulo_id = $fila[0]['articulo_id'];
+            $clausulas['where'] = " id = $articulo_id ";
+            $filas = \modelos\Datos_SQL::select( $clausulas, self::$tabla);
+            $articulo_nombre = $filas[0]['nombre'];
+            $articulo_nombre = str_replace(" ", "-",$articulo_nombre);
+            
             \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar(self::$controlador."/juego/".$articulo_nombre));
             \core\HTTP_Respuesta::enviar();
         }
     }
 
+    /**
+     * Muestra el formulario para eliminar un comentario
+     * @author Jorge Rodriguez <jergo23@gmail.com>
+     * @param array $datos
+     * @return type
+     */
+    public function form_eliminar_comentario(array $datos=array()) {
+        
+        $datos["form_name"] = __FUNCTION__;
+
+        //self::request_come_by_post();   //Si viene por POST sigue adelante
+        
+        if ( ! isset($datos["errores"])) { // Si no es un reenvío desde una validación fallida
+            $validaciones=array(
+                "id" => "errores_requerido && errores_numero_entero_positivo && errores_referencia:id/".self::$tabla2."/id"
+            );
+            if ( ! $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos)) {
+                $datos['mensaje'] = 'Datos erróneos para identificar el elemento a eliminar';
+                \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
+                return;
+            }else{
+                $clausulas['where'] = " id = {$datos['values']['id']} ";
+                if ( ! $filas = \modelos\Datos_SQL::select( $clausulas, self::$tabla2)) {
+                    $datos['mensaje'] = 'Error al recuperar la fila de la base de datos';
+                    \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
+                    return;
+                }else{   
+                    $datos['values'] = $filas[0];
+
+                }
+            }
+        }
+                        
+        $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
+        $http_body = \core\Vista_Plantilla::generar('plantilla_principal', $datos);
+        \core\HTTP_Respuesta::enviar($http_body);
+    }
+    /**
+     * Elimina un comentario enviado mediante un formulario
+     * @author Jorge Rodriguez "Jergo" <jergo23@gmail.com>
+     * @param array $datos
+     */
+    public function validar_form_eliminar_comentario(array $datos=array()) {
+        
+        self::request_come_by_post();   //Si viene por POST sigue adelante
+        
+        $validaciones = array(
+            "id" =>"errores_requerido && errores_texto && errores_numero_entero_positivo && errores_referencia:id/".self::$tabla2."/id"
+            //"articulo_nombre" =>"errores_requerido && errores_texto && errores_unicidad_modificar:id,articulo_nombre/articulos/id,articulo_nombre"
+            ,"usuario_login" => "errores_requerido && errores_texto"
+            ,"comentario" => "errores_requerido && errores_texto"
+        );                                
+
+        if ( ! $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos)){  //validaciones en PHP
+            $datos["errores"]["errores_validacion"]="Corrija los errores, por favor.";
+        }else{
+            //Cogemos el nombre del articulo antes de borrarlo, para luego poder mostrar la misma página
+            $where = ' id = '.$datos['values']['id'];
+            $sql = 'select * from '.\core\Modelo_SQL::get_prefix_tabla(self::$tabla2).' where '.$where;
+            $fila = \core\Modelo_SQL::execute($sql);          
+            $articulo_id = $fila[0]['articulo_id'];
+
+            if ( ! $validacion = \modelos\Modelo_SQL::delete($datos["values"], self::$tabla2)) // Devuelve true o false
+                $datos["errores"]["errores_validacion"]="No se han podido grabar los datos en la bd.";
+        }
+        if ( ! $validacion){ //Devolvemos el formulario para que lo intente corregir de nuevo
+            \core\Distribuidor::cargar_controlador(self::$controlador, 'editar_comentario', $datos);
+        }else{
+            // Se ha grabado la modificación. Devolvemos el control al la situacion anterior a la petición del form_modificar
+            //$datos = array("alerta" => "Se han grabado correctamente los detalles");
+            // Definir el controlador que responderá después de la inserción
+            //\core\Distribuidor::cargar_controlador(self::$tabla, 'index', $datos);
+            $_SESSION["alerta"] = "El comentario ha sido eliminado";
+            //header("Location: ".\core\URL::generar("self::$controlador/index"));
+            $articulo_nombre = str_replace(" ", "-",$datos['values']['articulo_nombre']);
+            
+            $clausulas['where'] = " id = $articulo_id ";
+            $filas = \modelos\Datos_SQL::select( $clausulas, self::$tabla);
+            $articulo_nombre = $filas[0]['nombre'];
+            $articulo_nombre = str_replace(" ", "-",$articulo_nombre);
+            
+            \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar(self::$controlador."/juego/".$articulo_nombre));
+            \core\HTTP_Respuesta::enviar();
+        }
+    }
+    
     /**
      * Presenta un formulario para insertar nuevas filas a la tabla
      * @param array $datos
@@ -208,7 +396,7 @@ class articulos extends \core\Controlador{
         $validaciones = \modelos\articulos::$validaciones_insert;
         
         if ( ! $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos)){  //validaciones en PHP
-            $datos["errores"]["errores_validacion"]="Corrige los errores.";
+            $datos["errores"]["errores_validacion"]="Corrija los errores, por favor.";
         }else{
             $validacion = self::comprobar_files($datos);
             if ($validacion) {
@@ -298,7 +486,7 @@ class articulos extends \core\Controlador{
         $validaciones = \modelos\articulos::$validaciones_update;
 
         if ( ! $validacion = ! \core\Validaciones::errores_validacion_request($validaciones, $datos)){  //validaciones en PHP
-            $datos["errores"]["errores_validacion"]="Corrige los errores.";
+            $datos["errores"]["errores_validacion"]="Corrija los errores, por favor.";
         }else{
             $validacion = self::comprobar_files($datos);
             if ($validacion) {
@@ -386,12 +574,15 @@ class articulos extends \core\Controlador{
             \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
             return;
         }else{
+            //Eliminamos la foto y el manual de nuestra carpeta, debemos de hacerlo lo primero    
+            self::borrar_files($datos);
+            
             if ( ! $validacion = \modelos\Datos_SQL::delete($datos["values"], self::$tabla)) {// Devuelve true o false
                 $datos['mensaje'] = 'Error al borrar en la bd';
                 $datos['url_continuar'] = \core\URL::http('?menu='.self::$tabla.'');
                 \core\Distribuidor::cargar_controlador('mensajes', 'mensaje', $datos);
                 return;
-            }else{
+            }else{               
                 $datos = array("alerta" => "Se ha borrado correctamente.");
                 \core\Distribuidor::cargar_controlador(self::$controlador, 'index', $datos);		
             }
@@ -652,22 +843,8 @@ class articulos extends \core\Controlador{
         return ($validacion ? $nombre.".".$extension : false);
 
     }
-
-
-    private static function borrar_foto($foto) {
-
-            $foto_path = PATH_APPLICATION."recursos".DS."imagenes".DS."articulos".DS.$foto;
-            // Si existe el fichero lo borramos
-            if (is_file($foto_path)) {
-                    return unlink($foto_path);
-            }
-            else {
-                    return null;
-            }
-
-    }
     
-    /**
+     /**
      * Guarda un archivo pdf en nuestros recursos
      * @param type $id
      * @param type $articulo_nombre = null
@@ -692,6 +869,61 @@ class articulos extends \core\Controlador{
         $validacion = move_uploaded_file($_FILES["manual"]["tmp_name"], $manual_path);
 
         return ($validacion ? $nombre.".".$extension : false);
+
+    }
+
+    /**
+     * Elimina los ficheros guardados en nuestra aplicación.
+     * @author Jorge Rodríguez <jergo23@gmail.com>
+     * @param array $datos
+     */
+    private static function borrar_files(array $datos){
+        $id = $datos["values"]['id'];
+        
+        $sql = 'select * from '.\core\Modelo_SQL::get_prefix_tabla(self::$tabla).' where id = '.$id;
+        $fila = \core\Modelo_SQL::execute($sql);
+        
+        $foto = $fila[0]['foto'];
+        $manual = $fila[0]['manual'];
+        
+        self::borrar_foto($foto);
+        self::borrar_manual($manual);
+        
+    }
+
+    /**
+     * Elimina una foto de la ruta recursos/imagenes/articulos
+     * @param type $foto
+     * @return null
+     */
+    private static function borrar_foto($foto) {
+        
+            $foto_path = PATH_APPLICATION."recursos".DS."imagenes".DS."articulos".DS.$foto;
+            // Si existe el fichero lo borramos
+            if (is_file($foto_path)) {
+                    return unlink($foto_path);
+            }
+            else {
+                    return null;
+            }
+
+    }
+    
+    /**
+     * 
+     * @param type $manual
+     * @return null
+     */
+    private static function borrar_manual($manual) {
+        
+            $manual_path = PATH_APPLICATION."recursos".DS."ficheros".DS."manuales".DS.$manual;
+            // Si existe el fichero lo borramos
+            if (is_file($manual_path)) {
+                    return unlink($manual_path);
+            }
+            else {
+                    return null;
+            }
 
     }
 	

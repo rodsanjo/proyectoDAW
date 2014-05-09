@@ -1,4 +1,4 @@
-<h3>Reglamentos de juego disponibles:</h3>
+<h2 class="titulo_seccion">Reglamentos de juego disponibles:</h2>
 <ul>
 <?php
     

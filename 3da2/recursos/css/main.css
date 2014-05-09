@@ -16,7 +16,7 @@ h2>i{
     text-shadow:1px 0 2px red /*#FF0000*/;
 }
 
-#titulo_seccion {
+.titulo_seccion {
     padding-left: 20px;
     text-shadow: 200px 5px 3px yellow;
     background: darkseagreen;
@@ -306,6 +306,17 @@ h2>i{
 #media_articulo * {
     padding-left: 5px;
 }
+.media_articulo {
+    width: auto;
+    padding: 5px;
+    margin-bottom: 10px;
+    background: rgba(200,200,15,1);
+    float: left;
+    border-radius: 10px 0px 40px 10px;
+}
+.media_articulo * {
+    padding-left: 5px;
+}
 #datos_articulo{ 
     padding: 0 10px  30px 25px;
     margin-bottom: 10px;
@@ -316,6 +327,14 @@ h2>i{
 #datos_tecnicos{ 
     color: green;
 }
+.datos_articulo{
+    padding: 0px 10px 10px 30px;
+    margin-bottom: 10px;
+    background-color: rgba(200,200,15,0.5);
+    overflow: auto;
+    border-radius: 0px 10px 10px 30%;
+}
+
 #datos_tecnicos img{ 
     float: right;
     height: 80px;
@@ -326,4 +345,13 @@ h2>i{
     padding: 5px;
     margin-bottom: 5px;
     border-radius: 20px 20px 0 0;
+}
+.resenha{
+    display: none;
+    padding: 15px;
+    border-radius: 5px 40px;
+    background: darkseagreen;
+}
+.masDetalles{
+    cursor: pointer;
 }

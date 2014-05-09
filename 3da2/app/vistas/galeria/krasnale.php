@@ -1,4 +1,4 @@
-<h2><img src="<?php echo URL_ROOT ?>recursos/imagenes/Wroclaw_escudo.jpg" width="50px"/>  Krasnale encontrados en Wroclaw  <img src="<?php echo URL_ROOT ?>recursos/imagenes/Wroclaw_escudo.jpg" width="50px"/></h2>
+<h2 class="titulo_seccion"><img src="<?php echo URL_ROOT ?>recursos/imagenes/Wroclaw_escudo.jpg" width="50px"/>  Krasnale encontrados en Wroclaw  <img src="<?php echo URL_ROOT ?>recursos/imagenes/Wroclaw_escudo.jpg" width="50px"/></h2>
 <div class='krasnale'>
 <?php
     $i=0;

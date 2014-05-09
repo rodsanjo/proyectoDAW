@@ -1,7 +1,7 @@
 var ok = false;    
 function validarLogin(){
-	var valor = document.getElementById("login").value;
-        //prompt()
+	var valor = formulario.login.value; //document.getElementById("login").value;
+        //alert(valor);
 	var patron=/^[a-zñ\d]{4,}$/;
 	if(!patron.test(valor)){
 		document.getElementById("error_login").innerHTML="Debe tener al menos 4 caracteres, admitiendose letras y números";

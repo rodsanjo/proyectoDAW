@@ -9,7 +9,7 @@
 
 <div>
     <div>
-        <h3 id="titulo_seccion"><?php echo iText('Artículos disponibles', 'dicc'); ?>:</h3>
+        <h2 class="titulo_seccion"><?php echo iText('Artículos disponibles', 'dicc'); ?>:</h2>
         <form method='post' action='<?php echo \core\URL::generar("articulos/index"); ?>'>
             <input type="hidden" name="categoria" value="<?php echo isset($_REQUEST['p3']) ? $_REQUEST['p3'] : ''; ?>"/>
             <input type="hidden" name="seccion" value="<?php echo isset($_REQUEST['p4']) ? $_REQUEST['p4'] : ''; ?>"/>
@@ -30,7 +30,6 @@
         echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_insertar"), "insertar un nuevo artículo");
         ?>
     </div>
-    
     <?php
     foreach ($datos['filas'] as $key => $fila){ //cada fila corresponde a un juego de mesa        
         $img = ($fila["foto"]) ? "<img class='img_index' src='".URL_ROOT."recursos/imagenes/articulos/".$fila["foto"]."' alt='{$fila['nombre']}' title='{$fila['nombre']}' />" :"";
@@ -44,13 +43,14 @@
         $articulo_nombre = str_replace(" ", "-", $fila['nombre']);
         $href = \core\URL::generar(array('articulos','juego',$articulo_nombre));
         $title = ((isset($fila['resenha']) and strlen($fila['resenha'])) ? $fila['resenha'] : $fila['nombre']); 
-        echo "<a href='$href' title='$title'><h3>{$fila['nombre']}</h3></a>"
-            .$img.
-            "<div class='text_justificado'>
-                <p>&nbsp;</p>
+        echo "<div class='juego'>
+            <a href='$href' title='$title'><h3>{$fila['nombre']}</h3></a>
+            <a href='$href' class='media_articulo'>$img</a>
+            <div class='datos_articulo'>
                 <p>Precio: <b class='precio'>{$fila['precio']} €</b></p>                    
                 <p>Jugadores: $rangoJug</p>
-                <a class='button' href='$href'>Mas detalles</a>
+                <a class='masDetalles' title='".iText('Leer reseña', 'frases')."'>".iText('Más detalles', 'frases')."</a>
+                <p class='resenha'>{$fila['resenha']}</b></p>
             </div>
                 
             <form method='post' action='".\core\URL::generar('carrito/meter')."' >
@@ -78,7 +78,7 @@
             //.\core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")
             .\core\HTML_Tag::a_boton("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")
             //<a class='boton' href='".\core\URL::generar("articulos/form_borrar/{$fila["id"]}")."' >borrar</a>
-        ."<hr/></div>";
+        ."<hr/></div></div>";
         //<p>Precio: <b class='precio'>".\core\Conversiones::decimal_punto_a_coma_y_miles($fila['precio'])." €</b></p>
   
     }

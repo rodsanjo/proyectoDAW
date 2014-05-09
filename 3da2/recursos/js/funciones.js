@@ -34,9 +34,26 @@ $(document).ready(function(){
             $("span#opcion_rec").slideToggle();
         }                
     );
+        //Desplegar el carrito lateral
     $("#btn_desplegar_carrito").click(
         function(){
             $("#carrito_oculto").slideToggle();  
+        }
+    );
+        //Desplegar las reseñas en articulos/index
+    $(".masDetalles").bind("click",
+        function(){
+            $(".masDetalles").css('background','white');
+            $(this).css('background','khaki');
+            $("p.resenha").slideDown(2000);
+             
+        }
+    );
+    $(".juego").bind("mouseleave",
+        function(){
+            
+            $(".resenha").fadeOut(5000);
+             
         }
     );
         

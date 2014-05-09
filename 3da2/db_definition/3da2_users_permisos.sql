@@ -211,8 +211,9 @@ insert into 3da2_usuarios
 ;
 insert into 3da2_usuarios 
   (login, email, password, fecha_alta, fecha_confirmacion_alta, clave_confiramcion) values
-, ('joseraul', 'albatros260@gmail.com', '80d46626da16fb73c8e5d14135b4a094', '2014-05-06', now(), 'jMpQGe*SS-spe}*8#P8Yy)Gt[MxJ[K')
-, ('Beto', 'sonbeto@gmail.com', '', '2014-05-06', now(), 'amLo]UKBb0*0XfcNK^PZjtkaG{TzfZ')
+, ('joseraul', 'albatros260@gmail.com', '80d46626da16fb73c8e5d14135b4a094', '2014-05-06 00:00:00', now(), 'jMpQGe*SS-spe}*8#P8Yy)Gt[MxJ[K')
+, ('joseraulg', 'albatros260@gmail.com', '80d46626da16fb73c8e5d14135b4a094', '2014-05-06 00:00:00', '2014-05-08 00:00:00', 'WZTMWwj12C#A^qWiw#7UrOE(Wot5)O')
+, ('Beto', 'sonbeto@gmail.com', '', '2014-05-06 00:00:00', now(), 'amLo]UKBb0*0XfcNK^PZjtkaG{TzfZ')
 ;
 
 insert into 3da2_metodos
@@ -308,7 +309,6 @@ insert into 3da2_roles_permisos
 , ('usuarios_logueados' ,'download'     ,'file')
 , ('usuarios_logueados' ,'articulos'	,'form_comentario')
 , ('usuarios_logueados' ,'articulos'	,'form_editar_comentario')
-, ('usuarios_logueados' ,'articulos'	,'form_eliminar_comentario')
 
 , ('empleados'          ,'articulos'	,'form_insertar')
 , ('empleados'          ,'articulos'	,'form_modificar')
@@ -330,6 +330,7 @@ insert into 3da2_usuarios_roles
   ('admin'	,'administradores')
 , ('jorge'      ,'empleados')
 , ('Beto'       ,'empleados')
+, ('joseraulg'  ,'empleados')
 -- , ('anonimo'	,'usuarios')
 -- , ('juan'	,'usuarios')
 -- , ('juan'	,'usuarios_logueados')

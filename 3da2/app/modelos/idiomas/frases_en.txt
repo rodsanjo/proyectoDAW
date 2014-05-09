@@ -6,5 +6,9 @@ Modificar datos|Update details
 Cambiar contraseña|Change password
 Repita el email|Repeat the email
 Repita la contraseña|Repeat the password
-SinComentarios|Be the first!!
+sinComentarios|Be the first!!
+opina|Write your opinion about this game!
+Reglamento no disponible|Unavailable rules
+Más detalles|More details
+Leer reseña|Read more
 parrafo1|If you love the games, it is your ideal web site. Here you will find a wide range of board games with comments from another players who have tested the article, so you can choose better what will be your choice when you purchase a new board game, and to have more details about it, for a potencial gift or for own enjoyment with relatives and friends. Also you will find accessories to complete your games, and why no, create your own. If you have a game created by you, warn us through our contact form. We can help you to advertise on our web site and in a future distribution.Accept the great ideas! and we are looking forward to hearing them from you and to having a good time together.

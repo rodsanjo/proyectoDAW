@@ -499,7 +499,7 @@ class usuarios extends \core\Controlador {
 	<p>Login: <b>{$datos['values']['login']}</b><br/> Password: <b>$password</b></p>
 	<p>Bienvenido a ".TITULO.". Para confirmar su registro pulse en el siguiente hipervínculo:<br/><a href='$url' target='_blank' >$url</a>
 	</p>
-	<p>En caso de n funcionar puede copiar y pegar el hipervínculo en la barra de direcciones de su navegador.</p>
+	<p>En caso de no funcionar puede copiar y pegar el hipervínculo en la barra de direcciones de su navegador.</p>
 </body>
 </html>";
 			$additional_headers = "From: ".  \core\Configuracion::$email_noreply . "\r\n";
