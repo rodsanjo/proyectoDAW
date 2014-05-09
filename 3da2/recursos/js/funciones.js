@@ -43,15 +43,14 @@ $(document).ready(function(){
         //Desplegar las reseñas en articulos/index
     $(".masDetalles").bind("click",
         function(){
-            $(".masDetalles").css('background','white');
-            $(this).css('background','khaki');
-            $("p.resenha").slideDown(2000);
+            $(".masDetalles").css('background','khaki');
+            $(this).css('background','white');
+            $(".resenha").slideDown(2000);
              
         }
     );
-    $(".juego").bind("mouseleave",
+    $(".juego_index").bind("mouseleave",
         function(){
-            
             $(".resenha").fadeOut(5000);
              
         }

@@ -182,12 +182,6 @@ h2>i{
     text-align: center;
 }
 
-.img_index{
-    height: 100px;
-    float: left;
-    padding-right: 50px;
-}
-
 #comentario{
     clear:both;
 }
@@ -272,6 +266,7 @@ h2>i{
 #descarga_manual{
     clear: both;
 }
+/* articulos/index : comentario */
 #cuadro_comentario{
     clear: both;
     background: khaki;
@@ -294,6 +289,7 @@ h2>i{
 .acciones_comentario{
     float: right;
 }
+/* articulos/juego */
 #media_articulo {
     width: 210px;
     padding: 5px;
@@ -306,17 +302,6 @@ h2>i{
 #media_articulo * {
     padding-left: 5px;
 }
-.media_articulo {
-    width: auto;
-    padding: 5px;
-    margin-bottom: 10px;
-    background: rgba(200,200,15,1);
-    float: left;
-    border-radius: 10px 0px 40px 10px;
-}
-.media_articulo * {
-    padding-left: 5px;
-}
 #datos_articulo{ 
     padding: 0 10px  30px 25px;
     margin-bottom: 10px;
@@ -326,13 +311,6 @@ h2>i{
 }
 #datos_tecnicos{ 
     color: green;
-}
-.datos_articulo{
-    padding: 0px 10px 10px 30px;
-    margin-bottom: 10px;
-    background-color: rgba(200,200,15,0.5);
-    overflow: auto;
-    border-radius: 0px 10px 10px 30%;
 }
 
 #datos_tecnicos img{ 
@@ -346,6 +324,17 @@ h2>i{
     margin-bottom: 5px;
     border-radius: 20px 20px 0 0;
 }
+
+/* articulos/index */
+.juego_index{
+    width: 50%;
+    float: left;
+}
+.flechas_cambio_pagina{
+    clear: both;
+    text-align: center;
+}
+
 .resenha{
     display: none;
     padding: 15px;
@@ -354,4 +343,33 @@ h2>i{
 }
 .masDetalles{
     cursor: pointer;
+    clear: both;
+}
+
+.datos_articulo{
+    padding: 0px 10px 10px 30px;
+    margin-bottom: 10px;
+    background-color: khaki;
+    overflow: auto;
+    border-radius: 10px;
+}
+div.juego_index + div.juego_index{
+    margin-left: 0px;
+}
+.media_articulo {
+    width: 160px;
+    padding: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    background: rgba(200,200,15,1);
+    float: left;
+    border-radius: 10px;
+}
+.media_articulo * {
+    padding-left: 5px;
+}
+.img_index{
+    width: 150px;
+    float: left;
+    padding-right: 50px;
 }

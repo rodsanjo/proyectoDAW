@@ -43,13 +43,15 @@
         $articulo_nombre = str_replace(" ", "-", $fila['nombre']);
         $href = \core\URL::generar(array('articulos','juego',$articulo_nombre));
         $title = ((isset($fila['resenha']) and strlen($fila['resenha'])) ? $fila['resenha'] : $fila['nombre']); 
-        echo "<div class='juego'>
-            <a href='$href' title='$title'><h3>{$fila['nombre']}</h3></a>
-            <a href='$href' class='media_articulo'>$img</a>
+        echo "<div class='juego_index'>
+                <a href='$href' title='$title'><h3>{$fila['nombre']}</h3></a>
+                <a href='$href' class='media_articulo'>$img</a>
             <div class='datos_articulo'>
                 <p>Precio: <b class='precio'>{$fila['precio']} €</b></p>                    
                 <p>Jugadores: $rangoJug</p>
-                <a class='masDetalles' title='".iText('Leer reseña', 'frases')."'>".iText('Más detalles', 'frases')."</a>
+            </div>
+            <div class='masDetalles'>
+                <a title='".iText('Leer reseña', 'frases')."'>".iText('Más detalles', 'frases')."</a>
                 <p class='resenha'>{$fila['resenha']}</b></p>
             </div>
                 
@@ -78,7 +80,12 @@
             //.\core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")
             .\core\HTML_Tag::a_boton("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")
             //<a class='boton' href='".\core\URL::generar("articulos/form_borrar/{$fila["id"]}")."' >borrar</a>
-        ."<hr/></div></div>";
+            ."</div>
+        </div>";
+        if($key%2){
+            echo "<div style='clear: both'></div><hr/>";
+        }
+        
         //<p>Precio: <b class='precio'>".\core\Conversiones::decimal_punto_a_coma_y_miles($fila['precio'])." €</b></p>
   
     }
@@ -112,7 +119,7 @@
     ?>
     <br/>
     
-    <div style="text-align: center;">
+    <div class="flechas_cambio_pagina">
         <a class='boton_flecha_izq' href='<?php echo $href1 ?>' title="primero">   <<   </a>
         <a class='boton_flecha_izq' href='<?php echo $href2 ?>' title="anterior">  <  </a>
         <?php echo iText('Artículos', 'dicc'); ?>
