@@ -7,7 +7,7 @@ Cambiar contraseña|
 Repita el email|
 Repita la contraseña|
 SinComentarios|¡¡Sea el primero!!
-Opina|¡Danos tu opinión!
+opina|¡Danos tu opinión!
 Reglamento no disponible|
 Más detalles|
 Leer reseña|

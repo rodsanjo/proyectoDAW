@@ -6,7 +6,7 @@ class articulos extends \core\Controlador{
     private static $tabla = 'articulos';
     private static $tabla2 = 'comentarios_articulo';
     private static $controlador = 'articulos';
-    public static $num_arts_por_pag = 4;
+    public static $num_arts_por_pag = 6;
     
     /**
      * Presenta una <table> con las filas de la tabla con igual nombre que la clase.
@@ -82,10 +82,12 @@ class articulos extends \core\Controlador{
     public function juego(array $datos=array()) {
         
         if(isset($_GET['p3'])){
-            $articulo_nombre = str_replace("-", " ", $_GET['p3']);
+            //$articulo_nombre = str_replace("-", " ", $_GET['p4']);
             //$articulo_nombre = mysql_escape_string($articulo_nombre);
             //printf("Escaped string: %s\n", $articulo_nombre);
-            $clausulas['where'] = " nombre like '%$articulo_nombre%' ";
+            //print $articulo_nombre;
+            //$clausulas['where'] = " nombre like '%$articulo_nombre%' ";
+            $clausulas['where'] = " id like '%{$_GET['p3']}%' ";
         }
         if ( ! $filas = \modelos\Datos_SQL::select( $clausulas, self::$tabla)) {
             $datos['mensaje'] = 'El articulo seleccionado no se encuentra en nuestro catálogo de productos';

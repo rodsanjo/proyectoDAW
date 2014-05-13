@@ -41,17 +41,36 @@ $(document).ready(function(){
         }
     );
         //Desplegar las reseñas en articulos/index
+//    $(".masDetalles").bind("click",
+//        function(){
+//            $(".masDetalles").css('background','khaki');
+//            $(this).css('background','white');
+//            $(".resenha").slideDown(2000);
+//             
+//        }
+//    );
     $(".masDetalles").bind("click",
         function(){
-            $(".masDetalles").css('background','khaki');
-            $(this).css('background','white');
-            $(".resenha").slideDown(2000);
+            if($(".resenha").is(":hidden")){
+                $(this).next('.resenha').show(2000);
+            }else{
+                $(".resenha").hide(2000);
+            }
              
         }
     );
+//    $(".resenha").hover(
+//            function () { 			 	
+//                $(this).show(2000);
+//            }
+//            ,function () { 			 	
+//                $(this).fadeOut(5000);
+//            }                
+//        );
     $(".juego_index").bind("mouseleave",
         function(){
-            $(".resenha").fadeOut(5000);
+            //$(".resenha").delay(6000);
+            $(".resenha").fadeOut(8000);
              
         }
     );

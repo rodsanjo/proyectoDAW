@@ -41,17 +41,17 @@
         }
         $rangoJug = $fila['num_min_jug'].$num_max_jug;
         $articulo_nombre = str_replace(" ", "-", $fila['nombre']);
-        $href = \core\URL::generar(array('articulos','juego',$articulo_nombre));
+        $href = \core\URL::generar(array('articulos','juego',$fila['id'], $articulo_nombre));
         $title = ((isset($fila['resenha']) and strlen($fila['resenha'])) ? $fila['resenha'] : $fila['nombre']); 
         echo "<div class='juego_index'>
-                <a href='$href' title='$title'><h3>{$fila['nombre']}</h3></a>
+                <a href='$href' title='$title'><h3 class='titulo_art'>{$fila['nombre']}</h3></a>
                 <a href='$href' class='media_articulo'>$img</a>
             <div class='datos_articulo'>
                 <p>Precio: <b class='precio'>{$fila['precio']} €</b></p>                    
                 <p>Jugadores: $rangoJug</p>
             </div>
             <div class='masDetalles'>
-                <a title='".iText('Leer reseña', 'frases')."'>".iText('Más detalles', 'frases')."</a>
+                <a class='masDetalles' title='".iText('Leer reseña', 'frases')."'>".iText('Más detalles', 'frases')."</a>
                 <p class='resenha'>{$fila['resenha']}</b></p>
             </div>
                 

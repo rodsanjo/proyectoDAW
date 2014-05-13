@@ -7,7 +7,7 @@
 		<input id='id'  name='id' type='hidden' value='<?php echo \core\Array_Datos::values('id', $datos); ?>' />
 
 		<label id="labelLogin" for="login"><?php echo iText('Usuario', 'dicc'); ?>:</label>
-                <input id='login' name='login' type='text' size='20'  maxlength='20' value='<?php echo \core\Array_Datos::values("login", $datos); ?>'/>
+                <input id='login' name='login' type='text' size='20'  maxlength='20' value='<?php echo \core\Array_Datos::values("login", $datos); ?>' />
 		<?php echo \core\HTML_Tag::span_error('login', $datos); ?>
 		<br />
 
@@ -22,17 +22,17 @@
 		<br />
 
 		<?php echo iText('Contraseña', 'dicc'); ?>:
-                <input id='password' name='password' type='password' size='20'  maxlength='20' autocomplete='off' value='<?php echo \core\Array_Datos::values('password', $datos); ?>'/>
+                <input id='password' name='password' type='password' size='20'  maxlength='20' autocomplete='off' value='<?php echo \core\Array_Datos::values('password', $datos); ?>' onblur="validarPassword();"/>
 		<?php echo \core\HTML_Tag::span_error('password', $datos); ?>
 		<br />
 
 		<?php echo iText('Repita la contraseña', 'frases'); ?>:
-                <input id='password2' name='password2' type='password' size='30'  maxlength='30' autocomplete='off' value='<?php echo \core\Array_Datos::values('password2', $datos); ?>'/>
+                <input id='password2' name='password2' type='password' size='30'  maxlength='30' autocomplete='off' value='<?php echo \core\Array_Datos::values('password2', $datos); ?>' onblur="validarRePassword();"/>
 		<?php echo \core\HTML_Tag::span_error('password2', $datos); ?>
 		<br />
                 
                 DNI:
-                <input onblur="return validarDNI(document.formulario.dni.value);" type="text" name="dni" value="" size="10" maxlength="8"  autocomplete='off'/>
+                <input onblur="return validarDNI(document.formulario.dni.value);" type="text" name="dni" value="<?php echo \core\Array_Datos::values('dni', $datos); ?>" size="10" maxlength="8"  autocomplete='off'/>
                 -<input type="text" name="letraDNI" readonly="readonly" size="1"/>
                 <span id="error_dni" class='input_error'></span><br/>
 
@@ -59,7 +59,7 @@
                 
 		
 		<?php echo \core\HTML_Tag::span_error('validacion', $datos);?><br />
-		<input type='submit' value='Enviar' onmousemove="validarAceptado();">
+		<input onmousemove="validarAceptado();" type='submit' value='Enviar' >
 		<?php if (\core\Distribuidor::get_metodo_invocado() != "form_borrar" ): ?>
 			<input type='reset' value='Limpiar'>
 		<?php endif; ?>
