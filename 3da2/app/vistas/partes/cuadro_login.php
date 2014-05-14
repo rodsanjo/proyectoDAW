@@ -8,8 +8,8 @@
     } else if (\core\Usuario::$login == 'anonimo') { ?>
         <form class="validar_form_login" method='post' action='<?php echo \core\URL::generar("usuarios/form_login_validar"); ?>' >
             <?php echo \core\HTML_Tag::form_registrar("form_login", "post"); ?>
-            <?php echo iText('Usuario', 'dicc'); ?>:<br/><input type='text' id='login' name='login' value='<?php echo \core\Datos::values('login', $datos) ?>'/><br/>
-            <?php echo iText('Contraseña', 'dicc'); ?>:<br/><input type='password' id='password' name='password' value='<?php echo \core\Datos::values('password', $datos) ?>'/><br/>
+            <?php echo iText('Usuario', 'dicc'); ?>:<br/><input type='text' id='login' name='login' value=''/><br/>
+            <?php echo iText('Contraseña', 'dicc'); ?>:<br/><input type='password' id='password' name='password' value=''/><br/>
             <input type='submit' value='<?php echo $log_in ?>' class="destacado_l"/>
         </form>
 <?php

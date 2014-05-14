@@ -6,11 +6,11 @@
         <!--<input name='articulo_nombre' type='hidden' value='{$datos['articulo']['articulo_nombre']}'/>-->
         
         <input id="usuario_login" name='usuario_login' type='hidden' value='<?php echo \core\Array_Datos::values('usuario_login', $datos); ?>'/>
-        <textarea type='text' id='comentario' name='comentario' maxlength='500' cols='95' rows='5'><?php echo \core\Array_Datos::values('comentario', $datos); ?></textarea>      
+        <textarea type='text' id='comentario' name='comentario' maxlength='500' cols='100' rows='5'><?php echo \core\Array_Datos::values('comentario', $datos); ?></textarea>      
         
         <?php echo \core\HTML_Tag::span_error('errores_validacion', $datos); ?>
         
-        <input type='submit' value='<?php echo \core\Idioma::text('Enviar', 'dicc'); ?>'/>
+        <input type='submit' value='<?php echo \core\Idioma::text('Enviar', 'dicc'); ?>' class='boton1'/>
         <input name="restablecer" type='reset' value='<?php echo iText('Restablecer', 'dicc'); ?>'/>
         <a class='boton1' style="float:right;" href='<?=$datos["url_volver"]?>' ><?php echo \core\Idioma::text('Cancelar', 'dicc'); ?></a>
     </form>

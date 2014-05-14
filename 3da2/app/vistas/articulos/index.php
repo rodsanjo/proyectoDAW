@@ -26,7 +26,7 @@
     
     <div class="align_right">
         <?php
-        echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar un nuevo artículo");
+        //echo \core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_insertar"), "Insertar un nuevo artículo");
         echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_insertar"), "insertar un nuevo artículo");
         ?>
     </div>
@@ -92,6 +92,7 @@
     
 //    $categoria = isset($_REQUEST['categoria'])?$_REQUEST['categoria']:'seccion';
     $categoria = isset($_REQUEST['p3'])?$_REQUEST['p3']:'seccion'; //'seccion' no vale para nada, solo para que p3 no quede vacio a la vista del usuario
+    $categoria = isset($_REQUEST['p2']) && $_REQUEST['p2'] == 'busqueda' ? 'busqueda': $categoria;
     
     $num_grupo = isset($_REQUEST['p4'])?$_REQUEST['p4']:'';
     

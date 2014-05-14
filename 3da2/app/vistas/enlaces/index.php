@@ -28,5 +28,5 @@
             echo \core\HTML_Tag::a_boton("boton1", array("enlaces", "form_anexar"), "Incluir un nuevo enlace");
         ?>
     </center>  
-    <center><button onclick='window.location.assign(<?php echo URL_ROOT.\core\Distribuidor::get_controlador_instanciado()."/form_anexar" ?>);'>Incluir un nuevo enlace</button></center>
+    <!--<center><button onclick='<?php //echo URL_ROOT.\core\Distribuidor::get_controlador_instanciado()."/form_anexar" ?>'>Incluir un nuevo enlace</button></center>-->
 </div>

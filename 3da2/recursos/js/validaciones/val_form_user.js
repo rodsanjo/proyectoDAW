@@ -2,7 +2,7 @@ var ok = false;
 function validarLogin(){
 	var valor = formulario.login.value; //document.getElementById("login").value;
         //alert(valor);
-	var patron=/^[a-z]{1}[a-z\d]{3,}$/;
+	var patron=/^[a-z]{1}[a-z\d]{3,}$/i;
 	if(!patron.test(valor)){
 		document.getElementById("error_login").innerHTML="Debe empezar por letra y tener al menos 4 caracteres, admitiendose letras y números, pero no la ñ";
 		document.getElementById("login").style.color = "red";
@@ -37,6 +37,30 @@ function validarRePassword(){
 		ok = false;
 	}else{
 		document.getElementById("error_password2").innerHTML="";
+	}                      
+}
+
+function validarEmail(){
+	var valor = document.getElementById("email").value;
+        //alert(valor);
+	var patron= /^([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}@([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}(\.[a-z]{2,4})$/i;
+	if(!patron.test(valor)){
+		document.getElementById("error_email").innerHTML="El email es incorrecto. Formato cuenta@servidor.net";
+		ok = false;
+	}else{
+		document.getElementById("error_email").innerHTML="";
+	}
+}
+
+function validarEmail2(){
+	var valor1 = document.getElementById("email").value;    //no lo coge con formulario.email.value
+	var valor2 = formulario.email2.value;
+        //alert(valor1+' - '+valor2);
+	if(valor1!==valor2){
+		document.getElementById("error_email2").innerHTML="Ambos correos deben de coincidir";               
+		ok = false;
+	}else{
+		document.getElementById("error_email2").innerHTML="";
 	}                      
 }
 
@@ -87,6 +111,8 @@ function validarForm(){
 	ok=true;
 	
 	validarLogin();
+        validarEmail();
+        validarEmail2();
 	validarPassword();
 	validarRePassword();
 	validarDNI(f.dni.value);

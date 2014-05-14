@@ -6,7 +6,7 @@ Modificar datos|
 Cambiar contraseña|
 Repita el email|
 Repita la contraseña|
-SinComentarios|¡¡Sea el primero!!
+sinComentarios|¡¡Sea el primero!!
 opina|¡Danos tu opinión!
 Reglamento no disponible|
 Más detalles|

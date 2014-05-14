@@ -12,12 +12,12 @@
 		<br />
 
 		Email:
-                <input id='email' name='email' type='text' size='50' maxlength='100' value='<?php echo \core\Array_Datos::values('email', $datos); ?>'/>
+                <input id='email' name='email' type='text' size='50' maxlength='100' value='<?php echo \core\Array_Datos::values('email', $datos); ?>' onblur="validarEmail();"/>
 		<?php echo \core\HTML_Tag::span_error('email', $datos); ?>
 		<br />
 
 		<?php echo iText('Repita el email', 'frases'); ?>:
-                <input id='email' name='email2' type='text' size='50' maxlength='100' value='<?php echo \core\Array_Datos::values('email2', $datos); ?>'/>
+                <input id='email' name='email2' type='text' size='50' maxlength='100' value='<?php echo \core\Array_Datos::values('email2', $datos); ?>' onblur="validarEmail2();"/>
 		<?php echo \core\HTML_Tag::span_error('email2', $datos); ?>
 		<br />
 

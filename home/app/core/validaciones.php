@@ -675,8 +675,8 @@ class Validaciones  {
     public static function errores_email($cadena) {
             $mensaje = null;
             if($cadena!=null) {
-                //$patron= '/^([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}@([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}(\.[a-z]{2,4})$/i';
-                $patron= '/^([a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}@([a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}(\.[a-z]{2,4})$/i';
+                $patron= '/^([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}@([a-z]{1}[a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}(\.[a-z]{2,4})$/i';
+                //$patron= '/^[a-z\d]{1,}((\.{0,1}[a-z\d\_\-]{1,}){1,}@([a-z\d]{0,})(([\.|\_\-]{1}[a-z\d]{1,}){1,}){0,}(\.[a-z]{2,4})$/i';
                 $encontrados=array();
                 if(preg_match($patron, $cadena, $encontrados)) { // Hay encuentros
                         if (self::$depuracion) {print("encuentros: "); print_r($encontrados);}

@@ -92,7 +92,7 @@
         Reseña:<br/>
         <textarea id="resenha" name="resenha" maxlength='300' cols="50" rows="3"><?php echo \core\Array_Datos::values('resenha', $datos); ?></textarea>
         <br/>
-        Descripción:<br/>
+        Descripción**:<br/>
         <textarea id="descripcion" name="descripcion" maxlength='1000' cols="80" rows="8"><?php echo \core\Array_Datos::values('descripcion', $datos); ?></textarea>
         <br/>
         
@@ -100,7 +100,8 @@
 	<?php echo \core\HTML_Tag::span_error('unds_stock', $datos); ?>
 	<br />
         
-        *Campos obligatorios
+        *Campos obligatorios<br />
+        **Debe escribirse con formato html para una correcta presentación
 	<br />
 	<?php echo \core\HTML_Tag::span_error('errores_validacion', $datos); ?>
 	

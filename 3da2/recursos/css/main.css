@@ -159,7 +159,7 @@ h2>i{
 
 .boton1 {
     margin: 3px 3px;
-    padding: 3px 7px;
+    padding: 2px 7px;
     line-height: 200%;
     background-color: lavender;
     border: 1px solid grey;
@@ -303,6 +303,9 @@ h2>i{
     padding: 5px;
     margin-bottom: 5px;
     border-radius: 20px 20px 0 0;
+}
+#resenha_articulo p{
+    text-indent: 0.5cm;
 }
 
 /* articulos/index */

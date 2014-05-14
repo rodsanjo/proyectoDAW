@@ -156,7 +156,7 @@ class articulos extends \core\Controlador{
             //Mostramos los datos a modificar en formato europeo. Convertimos el formato de MySQL a europeo
             self::convertir_formato_mysql_a_ususario($datos['filas']);
             
-            $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
+            $datos['view_content'] = \core\Vista::generar('index', $datos);
             $http_body = \core\Vista_Plantilla::generar("DEFAULT", $datos);
             \core\HTTP_Respuesta::enviar($http_body);
         }
@@ -197,7 +197,7 @@ class articulos extends \core\Controlador{
             $articulo_nombre = $filas[0]['nombre'];
             $articulo_nombre = str_replace(" ", "-",$articulo_nombre);
             
-            \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar(self::$controlador."/juego/".$articulo_nombre));
+            \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar(self::$controlador."/juego/".$articulo_id."/".$articulo_nombre));
             \core\HTTP_Respuesta::enviar();
         }
     }
@@ -284,7 +284,7 @@ class articulos extends \core\Controlador{
             $articulo_nombre = $filas[0]['nombre'];
             $articulo_nombre = str_replace(" ", "-",$articulo_nombre);
             
-            \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar(self::$controlador."/juego/".$articulo_nombre));
+            \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar(self::$controlador."/juego/".$articulo_id."/".$articulo_nombre));
             \core\HTTP_Respuesta::enviar();
         }
     }
@@ -370,7 +370,7 @@ class articulos extends \core\Controlador{
             $articulo_nombre = $filas[0]['nombre'];
             $articulo_nombre = str_replace(" ", "-",$articulo_nombre);
             
-            \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar(self::$controlador."/juego/".$articulo_nombre));
+            \core\HTTP_Respuesta::set_header_line("location", \core\URL::generar(self::$controlador."/juego/".$articulo_id."/".$articulo_nombre));
             \core\HTTP_Respuesta::enviar();
         }
     }

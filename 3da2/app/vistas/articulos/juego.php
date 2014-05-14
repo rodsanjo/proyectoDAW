@@ -13,7 +13,9 @@
         $num_max_jug ='-'.$num_max_jug;
     }
     $rangoJug = $fila['num_min_jug'].$num_max_jug;
-    $duracion = (isset($fila['duracion'])?$fila['duracion']:"-").' min.';
+    $duracion = (isset($fila['duracion'])?$fila['duracion'].' min.':"-");
+    $edad = isset($fila['edad_min']) ? $fila['edad_min'].'+' : '-';
+    
     $articulo_nombre = str_replace(" ", "-", $fila['nombre']);
     $resenha = ((isset($fila['resenha']) and strlen($fila['resenha'])) ? $fila['resenha'] : ''); 
     $descripcion = ((isset($fila['descripcion']) and strlen($fila['descripcion'])) ? $fila['descripcion'] : ''); 
@@ -59,7 +61,7 @@
             <div id='datos_articulo'>
                 <div id='datos_tecnicos'>
                     $src
-                    <p>Edad: {$fila['edad_min']}+</p>
+                    <p>Edad: $edad</p>
                     <p>Jugadores: $rangoJug</p>
                     <p>Duración: $duracion</p>
                 </div>
