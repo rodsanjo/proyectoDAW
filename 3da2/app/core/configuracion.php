@@ -85,6 +85,14 @@ namespace core {
 //                        'prefix_'  => '3da2_'
 //                );
 
+                // Zymic
+//                public static $db = array(
+//                        'server'   => 'mysql.hostinger.es',
+//                        'user'     => '832080_3da2',
+//                        'password' => '832080_3da2',
+//                        'db_name'   => 'rodsanjo_99k_3da2',
+//                        'prefix_'  => '3da2_'
+//                );
 
 
 		// Acceso estático de usuarios

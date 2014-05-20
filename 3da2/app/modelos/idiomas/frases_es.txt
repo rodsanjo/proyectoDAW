@@ -1,5 +1,6 @@
 key|sentence
 saludo1|Bienvenido a 3da2 juegos de mesa
+mensajeRegistro|<div class='mensaje'><center><b>Cuenta creada satisfactoriamente.</b><p>Se ha enviado un correo electrónico a la cuenta de email aportada.</p> <p>Para confimar su alta, consulte su correo electrónico y haga click en el vínculo que se le ha enviado. Si no lo encuentra en la bandeja de entrada <b>revise su spam</b>, por favor.</p></center></div>
 Fecha última actualización|
 Ver el contenido del baúl|
 Modificar datos|
