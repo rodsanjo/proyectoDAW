@@ -10,7 +10,7 @@ namespace core {
 		public static $controlador_por_defecto = 'inicio';
 		public static $metodo_por_defecto = 'index';
 		public static $plantilla_por_defecto = 'plantilla_principal';
-		public static $plantilla_administrator = 'plantilla_administrator';
+		public static $plantilla_administrator = 'plantilla_principal'; //'plantilla_administrator';
 
 		// Respuesta HTTP
 		public static $tipo_mime_por_defecto = 'text/html';
@@ -84,10 +84,19 @@ namespace core {
 //                        'db_name'   => 'u513745123_3da2',
 //                        'prefix_'  => '3da2_'
 //                );
+                
+                // Free MySQL Hosting
+//                public static $db = array(
+//                    'server'   => 'sql3.freemysqlhosting.net',
+//                    'user'     => 'sql340886',
+//                    'password' => 'gP9!fL2%',
+//                    'db_name'   => 'sql340886',
+//                    'prefix_'  => '3da2_'
+//                );
 
                 // Zymic
 //                public static $db = array(
-//                        'server'   => 'mysql.hostinger.es',
+//                        'server'   => '',
 //                        'user'     => '832080_3da2',
 //                        'password' => '832080_3da2',
 //                        'db_name'   => 'rodsanjo_99k_3da2',

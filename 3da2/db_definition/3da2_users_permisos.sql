@@ -202,7 +202,7 @@ insert into 3da2_roles
 
 insert into 3da2_usuarios 
   (login, email, password, fecha_confirmacion_alta) values
-  ('admin', 'admin@3da2.com', md5('admin00'), now())
+  ('admin', '3da2@rodsanjo.esy.es', md5('admin00'), now())
 , ('anonimo', 'anonimo@email.com', md5(''), now())
 , ('jorge', 'jergo23@gmail.com', md5('jorge00'), now())
 , ('juan', 'juan@email.com', md5('juan00'), now())
@@ -210,8 +210,8 @@ insert into 3da2_usuarios
 , ('lola', 'lola@email.es', md5('lola00'), now())
 ;
 insert into 3da2_usuarios 
-  (login, email, password, fecha_alta, fecha_confirmacion_alta, clave_confiramcion) values
-, ('joseraul', 'albatros260@gmail.com', '80d46626da16fb73c8e5d14135b4a094', '2014-05-06 00:00:00', now(), 'jMpQGe*SS-spe}*8#P8Yy)Gt[MxJ[K')
+  (login, email, password, fecha_alta, fecha_confirmacion_alta, clave_confirmacion) values
+ ('joseraul', 'albatros260@gmail.com', '80d46626da16fb73c8e5d14135b4a094', '2014-05-06 00:00:00', now(), 'jMpQGe*SS-spe}*8#P8Yy)Gt[MxJ[K')
 , ('joseraulg', 'albatros260@gmail.com', '80d46626da16fb73c8e5d14135b4a094', '2014-05-06 00:00:00', '2014-05-08 00:00:00', 'WZTMWwj12C#A^qWiw#7UrOE(Wot5)O')
 , ('Beto', 'sonbeto@gmail.com', '', '2014-05-06 00:00:00', now(), 'amLo]UKBb0*0XfcNK^PZjtkaG{TzfZ')
 ;
