@@ -29,7 +29,7 @@
                                 <input type='hidden' name='articulo_id' value='$articulo_id' />
                                 <input type='hidden' name='unidades' value='".number_format($articulo["unidades"], 0, ",", ".")."' />
                                 <span class='car_nxart'>".number_format($articulo["unidades"], 0, ",", ".")." x $nombre_corto</span>
-                                <span>".number_format($total,2,",",".")."</span>4
+                                <span>".number_format($total,2,",",".")."</span>
                                 <button name='accion' type='submit' value='quitar' class='boton_con_imagen'>$cubo_basura</button>
                             </form><br/>
                                 ";

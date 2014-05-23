@@ -1,7 +1,7 @@
 key|sentence
 saludo1|Welcome to 3da2 board games
-mensajeRegistro|<div class='mensaje'><center><b>Successfully created your account.</b><br/><b>Welcome to 3da2 board games!</b><br/><p>In order to use some of the functions of 3da2 board games website, your email address needs to be verified.</p><p>An activation key has been sent to the e-mail address you provided. Please check your e-mail for further information</p><p>Thanks... Enjoy your stay!</p></center></div>
-mensajeVerificacion|TO VERIFY as a valid email address for the BoardGameGeek, click on the following link or enter it in your browser.
+mensajeRegistro|<div><b>Successfully created your account.</b><br/><b>Welcome to 3da2 board games!</b><br/><p>In order to use some of the functions of 3da2 board games website, your email address needs to be verified.</p><p>An activation key has been sent to the e-mail address you provided. Please check your e-mail for further information</p><p>Thanks... Enjoy your stay!</p></div>
+mensajeVerificacion|TO VERIFY as a valid email address for the 3da2 Board Games, click on the following link or enter it in your browser.
 Fecha última actualización|Last updated date
 Ver el contenido del baúl|Look inside the chest
 Modificar datos|Update details

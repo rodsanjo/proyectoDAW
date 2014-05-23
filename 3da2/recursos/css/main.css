@@ -26,8 +26,12 @@ h2>i{
     border-radius: 20px 80px;
 }
 
+#mensaje{
+    text-align: center;
+}
+
 .mensaje{
-    text-align: justify;
+    text-align: center;
     width: 560px;
 }
 

@@ -7,18 +7,20 @@
     <link href="<?php echo URL_ROOT ?>favicon_3da2.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="<?php echo URL_ROOT ?>favicon_3da2.ico" rel="icon" type="image/x-icon" />    
     
-    <meta name="Description" content="Explicación de la página: tienda online de juegos de mesa" />
-    <meta name="Keywords" content="juegos de mesa, ocio,board game, rol, frikis, dados" />
-    <meta name="Generator" content="con qué se ha hecho" />
-    <meta name="Origen" content="3da2" />
-    <meta name="Author" content="Jergo" />
-    <meta name="Locality" content="Madrid, España" />
-    <meta name="Lang" content="<?php echo \core\Idioma::get(); ?>" />
-    <meta name="Viewport" content="maximum-scale=10.0" />
+    <meta name="description" content="tienda online de juegos de mesa shop online about board games" />
+    <meta name="keywords" content="juegos,mesa,ocio,board,game,boardgame,dados,rol,frikis" />
+    <meta name="rating" content="General">
+    <meta name="generator" content="con qué se ha hecho" />
+    <meta name="origen" content="3da2" />
+    <meta name="author" content="Jergo" />
+    <meta name="owner" content="3da2">
+    <meta name="locality" content="Madrid, España" />
+    <meta name="lang" content="<?php echo \core\Idioma::get(); ?>" />
+    <meta name="viewport" content="maximum-scale=10.0" />
     <meta name="revisit-after" content="1 days" />
     <meta name="robots" content="INDEX,FOLLOW,NOODP" />
-    <meta http-equiv="Content-Language" content="<?php echo \core\Idioma::get(); ?>"/>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta http-equiv="content-Language" content="<?php echo \core\Idioma::get(); ?>"/>
+    <meta http-equiv="content-Type" content="text/html;charset=utf-8" />
 
     <style type="text/css" >
     </style>

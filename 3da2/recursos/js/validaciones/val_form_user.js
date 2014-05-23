@@ -99,7 +99,7 @@ function validarSexo(){     //no necesitas el id de los type='radio'
 function validarAceptado(){        
 	var valor = formulario.aceptado;	//document.getElementById("aceptado")
 	if(!valor.checked){
-	   document.getElementById("error_aceptado").innerHTML="Debe aceptar esta clausula";                
+	   document.getElementById("error_aceptado").innerHTML="Debe aceptar esta claúsula";                
 	   ok = false;
 	}else{
 	   document.getElementById("error_aceptado").innerHTML="";               

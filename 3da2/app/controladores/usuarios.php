@@ -508,7 +508,8 @@ class usuarios extends \core\Controlador {
 			$additional_headers .= 'X-Mailer: PHP/' . phpversion();
 			
 			if ( $envio_email = mail($to, $subject, $message, $additional_headers))  {
-				$datos["mensaje"] .= iText('mensajeRegistro', 'frases'); //"<div class='mensaje'><p>Se ha enviado un correo electrónico a la cuenta de email aportada.</p> <p>Para confimar su alta, consulte su correo electrónico y haga click en el vínculo que se le ha enviado. Si no lo encuentra en la bandeja de entrada <b>revise su spam</b>, por favor.</p></div>";
+				//$datos["mensaje"] .= "<p>Se ha enviado un correo electrónico a la cuenta de email aportada.</p> <p>Para confimar su alta, consulte su correo electrónico y haga click en el vínculo que se le ha enviado. Si no lo encuentra en la bandeja de entrada <b>revise su spam</b>, por favor.</p>";
+                                $datos["mensaje"] .= iText('mensajeRegistro', 'frases');
 			}
 			else {
 				// Si falla el envío del email

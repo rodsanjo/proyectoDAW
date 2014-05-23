@@ -76,12 +76,21 @@ namespace core {
 			'prefix_'  => '3da2_'
 		);
 
-		// hostinger
+		// hostinger: rodsanjo.esy.es
 //                public static $db = array(
 //                        'server'   => 'mysql.hostinger.es',
 //                        'user'     => 'u513745123_3da2',
 //                        'password' => 'u513745123_3da2',
 //                        'db_name'   => 'u513745123_3da2',
+//                        'prefix_'  => '3da2_'
+//                );
+                
+                  // hostinger: rodsanjo.url.ph
+//                public static $db = array(
+//                        'server'   => 'mysql.hostinger.es',
+//                        'user'     => 'u907916144_3da2',
+//                        'password' => 'u907916144_3da2',
+//                        'db_name'   => 'u907916144_3da2',
 //                        'prefix_'  => '3da2_'
 //                );
                 
