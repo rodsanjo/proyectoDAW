@@ -1,14 +1,11 @@
 <script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/validaciones.js"></script>
 <style>
-    span{
-        color:red;
-    }
     input, textarea{
         background: wheat;
     }
 </style>
     
-<h1 class="titulo_seccion">CONTACTO</h1>
+<h1 class="titulo_seccion"><?php echo ucfirst(iText('contacto', 'dicc')); ?></h1>
 <p>Si quiere poenrse en contacto con nostros para cualquier consulta, puede hacerlo
     a través de nuestro correo electrónico: <a href="mailto:3da2@rodsanjo.esy.es">3da2@rodsanjo.esy.es</a>
     o bien mediante el siguiente formulario y le contestaremos lo antes posible.

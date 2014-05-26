@@ -16,10 +16,11 @@ Galería|Galery
 Reglamentos|Rules
 Enanos|Dwarves
 Enlaces|Links
-contacto|Contact
+Contacto|Contact
 Revista|Magazine
 Libros|Books
 Diseñada por|Designed by
+contacto|contact
 Fecha última actualización|Last updated date
 Idioma|Language
 Alemán|German
@@ -53,6 +54,6 @@ Comprar|Purchase
 Vaciar|Empty
 añadir|add
 Producto|Article
-total|
-acciones|actions
+total|całkowity
+acciones|accions
 precio|price

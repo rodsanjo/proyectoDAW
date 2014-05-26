@@ -27,7 +27,7 @@ h2>i{
 }
 
 #mensaje{
-    text-align: center;
+
 }
 
 .mensaje{
@@ -314,8 +314,18 @@ h2>i{
 
 /* articulos/index */
 .juego_index{
-    width: 47%;
+    width: 48%;
     float: left;
+    margin-bottom: 10px;
+}
+.juego_index:hover{
+    width: 48%;
+    float: left;
+    background: wheat;
+    border-radius: 10px;
+    margin: -0px;
+    margin-bottom: 10px;
+    font-size: 100%;
 }
 .juego_index h3{
     font-family: Comic Sans MS, calibri, Times New Roman, Times, serif;
@@ -325,8 +335,9 @@ h2>i{
     border-radius: 10px;
     margin-bottom: 8px;
 }
+
 div.juego_index + div.juego_index{
-    margin-left: 6%;    /* 46+8+46 = 100% */
+    margin-left: 4%;    /* 48+4+48 = 100% */
 }
 
 .flechas_cambio_pagina{

@@ -30,6 +30,7 @@
         echo \core\HTML_Tag::a_boton("boton", array("articulos", "form_insertar"), "insertar un nuevo artículo");
         ?>
     </div>
+    <div id="articulos">
     <?php
     foreach ($datos['filas'] as $key => $fila){ //cada fila corresponde a un juego de mesa        
         $img = ($fila["foto"]) ? "<img class='img_index' src='".URL_ROOT."recursos/imagenes/articulos/".$fila["foto"]."' alt='{$fila['nombre']}' title='{$fila['nombre']}' />" :"";
@@ -46,44 +47,48 @@
         echo "<div class='juego_index'>
                 <a href='$href' title='$title'><h3 class='titulo_art'>{$fila['nombre']}</h3></a>
                 <a href='$href' class='media_articulo'>$img</a>
-            <div class='datos_articulo'>
-                <p>Precio: <b class='precio'>{$fila['precio']} €</b></p>                    
-                <p>Jugadores: $rangoJug</p>
-            </div>
-            <div class='masDetalles'>
-                <a class='masDetalles' title='".iText('Leer reseña', 'frases')."'>".iText('Más detalles', 'frases')."</a>
-                <p class='resenha'>{$fila['resenha']}</b></p>
-            </div>
-                
-            <form method='post' action='".\core\URL::generar('carrito/meter')."' >
-                <input type='hidden' name='articulo_id' value='{$fila['id']}' />
-                <tr>
-                    <td><input type='hidden' readonly='readonly' name='nombre' value='{$fila['nombre']}' /></td>
-                    <td><input type='hidden' readonly='readonly' name='precio' value='{$fila['precio']}' /></td>
-                    ";
-                    if ( \core\Usuario::$login != 'anonimo' && ! \modelos\roles::es_empleado(\core\Usuario::$login)) {
-                    //if (\core\Usuario::$login != 'anonimo' && ! \core\Usuario::$empleado ) {
-                    echo "<td><input type='text'  name='unidades' value='1' size='2'/></td>
-                    <td>
-                        <input name='accion' type='submit' value='añadir' />
-                    </td>";
-                    }
+                <div class='datos_articulo'>
+                    <p>Precio: <b class='precio'>{$fila['precio']} €</b></p>                    
+                    <p>Jugadores: $rangoJug</p>
+                </div>
+                <div class='masDetalles'>
+                    <a class='masDetalles' title='".iText('Leer reseña', 'frases')."'>".iText('Más detalles', 'frases')."</a>
+                    <p class='resenha'>{$fila['resenha']}</b></p>
+                </div>
+            ";
+//                <form id='form_carrito' name='form_carrito' method='post' action='".\core\URL::generar('carrito/meter_ajax')."' >
+//                <form id='form_carrito_ajax' name='form_carrito_ajax'  >  //Usando carrito_prueba.js
         echo "
+                    <form method='post' onsubmit='carrito_meter(this, event); return(false);'  >
                     
-                </tr>
-            </form>"
+                    <input type='hidden' name='articulo_id' value='{$fila['id']}' />
+                    <tr>
+                        <td><input type='hidden' readonly='readonly' name='nombre' value='{$fila['nombre']}' /></td>
+                        <td><input type='hidden' readonly='readonly' name='precio' value='{$fila['precio']}' /></td>
+                        ";
+                        if ( \core\Usuario::$login != 'anonimo' && ! \modelos\roles::es_empleado(\core\Usuario::$login)) {
+                        //if (\core\Usuario::$login != 'anonimo' && ! \core\Usuario::$empleado ) {
+                        echo "<td><input type='text'  name='unidades' value='1' size='2'/></td>
+                        <td>
+                            <input name='accion' type='submit'  value='".iText('añadir', 'dicc')."' />
+                        </td>";
+                        }
+            echo "
+
+                    </tr>
+                </form>"
               
-            ."<div class='align_right'>"
-            //.\core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_modificar", $fila['id']), "Modificar")
-            .\core\HTML_Tag::a_boton("boton", array("articulos", "form_modificar", $fila['id']), "Modificar")
-            //<a class='boton' href='?menu={$datos['controlador_clase']}&submenu=form_modificar&id={$fila['id']}' >modificar</a>
-            //.\core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")
-            .\core\HTML_Tag::a_boton("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")
-            //<a class='boton' href='".\core\URL::generar("articulos/form_borrar/{$fila["id"]}")."' >borrar</a>
-            ."</div>
-        </div>";
+                ."<div class='align_right'>"
+                //.\core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_modificar", $fila['id']), "Modificar")
+                .\core\HTML_Tag::a_boton("boton", array("articulos", "form_modificar", $fila['id']), "Modificar")
+                //<a class='boton' href='?menu={$datos['controlador_clase']}&submenu=form_modificar&id={$fila['id']}' >modificar</a>
+                //.\core\HTML_Tag::a_boton_onclick("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")
+                .\core\HTML_Tag::a_boton("boton", array("articulos", "form_borrar", $fila['id']), "Borrar")
+                //<a class='boton' href='".\core\URL::generar("articulos/form_borrar/{$fila["id"]}")."' >borrar</a>
+                ."</div>
+            </div>";
         if($key%2){
-            echo "<div style='clear: both'></div><hr/>";
+            echo "<div style='clear: left;'><hr/></div>";
         }
         
         //<p>Precio: <b class='precio'>".\core\Conversiones::decimal_punto_a_coma_y_miles($fila['precio'])." €</b></p>
@@ -119,6 +124,8 @@
     $href4 = \core\URL::generar(array('articulos','index',$categoria,$ult_grupo));
     ?>
     <br/>
+    
+    </div>
     
     <div class="flechas_cambio_pagina">
         <a class='boton_flecha_izq' href='<?php echo $href1 ?>' title="primero">   <<   </a>

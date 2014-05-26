@@ -21,7 +21,7 @@ class Menus{    //la clase se tiene que llamar igual que el archivo
         ,"Accesorios" => "articulos,index/accesorios,Accesorios"
         ,"Galería" => "galeria,index,Galeria de imagenes"
         ,"Enlaces" => "enlaces,index,Enlaces de interés"
-        ,"Contacto" => "contacto,index,Contacto"
+        ,"contacto" => "contacto,index,contacto"
     );
     
     public static function get_menuUp(){
@@ -48,7 +48,7 @@ class Menus{    //la clase se tiene que llamar igual que el archivo
             ,"Enanos"=>"galeria,carpeta,krasnale,Enanos"
         )
         ,"Enlaces" => "enlaces,index,Enlaces de interés"
-        ,"Contacto" => "contacto,index,Contacto"
+        ,"contacto" => "contacto,index,contacto"
     );
     
     public static function get_menuLeft(){

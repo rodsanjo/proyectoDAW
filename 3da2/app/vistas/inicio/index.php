@@ -1,3 +1,4 @@
+<script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/image_slide.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT ?>recursos/css/image_slide.css" />
 <script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/image_slide.js"></script>
 

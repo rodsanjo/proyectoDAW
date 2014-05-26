@@ -29,8 +29,8 @@
     <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT ?>recursos/css/menu_up.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT ?>recursos/css/menu_left_v.css" />
     
-    <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT ?>recursos/css/print.css" media="print" />
-    <link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT.'recursos/css/'.\core\Distribuidor::get_controlador_instanciado(); ?>.css" />
+    <!--<link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT ?>recursos/css/print.css" media="print" />-->
+    <!--<link rel="stylesheet" type="text/css" href="<?php echo URL_ROOT.'recursos/css/'.\core\Distribuidor::get_controlador_instanciado(); ?>.css" />-->
     
     <script type="text/javascript" src="<?php echo URL_HOME_ROOT ?>recursos/js/f_cookies.js"></script>
     <script type="text/javascript" src="<?php echo URL_HOME_ROOT ?>recursos/js/idiomas.js"></script>
@@ -38,8 +38,9 @@
     <script type="text/javascript" src=""></script>
     <script type="text/javascript" src="<?php echo URL_HOME_ROOT ?>recursos/js/jquery/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/funciones.js"></script>
-    <script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/image_slide.js"></script>
     
+    <script type='text/javascript' src="<?php echo URL_APPLICATION_ROOT."recursos/js/carrito/carrito_localhost.js"; ?>" ></script>
+    <!--<script type='text/javascript' src="<?php //echo URL_APPLICATION_ROOT."recursos/js/carrito/carrito_prueba.js"; ?>" ></script>-->
     <script type="text/javascript">       
     /* líneas del script */
     </script>
@@ -82,10 +83,9 @@
                     include PATH_APPLICATION_APP."vistas/partes/cuadro_login.php";
                 ?>  
             </div>
-            <div id='carrito'>
+            <div id='carrito'>                             
                 <?php
-                    echo self::incluir("carrito", "ver");
-                    //echo $datos["carrito"];
+                    include PATH_APPLICATION_APP."vistas/partes/carrito_lateral.php";
                 ?>
             </div>
             

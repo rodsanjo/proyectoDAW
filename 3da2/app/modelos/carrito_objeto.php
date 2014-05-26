@@ -37,8 +37,7 @@ abstract class carrito_objeto extends \modelos\Modelo_SQL implements \modelos\ca
 	}
 	
 	 
-	
-	
+		
 	public function persistir() {
 		
 		$texto = $this->escape_string((serialize($this)));

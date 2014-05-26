@@ -1,5 +1,5 @@
 <div id='galeria'>
-    <h2 class="titulo_seccion">Galería</h2>
+    <h2 class="titulo_seccion"><?php echo iText('Galería', 'dicc'); ?></h2>
     <ul>
         <li>
             <a href="<?php echo \core\URL::generar("galeria/carpeta/manuales"); ?>">Reglamentos de juegos de mesa</a>

@@ -16,13 +16,10 @@ Galería|
 Reglamentos|
 Enanos|
 Enlaces|
-Contacto|
+contacto|
 Revista|
 Libros|
-h1#titulo|Biblioteca internacional del alumno
-h2#titulo|Página web generada con patrón MVC
 Diseñada por|
-Contacto|
 Fecha última actualización|
 Idioma|
 Alemán|
@@ -41,6 +38,7 @@ Enviar|
 Cancelar|
 Restablecer|
 Baúl|
+Baúl vacío|
 Mostrar|
 Ocultar|
 Artículos|
@@ -51,3 +49,10 @@ Editar|
 Editado|
 Eliminar|
 veces|
+Comprar|
+Vaciar|Vaciar baúl
+añadir|
+Producto|
+total|
+acciones|
+precio|
