@@ -154,6 +154,17 @@ end;
 delimiter ;
 
 
+/* Simular el comportamiento on delete cascade, cuando las tablas son myisam*/
+delimiter //
+create trigger 3da2_t_borrar_usuario_ad after delete on 3da2_usuarios
+for each row
+begin
+delete from 3da2_usuarios_roles where login = old.login;
+end;
+//
+delimiter ;
+
+
 create table 3da2_usuarios_permisos
 ( id integer unsigned auto_increment not null
 , login varchar(20) not null

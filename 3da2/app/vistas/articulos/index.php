@@ -9,7 +9,7 @@
 
 <div>
     <div>
-        <h2 class="titulo_seccion"><?php echo iText('Artículos disponibles', 'dicc'); ?>:</h2>
+        <h2 id="titulo_seccion" class="titulo_seccion"><?php echo iText('Artículos disponibles', 'dicc'); ?>:</h2>
         <form method='post' action='<?php echo \core\URL::generar("articulos/index"); ?>'>
             <input type="hidden" name="categoria" value="<?php echo isset($_REQUEST['p3']) ? $_REQUEST['p3'] : ''; ?>"/>
             <input type="hidden" name="seccion" value="<?php echo isset($_REQUEST['p4']) ? $_REQUEST['p4'] : ''; ?>"/>
@@ -56,7 +56,7 @@
                     <p class='resenha'>{$fila['resenha']}</b></p>
                 </div>
             ";
-//                <form id='form_carrito' name='form_carrito' method='post' action='".\core\URL::generar('carrito/meter_ajax')."' >
+//                <form id='form_carrito' name='form_carrito' method='post' action='".\core\URL::generar('carrito/meter')."' >  //Si no funciona ajax en el Host
 //                <form id='form_carrito_ajax' name='form_carrito_ajax'  >  //Usando carrito_prueba.js
         echo "
                     <form method='post' onsubmit='carrito_meter(this, event); return(false);'  >

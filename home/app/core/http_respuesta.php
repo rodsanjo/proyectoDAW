@@ -73,7 +73,9 @@ class HTTP_Respuesta extends \core\Clase_Base {
 		
 		// Añadimos a la cabecera la longitud del cuerpo, si es mayor que cero
 		if (strlen(self::$http_body_content)) {
-			self::set_header_line("Content-Length", (string) strlen(self::$http_body_content) );
+//			exit ("mb_internal_encoding()= ".mb_internal_encoding()); // Para comprobar la comprobar la configuración interna de la codificación de caracteres
+//			self::set_header_line("Content-Length", (string)mb_strlen(self::$http_body_content, "utf8") ); // Comentamos esta línea porque el nuevo hostinger.es da problemas con utf8 //Hostinger se queda en blanco
+			self::set_header_line("Content-Length", (string)mb_strlen(self::$http_body_content) );
 		}
 		
 		// Enviar HEADER

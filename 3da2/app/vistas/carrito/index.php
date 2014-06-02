@@ -12,8 +12,8 @@
         <table>
             <thead>
                 <tr>
-                    <th colspan="2"><?php echo iText('Producto', 'dicc'); ?></th>
-                    <th><?php echo iText('precio', 'dicc'); ?></th>
+                    <th colspan="2" style="width:40%;"><?php echo iText('Producto', 'dicc'); ?></th>
+                    <th><?php echo iText('Precio', 'dicc'); ?></th>
                     <th>nº</th>
                     <th><?php echo ucfirst(iText('total', 'dicc')); ?></th>
                     <th><?php echo iText('acciones', 'dicc'); ?></th>
