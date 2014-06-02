@@ -10,9 +10,9 @@ class Menus{    //la clase se tiene que llamar igual que el archivo
                 subitem => "controlador,metodo,title"
 
         */
-        "Inicio" => "inicio,index,Home"
-        ,"Juegos de mesa" => 
-            "articulos,index,Juegos de mesa"
+        "inicio" => "inicio,index,inicio"
+        ,"juegos de mesa" => 
+            "articulos,index,juegos de mesa"
 //            array(
 //                "Juegos de tablero"=>"articulos,juegosTablero,Juegos de Tablero"
 //                ,"Juegos de cartas"=>"articulos,juegosCartas,Juegos de Cartas"
@@ -35,12 +35,12 @@ class Menus{    //la clase se tiene que llamar igual que el archivo
                 subitem => "controlador,metodo,clausula,title"
 
         */
-        "Inicio" => "inicio,index,Home"
-        ,"Juegos de mesa" => array(
-            "Juegos de tablero"=>"articulos,index,tablero,Juegos de Tablero"
-            ,"Juegos de cartas"=>"articulos,index,cartas,Juegos de Cartas"
+        "inicio" => "inicio,index,inicio"
+        ,"juegos de mesa" => array(
+            "juegos de tablero"=>"articulos,index,tablero,juegos de tablero"
+            ,"juegos de cartas"=>"articulos,index,cartas,juegos de cartas"
             ,"2 jugadores"=>"articulos,index,2jugadores,2 jugadores"
-            ,"Solitarios"=>"articulos,index,solitarios,Solitarios" 
+            ,"solitarios"=>"articulos,index,solitarios,solitarios" 
         )
         ,"Accesorios" => "articulos,index/accesorios,Accesorios"
         ,"Galería" => array(

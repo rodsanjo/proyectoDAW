@@ -15,11 +15,11 @@
             <input type="hidden" name="seccion" value="<?php echo isset($_REQUEST['p4']) ? $_REQUEST['p4'] : ''; ?>"/>
             <p>Ordenar por:
                 <select id='ordenar_por' name="ordenar_por" onchange="ordenar_por(<?php echo \core\URL::actual(); ?>);">
-                    <option value='nombre' selected='selected'>Nombre</option>
-                    <option value='precio' >Precio</option>
-                    <option value='precio desc' >Precio descendente</option>
+                    <option value='nombre' selected='selected'><?php echo iText('Nombre', 'dicc'); ?></option>
+                    <option value='precio' ><?php echo iText('Precio', 'dicc'); ?></option>
+                    <option value='precio desc' ><?php echo iText('Precio descendente', 'dicc'); ?></option>
                 </select>  
-                <input type="submit" value="Ordenar" title="Solo se mostrarán los <?php echo \controladores\articulos::$num_arts_por_pag; ?> primeros artículos sin diferenciar categoría"/>
+                <input type="submit" value="<?php echo iText('Ordenar', 'dicc'); ?>" title="Solo se mostrarán los <?php echo \controladores\articulos::$num_arts_por_pag; ?> primeros artículos sin diferenciar categoría"/>
             </p>       
         </form>
     </div>
@@ -48,8 +48,8 @@
                 <a href='$href' title='$title'><h3 class='titulo_art'>{$fila['nombre']}</h3></a>
                 <a href='$href' class='media_articulo'>$img</a>
                 <div class='datos_articulo'>
-                    <p>Precio: <b class='precio'>{$fila['precio']} €</b></p>                    
-                    <p>Jugadores: $rangoJug</p>
+                    <p>".iText('Precio', 'dicc').":<br/> <b class='precio'>{$fila['precio']} €</b></p>                    
+                    <p>".iText('Jugadores', 'dicc').":<br/> $rangoJug</p>
                 </div>
                 <div class='masDetalles'>
                     <a class='masDetalles' title='".iText('Leer reseña', 'frases')."'>".iText('Más detalles', 'frases')."</a>

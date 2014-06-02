@@ -45,14 +45,14 @@ namespace core {
 		// Gestión de inactividad para usuario logueados
 		public static $sesion_minutos_inactividad = 20; // num >= 0. 0 Implica sin control
 		public static $sesion_minutos_maxima_duracion = 120; // Duración máxima de una conexión. 0 Implica sin control.
+                public static $minutos_edicion_comentario = 15; //Tiempo máximo para editar un comentario desde la última edición
 
-
-		// Gestión de idiomas
+                // Gestión de idiomas
 		public static $idioma_sensibilidad = true;
 		public static $idioma_por_defecto = "es";
 		public static $idioma_seleccionado;
 		// Idiomas reconocidos en los que puede respondeer la aplicación
-		public static $idiomas_reconocidos = "es|en";
+		public static $idiomas_reconocidos = "es|en|pl";
 
 		// Formularios de login
 		public static $https_login = false;

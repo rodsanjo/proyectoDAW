@@ -61,9 +61,10 @@
             <div id='datos_articulo'>
                 <div id='datos_tecnicos'>
                     $src
-                    <p>Edad: $edad</p>
-                    <p>Jugadores: $rangoJug</p>
-                    <p>Duración: $duracion</p>
+                    <p><b>".iText('Precio', 'dicc').":<br/>{$fila['precio']} €</b></p>
+                    <p>".iText('Edad', 'dicc').":<br/>$edad</p>
+                    <p>".iText('Jugadores', 'dicc').": $rangoJug</p>
+                    <p>".iText('Duración', 'dicc').": $duracion</p>
                 </div>
                 <p>$descripcion</p>
             </div>
@@ -91,14 +92,15 @@
         ";
     }
     echo "<div id='comentarios' >
-            <h4>Comentarios:</h4>";
+            <h4>".iText('Comentarios', 'dicc').":</h4>";
             $array = $datos['comentarios'];
             if( ! count($array)){
                 echo "<center>".iText('sinComentarios', 'frases')."</center>";
             }
             $ahora = date("Y-m-d H:i:s");   // 2001-03-10 17:16:18 (el formato DATETIME de MySQL)
-            foreach ($array as $key => $comentario) {
-                if ( \core\Usuario::$login == $comentario['usuario_login'] && $comentario['fecha_ult_edicion'] > $ahora - (1/24)){
+            foreach ($array as $key => $comentario) {    
+                //print_r(strtotime($ahora).'<br/>');   //strtotime() pasa la fecha a seg
+                if ( \core\Usuario::$login == $comentario['usuario_login'] && strtotime($comentario['fecha_ult_edicion']) > strtotime($ahora) - (60* \core\Configuracion::$minutos_edicion_comentario ) ){ //Permitimos editar el comentario si es del usuario y han transcurrido menos de x minutos desde la ultima edición
                     $editar_comentario = \core\HTML_Tag::a_boton("boton", array("articulos", "form_editar_comentario", $comentario['id']), iText('Editar', 'dicc') );
                 }else{
                     $editar_comentario = "";
@@ -111,8 +113,8 @@
                 $edicion = ($comentario['num_ediciones'] > 0 ) ? '<small>'.iText('Editado', 'dicc').' '.$comentario['num_ediciones'].' '.iText('veces', 'dicc').'.</small>' : "" ;
                 echo "<div>
                         <div class='acciones_comentario'>$editar_comentario $eliminar_comentario</div>
-                        fecha: ".$comentario['fecha_comentario'].'  '.$edicion."<br/>
-                        <b>".$comentario['usuario_login']."</b> escribió:
+                        ".iText('fecha', 'dicc').": ".$comentario['fecha_comentario'].'  '.$edicion."<br/>
+                        <b>".$comentario['usuario_login']."</b> ".iText('escribió', 'dicc').":
                     </div>";
                 echo "<div id='texto_comentario'>{$comentario['comentario']}</div><br/>";
             }

@@ -1,14 +1,13 @@
 <script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/validaciones.js"></script>
 <style>
     input, textarea{
-        background: wheat;
+        background: khaki;
     }
 </style>
     
 <h1 class="titulo_seccion"><?php echo ucfirst(iText('contacto', 'dicc')); ?></h1>
-<p>Si quiere poenrse en contacto con nostros para cualquier consulta, puede hacerlo
-    a través de nuestro correo electrónico: <a href="mailto:3da2@rodsanjo.esy.es">3da2@rodsanjo.esy.es</a>
-    o bien mediante el siguiente formulario y le contestaremos lo antes posible.
+<p>
+    <?php echo ucfirst(iText('paraContactar', 'frases')); ?>
 </p>
 <form onsubmit="return validarForm();" name="formulario" action="<?php echo \core\URL::generar("contacto/enviar_mail"); ?>" method="post" enctype="multipart/form-data">
     <fieldset>

@@ -5,7 +5,7 @@
             if(!is_array($item)){
                 $item = explode(",", $item);
                 $href = \core\URL::generar("$item[0]/$item[1]");
-                $title = $item[2];
+                $title = ucfirst( iText($item[2], 'dicc') );
                 $texto = ucfirst(\core\Idioma::text($key, 'dicc'));
                 echo"
                     <li class='item' title='$title'>
@@ -20,7 +20,7 @@
                         foreach ($item as $key => $subitem) {
                             $subitem = explode (",", $subitem);
                             $href = \core\URL::generar("$subitem[0]/$subitem[1]");
-                            $title = $subitem[2];
+                            $title = ucfirst( iText($item[2], 'dicc') );
                             $texto = ucfirst(\core\Idioma::text($key, 'dicc'));
                             echo "
                                 <li class='subitem' title='$title'>

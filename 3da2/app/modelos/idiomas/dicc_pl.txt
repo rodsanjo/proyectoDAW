@@ -1,59 +1,70 @@
 key|word
 title|3da2 boardgames
-Bienvenido|Welcome
-Bienvenido a|Welcome to
-saludo1|Welcome to 3da2
-Seleccinar|Select
+Bienvenido|Witamy
+Bienvenido a|Witamy na
+saludo1|Witamy na 3da2
+Seleccinar|Wybierz
 Saludo|Greeting
-Inicio|Home
-Juegos de mesa|Boardgames
-Juegos de tablero|Table games
-Juegos de cartas|Card games
-2 jugadores|2 players
-Solitarios|Solitaire
-Accesorios|Accesories
-Galería|Galery
-Reglamentos|Rules
-Enanos|Dwarves
-Enlaces|Links
-Contacto|Contact
-Revista|Magazine
-Libros|Books
-Diseñada por|Designed by
-contacto|contact
-Fecha última actualización|Last updated date
-Idioma|Language
-Alemán|German
-Español|Spanish
-Inglés|English
-Portugués|Portuguese
-Polaco|Polish
-Contactar|Contact
-parrafo1|Welcome to my library where you can find out some fascinating books. Some of them are highly recommended reading, although it depends on the tastes of every reader to achieve an interesting reading, getting immersion in each adventure.
-Conectarse|Log in
-Desconectarse|Log out
-Registrarse|Sign up
+inicio|Strona główna
+juegos de mesa|Planszowe
+juegos de tablero|Gry planszowe
+juegos de cartas|Gry karciane
+2 jugadores|Dwóch graczy
+solitarios|solitaire
+Accesorios|Akcesoria
+Galería|Galeria
+Reglamentos|Zasady
+Enanos|Krasnoludy
+Enlaces|Linki
+Contacto|Kontakt
+Revista|Magazyn
+Libros|Książki
+Diseñada por|Zaprojektowany przez
+contacto|kontakt
+Fecha última actualización|Data ostatniej modyfikacji
+Idioma|Język
+Alemán|Niemiecki
+Español|Hiszpański
+Inglés|Angielski
+Portugués|Portugalski
+Polaco|Polski
+Contactar|Kontakt
+Conectarse|Zaloguj się
+Desconectarse|Wyloguj się
+Registrarse|Zarejestruj się
 Usuario|Login
-Contraseña|Password
-Enviar|Send
-Cancelar|Cancel
-Restablecer|Restore
-Baúl|Chest
-Baúl vacío|Empty chest
-Mostrar|Show
-Ocultar|Hide
-Artículos|Articles
-Volver|Come back
-Subir|Go up
-Artículos disponibles|Available articles
-Editar|Edit
-Editado|Edited
-Eliminar|Remove
-veces|times
-Comprar|Purchase
-Vaciar|Empty
-añadir|add
-Producto|Article
+Contraseña|Hasło
+Enviar|Wyślij
+Cancelar|Anuluj
+Restablecer|Przywróć
+Baúl|Skrzynia
+Baúl vacío|Pusta skrzynia
+Mostrar|Pokaż
+Ocultar|Ukryj
+Artículos|Artykuły
+Volver|Powróć
+Subir|Unieść się
+Artículos disponibles|Dostępne artykuły
+Editar|Edytuj
+Editado|Edytowany
+Eliminar|Usuń
+veces|czasy
+Comprar|Zakup
+Vaciar|Pusty
+añadir|dodaj
+Producto|artykuł
 total|całkowity
 acciones|accions
-precio|price
+Precio|Cena
+Buscar|Poszukiwanie
+Enlaces de interés|Przydatne linki
+Galeria de imagenes|Galeria zdjęć
+Jugadores|Graczy
+Edad|wiek
+Duración|Czas trwania
+Nombre|Nazwa
+Ordenar|klasyfikować
+Precio descendente|Cena malejąco
+Comentarios|Komentarze
+escribió|napisał
+fecha|data

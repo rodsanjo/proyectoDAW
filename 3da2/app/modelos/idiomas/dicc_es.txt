@@ -5,12 +5,12 @@ Bienvenido a|
 saludo1|Bienvenido a 3da2
 Seleccinar|
 Saludo|
-Inicio|
-Juegos de mesa|
-Juegos de tablero|
-Juegos de cartas|
+inicio|
+juegos de mesa|
+juegos de tablero|
+juegos de cartas|
 2 jugadores|
-Solitarios|
+solitarios|
 Accesorios|
 Galería|
 Reglamentos|
@@ -55,4 +55,16 @@ añadir|
 Producto|
 total|
 acciones|
-precio|
+Precio|
+Buscar|
+Enlaces de interés|
+Galeria de imagenes|
+Jugadores|
+Edad|
+Duración|
+Nombre|
+Ordenar|
+Precio descendente|
+Comentarios|
+escribió|
+fecha|

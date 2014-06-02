@@ -1,4 +1,4 @@
-<div id='cuadro_comentario' >
+<div id='cuadro_comentario' style='clear: left;'>
     <form class='<?php echo \core\Array_Datos::contenido("form_name", $datos); ?>' name='<?php echo \core\Array_Datos::contenido("form_name", $datos); ?>' method='post' action='<?php echo \core\URL::generar($datos['controlador_clase'].'/validar_'.$datos['controlador_metodo']); ?>' onsubmit='return (window.document.getElementById("comentario").innnerHTML.length>0)'>
         
         <!--//Dos formas dependiendo si usamos articulo_id o articulo_nombre como FK-->

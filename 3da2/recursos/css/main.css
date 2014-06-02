@@ -86,7 +86,12 @@ h2>i{
 }
 
 .precio{
-    color:green;
+    color:green;  
+}
+.precio_detalle{
+    float:right;
+    padding-right:45px;
+    font: 900;
 }
 
 #view_content{
@@ -189,7 +194,7 @@ h2>i{
 }
 
 #comentario{
-    clear:both;
+    clear: left;
 }
 
 /* CARRITO */
@@ -202,7 +207,7 @@ h2>i{
 }
 #carrito_oculto{
     font-size: 80%;
-    display: block;
+    display: none;
 }
 .car_nxart{
     color: green;
@@ -321,7 +326,7 @@ h2>i{
 .juego_index:hover{
     width: 48%;
     float: left;
-    background: wheat;
+    background: khaki;
     border-radius: 10px;
     margin: -0px;
     margin-bottom: 10px;
@@ -387,14 +392,14 @@ div.juego_index + div.juego_index{
 /* articulos/index : comentario */
 
 #cuadro_comentario{
-    clear: both;
+    clear: left;
     background: khaki;
     margin-top:10px;
     padding: 10px;
     border-radius: 20px 20px 0 0;
 }
 #comentarios{
-    clear: both;
+    clear: left;
     background: gainsboro;
     padding: 1px 10px 10px 10px;
     border-radius: 0px 0px 30px 30px;

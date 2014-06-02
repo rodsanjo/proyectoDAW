@@ -5,12 +5,12 @@ Bienvenido a|Welcome to
 saludo1|Welcome to 3da2
 Seleccinar|Select
 Saludo|Greeting
-Inicio|Home
-Juegos de mesa|Boardgames
-Juegos de tablero|Table games
-Juegos de cartas|Card games
+inicio|home
+juegos de mesa|boardgames
+juegos de tablero|table games
+juegos de cartas|card games
 2 jugadores|2 players
-Solitarios|Solitaire
+solitarios|solitaire
 Accesorios|Accesories
 Galería|Galery
 Reglamentos|Rules
@@ -55,4 +55,16 @@ añadir|add
 Producto|Article
 total|
 acciones|actions
-precio|price
+Precio|Price
+Buscar|Search
+Enlaces de interés|useful links
+Galeria de imagenes|Image Gallery
+Jugadores|Players
+Edad|Age
+Duración|Duration
+Nombre|Name
+Ordenar|Sort
+Precio descendente|Descending price
+Comentarios|Comments
+escribió|wrote
+fecha|date

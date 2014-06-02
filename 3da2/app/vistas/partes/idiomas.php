@@ -13,7 +13,7 @@
         
         //Para que lleve al inicio
         $url = \core\URL::generar_sin_idioma("inicio");
-        
+        //Para que nos lleve a la misma ubicación donde nos encontramos:
         $url = URL_ROOT_URI;
         //Debemos reemplazar el idioma de la URI, el actual por el nuevo. Ej /es/ por /en/
         $url = str_replace( '/'.\core\Idioma::get().'/', '/'.$lang.'/', $url);

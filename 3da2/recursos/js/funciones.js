@@ -29,11 +29,6 @@ $(document).ready(function(){
             $("span.desplegable").slideToggle();
         }               
     );
-    $("li#recetas").click(
-        function () { 			 	
-            $("span#opcion_rec").slideToggle();
-        }                
-    );
         //Desplegar el carrito lateral
     $("#btn_desplegar_carrito").click(
         function(){

@@ -4,7 +4,7 @@ function validarLogin(){
         //alert(valor);
 	var patron=/^[a-z]{1}[a-z\d]{3,}$/i;
 	if(!patron.test(valor)){
-		document.getElementById("error_login").innerHTML="Debe empezar por letra y tener al menos 4 caracteres, admitiendose letras y números, pero no la ñ";
+		document.getElementById("error_login").innerHTML="Debe empezar por letra y tener al menos 4 caracteres, admitiendose números y letras, excepto la ñ";
 		document.getElementById("login").style.color = "red";
 		//document.getElementById("login").value="";
 		document.getElementById("login").focus();

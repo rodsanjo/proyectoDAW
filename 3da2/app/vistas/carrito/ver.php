@@ -1,4 +1,4 @@
-<div id='carrito_detalles' >    
+<div>    
     <?php
         $articulos = $datos["carrito"]->get_articulos();
     //var_dump($articulos);
