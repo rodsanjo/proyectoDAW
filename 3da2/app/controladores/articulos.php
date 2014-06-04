@@ -9,7 +9,8 @@ class articulos extends \core\Controlador{
     public static $num_arts_por_pag = 6;
     
     /**
-     * Presenta una <table> con las filas de la tabla con igual nombre que la clase.
+     * Presenta la lista de articulos disponibles en función de la categoria o de la busqueda seleccionada mediante el parametro $_REQUEST['p3'].
+     * @author Jorge
      * @param array $datos
      */
     public function index(array $datos=array()) {
@@ -408,7 +409,18 @@ class articulos extends \core\Controlador{
                 if ( ! $validacion = \modelos\Datos_SQL::table(self::$tabla)->insert($datos["values"])) // Devuelve true o false
                     $datos["errores"]["errores_validacion"]="No se han podido grabar los datos en la bd.";
                 else {
+                    //Como insertamos un nuevo articulo es necesario extraer el id antes de persistir en la base de datos las ficheros multimedia
+                    $sql = 'select(last_insert_id())';
+                    $last_insert_id = \core\Modelo_SQL::execute($sql);
+                    //var_dump($last_insert_id[0]['(last_insert_id())']);
+                    $last_insert_id = $last_insert_id[0]['(last_insert_id())'];
+                    $tabla = \core\Modelo_SQL::get_prefix_tabla(self::$tabla);
+                    $sql = 'select * from '.$tabla.' where id = '.$last_insert_id;
+                    $consulta = \core\Modelo_SQL::execute($sql);
+                    $datos["values"]['id'] = $consulta[0]['id'];
+                    //var_dump($consulta);
                     //var_dump($datos);
+                    //A continuacion con el id ya conseguido procedemos a grabar en la base de datos la imagen y el manual del articulo
                     self::mover_files($datos);
                 }
             }

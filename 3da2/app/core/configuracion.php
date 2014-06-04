@@ -21,7 +21,7 @@ namespace core {
 		// Usar sesiones de trabajo (activar array $_SESSION)
 		public static $session_name = "SESSID_3DA2";
 		public static $session_activate = false;
-		public static $session_lifetime = 0; // Segundos de duración de la cookie de sessionsession.cookie_lifetime
+		public static $session_lifetime = 1200; // 60*20, Segundos de duración de la cookie de sessionsession.cookie_lifetime
 		public static $session_cookie_path = "/";
 		public static $session_cookie_domain = "";
 		public static $session_cookie_secure = false;

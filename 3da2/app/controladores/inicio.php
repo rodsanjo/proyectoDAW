@@ -5,8 +5,7 @@ class inicio extends \core\Controlador {
 	
 	public function index(array $datos = array()) {
             
-            // Aprovechamos para borrar en la base de datos los carritos de hace más de
-            // 3 dias.
+            // Aprovechamos para borrar en la base de datos los carritos de hace más de 3 dias.
             $where = "timestampdiff(minute, fechaHoraInicio, now()) > 3*24*60*60";
             \modelos\Modelo_SQL::table("carritos")->delete(null, null, $where);
             

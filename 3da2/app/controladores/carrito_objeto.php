@@ -148,7 +148,9 @@ abstract class carrito_objeto extends \core\Controlador implements \controladore
 	
 	
 	public function comprar(array $datos = array()) {
-		
+            $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos, true);
+            $http_body = \core\Vista_Plantilla::generar('plantilla_principal',$datos);
+            \core\HTTP_Respuesta::enviar($http_body);
 	}
 	
 	

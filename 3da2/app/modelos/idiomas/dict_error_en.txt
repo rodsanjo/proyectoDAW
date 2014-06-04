@@ -7,7 +7,7 @@ int_pos|It contains invalid characters. Only unsigned positive numbers are allow
 texto|It must be a string with at least one character.
 identificador|It contains invalid characters. Only letters, numbers and _ are allowed, and it can not begin with numbers.
 entero_positivo|There are characters invalid. Only unsigned positive numbers are allowed.
-precio|Error: The number can be written with thousands separator and decimal comma (,) and two decimal as maximum.
+precio|Error: The number must be written with thousands separator and decimal comma (,) and two decimal as maximum.
 decimal|Error: The number must be written using the "." or "," as decimal separator and without thousands separator
 fecha|The date format is wrong. Type it in dd-mm-yyyy or dd/mm/yyyy, please.
 unicidad_parte1|The selected datum 

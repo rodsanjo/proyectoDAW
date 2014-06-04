@@ -1,4 +1,4 @@
-<h2 class="titulo_seccion">Reglamentos de juego disponibles:</h2>
+<h2 class="titulo_seccion"><?php echo iText('Reglamentos de juego disponibles', 'frases'); ?>:</h2>
 <ul>
 <?php
     
