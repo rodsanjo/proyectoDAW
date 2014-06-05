@@ -61,8 +61,8 @@
             <div id='datos_articulo'>
                 <div id='datos_tecnicos'>
                     $src
-                    <p><b>".iText('Precio', 'dicc').":<br/>{$fila['precio']} €</b></p>
-                    <p>".iText('Edad', 'dicc').":<br/>$edad</p>
+                    <p><b>".iText('Precio', 'dicc').": {$fila['precio']} €</b></p>
+                    <p>".iText('Edad', 'dicc').": $edad</p>
                     <p>".iText('Jugadores', 'dicc').": $rangoJug</p>
                     <p>".iText('Duración', 'dicc').": $duracion</p>
                 </div>

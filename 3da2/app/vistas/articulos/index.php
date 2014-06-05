@@ -10,16 +10,22 @@
 <div>
     <div>
         <h2 id="titulo_seccion" class="titulo_seccion"><?php echo iText('Artículos disponibles', 'dicc'); ?>:</h2>
-        <form method='post' action='<?php echo \core\URL::generar("articulos/index"); ?>'>
-            <input type="hidden" name="categoria" value="<?php echo isset($_REQUEST['p3']) ? $_REQUEST['p3'] : ''; ?>"/>
-            <input type="hidden" name="seccion" value="<?php echo isset($_REQUEST['p4']) ? $_REQUEST['p4'] : ''; ?>"/>
+        
+        <?php
+            $categoria = isset($_REQUEST['p3']) ? $_REQUEST['p3'] : '';
+            $seccion = isset($_REQUEST['p4']) ? $_REQUEST['p4'] : '';
+        ?>
+        <form method='post' action='<?php echo \core\URL::generar("articulos/index/".$categoria.'/'.$seccion); ?>'>
             <p>Ordenar por:
                 <select id='ordenar_por' name="ordenar_por" onchange="ordenar_por(<?php echo \core\URL::actual(); ?>);">
-                    <option value='nombre' selected='selected'><?php echo iText('Nombre', 'dicc'); ?></option>
+                    <option value='nombre' ><?php echo iText('Nombre', 'dicc'); ?></option>
                     <option value='precio' ><?php echo iText('Precio', 'dicc'); ?></option>
                     <option value='precio desc' ><?php echo iText('Precio descendente', 'dicc'); ?></option>
+                    <option value='num_min_jug' >nº jugadores min</option>
+                    <option value='num_max_jug desc' >nº jugadores max</option>
+                    <option value='anho desc' selected='selected'>Últimas novedades</option>
                 </select>  
-                <input type="submit" value="<?php echo iText('Ordenar', 'dicc'); ?>" title="Solo se mostrarán los <?php echo \controladores\articulos::$num_arts_por_pag; ?> primeros artículos sin diferenciar categoría"/>
+                <input type="submit" value="<?php echo iText('Ordenar', 'dicc'); ?>" title="Solo se mostrarán los <?php echo 2*\controladores\articulos::$num_arts_por_pag; ?> primeros artículos"/>
             </p>       
         </form>
     </div>
@@ -45,7 +51,9 @@
         $href = \core\URL::generar(array('articulos','juego',$fila['id'], $articulo_nombre));
         $title = ((isset($fila['resenha']) and strlen($fila['resenha'])) ? $fila['resenha'] : $fila['nombre']); 
         echo "<div class='juego_index'>
-                <a href='$href' title='$title'><h3 class='titulo_art'>{$fila['nombre']}</h3></a>
+                <a href='$href' title='$title'>
+                    <h3 class='titulo_art'>{$fila['nombre']}</h3>
+                </a>
                 <a href='$href' class='media_articulo'>$img</a>
                 <div class='datos_articulo'>
                     <p>".iText('Precio', 'dicc').":<br/> <b class='precio'>{$fila['precio']} €</b></p>                    
@@ -128,6 +136,9 @@
     </div>
     
     <div class="flechas_cambio_pagina">
+    <?php
+        if( ! isset($_POST['ordenar_por'])){
+    ?>
         <a class='boton_flecha_izq' href='<?php echo $href1 ?>' title="primero">   <<   </a>
         <a class='boton_flecha_izq' href='<?php echo $href2 ?>' title="anterior">  <  </a>
         <?php echo iText('Artículos', 'dicc'); ?>
@@ -135,8 +146,7 @@
         <a class='boton_flecha_der' href='<?php echo $href4 ?>' title="último">   >>   </a>
 
         <!--<span title="total"><?php //echo $num_total_juegos; ?></span>-->
-
-        <br/>
+    <?php } ?>
         <a class='boton' style="text-align: right;" href='#titulo_seccion' ><?php echo iText('Subir', 'dicc'); ?></a><br/>
     </div>
 </div>

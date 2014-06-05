@@ -41,7 +41,12 @@ class articulos extends \core\Controlador{
         
         //Ordenamos por lo que venga en $_REQUEST['ordenar_por']  mejorar No funciona al pasar a otra seccion
         $order_by = isset($_REQUEST['ordenar_por'])?$_REQUEST['ordenar_por']:'nombre';
-        $order_by = isset($_REQUEST['p5'])?$_REQUEST['p5']:$order_by;
+        
+        if(isset($_REQUEST['ordenar_por']) && $_REQUEST['ordenar_por'] != null){ //Aqui entrará al realizar una ordenación y en este caso mostraremos el doble de artículos evitando que aparezcan las flechas inferiores para avanzar de sección en la vista/articulos/index.php
+            $order_by = $_REQUEST['ordenar_por'];
+            self::$num_arts_por_pag *= 2;
+        }
+        //$order_by = isset($_REQUEST['p5'])?$_REQUEST['p5']:$order_by;
         $clausulas['order_by'] = $order_by;
         /*
         if(isset($_REQUEST['ordenar_por']) && $_REQUEST['ordenar_por'] != null){
@@ -67,6 +72,10 @@ class articulos extends \core\Controlador{
         self::convertir_formato_mysql_a_ususario($datos['filas']);
 
         //var_dump($datos);
+        
+        if(isset($_REQUEST['ordenar_por']) && $_REQUEST['ordenar_por'] != null){ //Devolvemos el valor original en caso de hacer una ordenación para no afectar al atributo 'title' de la etiqueta 'input' de 'ordenar por' en la vista
+            self::$num_arts_por_pag /= 2;
+        }
         
         $datos['view_content'] = \core\Vista::generar(__FUNCTION__, $datos);
         $datos["carrito"] = $this->incluir("carrito", "ver");
@@ -207,7 +216,6 @@ class articulos extends \core\Controlador{
      * Muestra el formulario para editar un comentario
      * @author Jorge Rodriguez <jergo23@gmail.com>
      * @param array $datos
-     * @return type
      */
     public function form_editar_comentario(array $datos=array()) {
         
@@ -390,7 +398,7 @@ class articulos extends \core\Controlador{
     }
     
     /**
-     * Valida los datos insertados por el usuario. Si estos son correctos mostrará la tabla con 
+     * Valida los datos insertados por el usuario. Si estos son correctos mostrará la lista de articulos con 
      * la nueva inserción, sino mostrará los errores por los que nos se admitió los datos introducidos.
      * @param array $datos
      */
@@ -451,7 +459,10 @@ class articulos extends \core\Controlador{
     }
 
 
-
+    /**
+     * Recoge el artículo a modificar de la BD y presenta un formulario con los datos actuales del artículo a modificar
+     * @param array $datos
+     */
     public function form_modificar(array $datos = array()) {
 
         $datos["form_name"] = __FUNCTION__;
@@ -492,7 +503,11 @@ class articulos extends \core\Controlador{
         \core\HTTP_Respuesta::enviar($http_body);
     }
 
-
+    /**
+     * Valida los datos insertados por el usuario al realizar una modificación. Si estos son correctos mostrará la lista de articulos con 
+     * la nueva inserción, sino mostrará los errores por los que nos se admitió los datos introducidos.
+     * @param array $datos
+     */
     public function validar_form_modificar(array $datos=array()) {
         
         //self::request_come_by_post();
@@ -570,11 +585,7 @@ class articulos extends \core\Controlador{
         \core\HTTP_Respuesta::enviar($http_body);
     }
 
-
-
-
-
-
+    
     public function validar_form_borrar(array $datos=array()) {	
         
         self::request_come_by_post();
@@ -608,12 +619,16 @@ class articulos extends \core\Controlador{
      * Fución que realiza las conversiones de los campos usados en está aplicación al formato utilizado por MySQL.
      * Convertimos a formato MySQL
      * @author Jorge Rodriguez Sanz
-     * @param array $param Se corresponderá por regla general con datos['values'] y lo pasamos por referencia, para que modificque el valor
+     * @param array $param Se corresponderá por regla general con datos['values'] y lo pasamos por referencia, para que modifique el valor
      */
-    private static function convertir_a_formato_mysql(array &$param) {  //$param = datos['values'] y lo pasamos por referencia, para que modificque el valor        
+    private static function convertir_a_formato_mysql(array &$param) {  //$param = datos['values'] y lo pasamos por referencia, para que modifique el valor        
         $param['precio'] = \core\Conversiones::decimal_puntoOcoma_a_punto($param['precio']);
     }
-    
+    /**
+     * Comprueba que los ficheros que el usuario intenta subir a la aplicación cumple con los requerimietnos exigidos.
+     * @param array $datos
+     * @return boolean
+     */
     private static function comprobar_files(array &$datos){
         $validacion = true;
         if ($_FILES["foto"]["size"]) {
@@ -847,8 +862,8 @@ class articulos extends \core\Controlador{
 
     /**
      * Guarda un archivo jpg en nuestros recursos en función del id del artículo
-     * @param type $id
-     * @return type
+     * @param $id
+     * @return nombre del archivo o false
      */
     private static function mover_foto($id) {
 
@@ -869,9 +884,9 @@ class articulos extends \core\Controlador{
     
      /**
      * Guarda un archivo pdf en nuestros recursos en función del id del artículo
-     * @param type $id
-     * @param type $articulo_nombre = null
-     * @return type
+     * @param  $id
+     * @param  $articulo_nombre = null
+     * @return nombre del archivo o false
      */
     private static function mover_manual($id, $articulo_nombre = null) {
 
@@ -916,7 +931,7 @@ class articulos extends \core\Controlador{
 
     /**
      * Elimina una foto de la ruta recursos/imagenes/articulos
-     * @param type $foto
+     * @param string $foto
      * @return null
      */
     private static function borrar_foto($foto) {
@@ -933,8 +948,8 @@ class articulos extends \core\Controlador{
     }
     
     /**
-     * 
-     * @param type $manual
+     * Elimina un archivo pdf de la ruta recursos/ficheros/manuales
+     * @param string $manual
      * @return null
      */
     private static function borrar_manual($manual) {
