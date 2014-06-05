@@ -827,6 +827,10 @@ class articulos extends \core\Controlador{
 
     }
     
+    /**
+     * Función que a través del id de un artículo guarda en la BD la referencia de los archivos multimedia del mismo que serán guardados en los recusros de la aplicación.  
+     * @param array $datos
+     */
     private static function mover_files(array $datos){
         $id = $datos["values"]['id'];
         if ($_FILES["foto"]["size"]) {
@@ -841,6 +845,11 @@ class articulos extends \core\Controlador{
         }
     }
 
+    /**
+     * Guarda un archivo jpg en nuestros recursos en función del id del artículo
+     * @param type $id
+     * @return type
+     */
     private static function mover_foto($id) {
 
         // Ahora hay que añadir la foto
@@ -859,7 +868,7 @@ class articulos extends \core\Controlador{
     }
     
      /**
-     * Guarda un archivo pdf en nuestros recursos
+     * Guarda un archivo pdf en nuestros recursos en función del id del artículo
      * @param type $id
      * @param type $articulo_nombre = null
      * @return type

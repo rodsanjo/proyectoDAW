@@ -1,0 +1,14 @@
+key|text
+mensajeGlobal|Proszę, popraw błędy wskazane.
+notnull|To pole jest obowiązkowe, nie może pozostać puste.
+prohibido_punto_y_coma|Nie można użyć ";".
+numero|
+int_pos|Zawiera niedozwolone znaki. Dozwolone są tylko niepodpisane pozytywne numery.
+texto|Musi to być sznur z co najmniej jednego znaku.
+identificador|Zawiera niedozwolone znaki. Tylko litery, cyfry i _ są dozwolone, i nie może się rozpocząć z liczbami.
+entero_positivo|Istnieją znaki nieprawidłowe. Dozwolone są tylko niepodpisane pozytywne numery.
+precio|Błąd: liczba musi być napisana z separatorem tysięcy i przecinek dziesiętny (,) i dwa miejsca po przecinku, jako maksimum.
+decimal|Błąd: numer musi być zapisany za pomocą "." lub "," jako separator dziesiętny i bez separatora tysięcy
+fecha|Format daty jest nie tak. Wpisz go w dd-mm-rrrr lub dd / mm / rrrr, proszę.
+unicidad_parte1|Wybrany punkt odniesienia
+unicidad_parte2|już istnieje w naszej bazie danych. Napisz kolejny zmierzających proszę.

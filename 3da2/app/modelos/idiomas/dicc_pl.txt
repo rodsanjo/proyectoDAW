@@ -6,7 +6,7 @@ saludo1|Witamy na 3da2
 Seleccinar|Wybierz
 Saludo|Greeting
 inicio|Strona główna
-juegos de mesa|Planszowe
+juegos de mesa| Gry planszowe
 juegos de tablero|Gry planszowe
 juegos de cartas|Gry karciane
 2 jugadores|Dwóch graczy
@@ -59,7 +59,7 @@ Precio|Cena
 Buscar|Poszukiwanie
 Enlaces de interés|Przydatne linki
 Galeria de imagenes|Galeria zdjęć
-Jugadores|Graczy
+Jugadores|Liczba graczy
 Edad|wiek
 Duración|Czas trwania
 Nombre|Nazwa

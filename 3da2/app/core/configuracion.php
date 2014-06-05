@@ -76,7 +76,7 @@ namespace core {
 			'prefix_'  => '3da2_'
 		);
 
-		// hostinger: rodsanjo.esy.es
+		// Hostinger
 //                public static $db = array(
 //                        'server'   => 'mysql.hostinger.es',
 //                        'user'     => 'u513745123_3da2',
@@ -85,7 +85,7 @@ namespace core {
 //                        'prefix_'  => '3da2_'
 //                );
                 
-                  // hostinger: rodsanjo.url.ph
+                  // Hostinger2
 //                public static $db = array(
 //                        'server'   => 'mysql.hostinger.es',
 //                        'user'     => 'u907916144_3da2',
