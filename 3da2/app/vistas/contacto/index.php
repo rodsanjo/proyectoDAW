@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/validaciones.js"></script>
+<script type="text/javascript" src="<?php echo URL_ROOT ?>recursos/js/validaciones/val_contacto.js"></script>
 <style>
     input, textarea{
         background: khaki;

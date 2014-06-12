@@ -21,9 +21,9 @@
                     <option value='nombre' ><?php echo iText('Nombre', 'dicc'); ?></option>
                     <option value='precio' ><?php echo iText('Precio', 'dicc'); ?></option>
                     <option value='precio desc' ><?php echo iText('Precio descendente', 'dicc'); ?></option>
-                    <option value='num_min_jug' >nº jugadores min</option>
-                    <option value='num_max_jug desc' >nº jugadores max</option>
-                    <option value='anho desc' selected='selected'>Últimas novedades</option>
+                    <option value='num_min_jug' ><?php echo iText('nº jugadores min', 'frases'); ?></option>
+                    <option value='num_max_jug desc' ><?php echo iText('nº jugadores max', 'frases'); ?></option>
+                    <option value='anho desc' selected='selected'><?php echo iText('Últimas novedades', 'frases'); ?></option>
                 </select>  
                 <input type="submit" value="<?php echo iText('Ordenar', 'dicc'); ?>" title="Solo se mostrarán los <?php echo 2*\controladores\articulos::$num_arts_por_pag; ?> primeros artículos"/>
             </p>       
@@ -115,7 +115,7 @@
     $num_total_juegos = $datos["num_total_juegos"][0]['num_total_juegos'];
     $ult_grupo = floor($num_total_juegos/\controladores\articulos::$num_arts_por_pag);
     //var_dump($num_total_juegos);
-    if($ult_grupo > 1 && $num_total_juegos%\controladores\articulos::$num_arts_por_pag == 0){    //Evto el cero por indeterminación y el 1 por ser primo
+    if($ult_grupo > 1 && $num_total_juegos%\controladores\articulos::$num_arts_por_pag == 0){    //Evito el cero por indeterminación y el 1 por ser primo
         $ult_grupo--; 
     }elseif($ult_grupo == 1 && $num_total_juegos == \controladores\articulos::$num_arts_por_pag){    //Evita el 1
         $ult_grupo = 0;
@@ -145,8 +145,9 @@
         <a class='boton_flecha_der' href='<?php echo $href3 ?>' title="siguiente">  >  </a>
         <a class='boton_flecha_der' href='<?php echo $href4 ?>' title="último">   >>   </a>
 
-        <!--<span title="total"><?php //echo $num_total_juegos; ?></span>-->
+        <div title="total"><small>Total: <?php echo $num_total_juegos; ?></small></div>
     <?php } ?>
+        <br/>
         <a class='boton' style="text-align: right;" href='#titulo_seccion' ><?php echo iText('Subir', 'dicc'); ?></a><br/>
     </div>
 </div>

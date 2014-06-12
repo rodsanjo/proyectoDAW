@@ -98,14 +98,14 @@ class download extends \core\Controlador {
         
         /**
          * Funcion que da el nombre del articulo a la descarga
-         * @author Jorge
+         * @author Jorge Rodríguez
          * @param type $fichero
          * @return string
          */
         private static function nombrar_descarga_manual($fichero){
             $sql = 'select * from '.\core\sgbd\mysqli::get_prefix_tabla("articulos").' where manual = "'.$fichero.'"';
             $fila = \core\sgbd\mysqli::execute($sql);
-            //var_dump($fila[0]);   //Al descomentar el var_dump da fallo ladescarga.
+            //var_dump($fila[0]);   //Al descomentar el var_dump da fallo la descarga.
             $nombre_descarga = str_replace(" ", "-", $fila[0]['nombre']).'_reglamento.pdf';
             return $nombre_descarga;
         }

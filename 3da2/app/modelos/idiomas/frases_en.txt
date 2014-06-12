@@ -17,3 +17,10 @@ parrafo1|If you love the games, it is your ideal web site. Here you will find a 
 Reglamentos de juegos de mesa|Rules of boardgames
 Reglamentos de juego disponibles|Rules of boardgames available
 paraContactar|If you want to contact with us for any query, you can contact us by our email: <a href="mailto:3da2@rodsanjo.esy.es"> 3da2@rodsanjo.esy.es </a> or by the form below and we will reply as soon as possible.
+totalDescargas|Number of downloads
+Reglamento de|Rules about
+Enanos de Breslavia|Breslau's dwarves
+Últimas novedades|Latest news
+nº jugadores min|minimum number players 
+nº jugadores max|maximum number players
+Enanos encontrados en Breslavia|Found dwarves in Breslau

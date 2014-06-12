@@ -14,7 +14,7 @@ solitarios|solitaire
 Accesorios|Akcesoria
 Galería|Galeria
 Reglamentos|Zasady
-Enanos|Krasnoludy
+Enanos|Krasnale
 Enlaces|Linki
 Contacto|Kontakt
 Revista|Magazyn

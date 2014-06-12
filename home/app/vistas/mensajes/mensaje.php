@@ -1,7 +1,7 @@
-<div id='mensaje'><br/><br/>
+<div class='mensaje'><br/><br/>
 <?php
 	if (isset($datos['mensaje'])) {
-		echo "<div class='mensaje'><p>{$datos['mensaje']}</p></div>";
+		echo "<p>{$datos['mensaje']}</div>";
 	}
 	elseif (isset($_SESSION["mensaje"])) {
 		echo "<p>{$_SESSION["mensaje"]}</p>";

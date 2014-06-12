@@ -5,7 +5,7 @@
             <a href="<?php echo \core\URL::generar("galeria/carpeta/manuales"); ?>"><?php echo iText('Reglamentos de juegos de mesa', 'frases'); ?></a>
         </li>
         <li>
-            <a href="<?php echo \core\URL::generar("galeria/carpeta/krasnale"); ?>">Krasnale de Wroclaw</a>
+            <a href="<?php echo \core\URL::generar("galeria/carpeta/krasnale"); ?>"><?php echo iText('Enanos de Breslavia', 'frases'); ?></a>
         </li>
     </ul>
 </div>

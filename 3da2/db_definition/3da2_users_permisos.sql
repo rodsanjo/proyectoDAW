@@ -365,9 +365,12 @@ insert into 3da2_menu
 , (5 , null	, 1	, null	, 'Usuarios', 'usuarios', 'index', null)
 , (6 , null	, 1	, null	, 'Contacto', 'contacto', 'index', null)
 , (7 , null	, 1	, null	, 'Enlaces', 'enlaces', null, null)
-, (8 , 2	, 2	, null	, 'Juegos de Tablero', 'articulos', 'tablero', null)
-, (9 , 2	, 2	, null	, 'Juegos de cartas', 'articulos', 'cartas', null)
-, (10 , 2	, 2	, null	, '2 jugadores', 'articulos', '2jugadores', null)
+, (8 , 2	, 2	, null	, 'Juegos de Tablero', 'articulos', 'index', null)
+, (9 , 2	, 2	, null	, 'Juegos de cartas', 'articulos', 'index', null)
+, (10 , 2	, 2	, null	, '2 jugadores', 'articulos', 'index', null)
+, (10 , 2	, 2	, null	, 'Solitarios', 'articulos', 'index', null)
+, (10 , 4	, 2	, null	, 'Reglamentos', 'galeria', 'carpeta', null)
+, (10 , 4	, 2	, null	, 'Enanos', 'galeria', 'carpeta', null)
 ;
 
 

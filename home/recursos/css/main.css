@@ -55,8 +55,11 @@ img {
     border-radius: 0px 0px 20px 20px;
 }
 #idioma img{
+    width:30px;  
+}
+#idioma a{
     width:30px;
-   
+   display: none;
 }
 
 #pie{

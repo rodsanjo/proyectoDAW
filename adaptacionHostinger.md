@@ -12,9 +12,10 @@
             <script type='text/javascript' src="<?php echo URL_APPLICATION_ROOT."recursos/js/carrito/carrito_localhost.js"; ?>" ></script>
         por:     
             <script type='text/javascript' src="<?php echo URL_APPLICATION_ROOT."recursos/js/carrito/carrito.js"; ?>" ></script>
+            Es decir, borrar "_localhost"
     3.Si no funciona ajax:
         /public_html/3da2/app/vistas/articulos/index.php
-            Reemplazar la linea 62 aprox. por el código de la linea 59 (comentada):
+            Reemplazar la linea 70 aprox. por el código de la linea 67 (comentada):
                 <form id='form_carrito' name='form_carrito' method='post' action='".\core\URL::generar('carrito/meter')."' >
             en lugar de: 
                 <form method='post' onsubmit='carrito_meter(this, event); return(false);'  >

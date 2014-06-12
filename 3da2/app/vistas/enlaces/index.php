@@ -4,14 +4,16 @@
         echo \core\HTML_Tag::a_boton("boton", array("enlaces", "form_anexar"), "Incluir un nuevo enlace");
     ?>
     <dl> 
-        <?php          
+        <?php
             foreach ( $datos['enlaces'] as $id => $enlace ) {
                 $patron = '/http:\/\//';
                 if(! preg_match($patron, $enlace['url'])){
                     $enlace['url'] = 'http://'.$enlace['url'];
                 }
                 echo "<dt>
-                        <a href='{$enlace['url']}' target='on_blank'>{$enlace['titulo']}</a>
+                        <a href='{$enlace['url']}' target='on_blank' title='{$enlace['descripcion']}'>
+                            {$enlace['titulo']}
+                        </a>
                     </dt>
                     <dd>{$enlace['descripcion']}</dd>
                     <center>
@@ -21,7 +23,7 @@
                     </center>
                     ";
             }
-        ?>  
+        ?>
     </dl>
     <center>
         <?php

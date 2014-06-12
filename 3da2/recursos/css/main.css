@@ -9,7 +9,6 @@ a:link { text-decoration:none; margin-top:0px;}
 
 body{
 	margin-top: 20px;
-	margin-bottom: 20px;
         background-image: url("../../recursos/imagenes/fondo2.jpg");
         background-size: 100%;
 }
@@ -29,9 +28,8 @@ h2>i{
 }
 
 #mensaje{
-
+    width: 560px;
 }
-
 .mensaje{
     text-align: center;
     width: 560px;
@@ -61,23 +59,15 @@ h2>i{
 	text-align:center;
 	background: /*wheat*/rgba(200,200,15,0.5);
 }
+#pie{
+    background: rgba(200,200,15,0.5);
+    padding: 10px;
+    margin-top: 10px;
+}
 
 #central_head{
     float: right;
 }
-
-#idioma{
-    font-family: sans-serif, arial, verdana;
-}
-#idioma img{
-    width:30px;
-   
-}
-#idioma a{
-    width:30px;
-   display: none;
-}
-
 
 #sendero_migas_pan{
     float: left;

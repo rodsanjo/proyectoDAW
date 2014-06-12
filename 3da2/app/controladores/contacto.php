@@ -9,7 +9,11 @@ class contacto extends \core\Controlador {
         $http_body = \core\Vista_Plantilla::generar('plantilla_principal',$datos);
         \core\HTTP_Respuesta::enviar($http_body);
     }
-
+    
+    /**
+     * Función que envía un correo electrónico
+     * @param array $datos
+     */
     public function enviar_mail(array $datos = array()) {
 
         $validacion_catcha = true; // Iniciamos la variable.

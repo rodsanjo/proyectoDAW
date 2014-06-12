@@ -393,10 +393,12 @@ class usuarios extends \core\Controlador {
 	}
 	
 	
-	
+	/**
+         * Función que valida el cambio de password de un usuario
+         * @param array $datos
+         */
 	public function form_cambiar_password_validar(array $datos = array()) {
-		
-            
+           
             //Comprobación de la contraseña anterior
             $clausulas['where'] = "login = '".\core\Usuario::$login."'";
             $datos["filas"] = \modelos\Modelo_SQL::tabla(self::$tabla_users)->select($clausulas);
