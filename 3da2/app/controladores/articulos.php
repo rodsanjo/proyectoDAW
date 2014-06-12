@@ -86,7 +86,7 @@ class articulos extends \core\Controlador{
     }
     
     /**
-     * Presenta solo los juegos de tablero
+     * Presenta un solo los juegos de tablero
      * @param array $datos
      */
     public function juego(array $datos=array()) {
