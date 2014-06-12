@@ -49,7 +49,7 @@ class contacto extends \core\Controlador {
             $login = \core\Usuario::$login;
             if($login != 'anonimo'){
                 $tabla_users = \core\Modelo_SQL::get_prefix_tabla('usuarios');
-                $sql = 'select * from '.$tabla.'where login = "'.$login.'"';
+                $sql = 'select * from '.$tabla_users.' where login = "'.$login.'"';
                 $email_BD = \core\Modelo_SQL::execute($sql);
                 $email_BD = $email_BD[0]['email'];
             }else{
@@ -61,6 +61,7 @@ class contacto extends \core\Controlador {
 <title>$subject</title>
 </head>
 <body>
+<div style='text-align:left;'>
 <h4>Mensaje de:</h4>
 <ul>
     <li>Nombre: $nombre</li>
@@ -70,6 +71,7 @@ class contacto extends \core\Controlador {
 </ul>
 <h4><span style='text-decoration:underline;'/>Asunto:</span> $subject</h4>
 <p>$mensaje</p>
+</div>
 </body>
 </html>";
             $additional_headers = "From: ".  \core\Configuracion::$email_noreply . "\r\n";
