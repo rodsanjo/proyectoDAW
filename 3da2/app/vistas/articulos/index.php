@@ -1,8 +1,23 @@
 <script type="text/javascript">
-    function ordenar_por(url){
-        tipo_ordenacion = document.getElementById(ordenar_por).innerHTML;
+    function ordenar_por(orden){
+        tipo_ordenacion = document.getElementById('ordenar_por').innerHTML;
         alert(tipo_ordenacion);
         return url += tipo_ordenacion;
+    }
+    var ordenacion = [
+        { "name" : "Nombre" , "order_by" : "nombre" }, 
+        { "name" : "Precio" , "order_by" : "precio" }, 
+        { "name" : "Precio descendente" , "order_by" : "precio desc" },
+        { "name" : "nº jugadores min" , "order_by" : "num_min_jug" }, 
+        { "name" : "nº jugadores max" , "order_by" : "num_max_jug desc" }, 
+    ];
+    for(i=0; i<ordenacion.length ;i++){
+        var tipoOrden = document.createElement("option"); //Creo la etiqueta
+        tipoOrden.setAttribute("value",ordenacion[i].order_by[0]); //creo los atributos. value indicará el "orderby"
+        var texto = document.createTextNode(ordenacion[i].name[0]); //Creo el texto
+        tipoOrden.appendChild(texto);  //añado el texto a la etiqueta creada
+        //alert(tipoOrden);
+        document.getElementById("ordenar_por").appendChild(tipoOrden);
     }
    
 </script>
@@ -17,12 +32,12 @@
         ?>
         <form method='post' action='<?php echo \core\URL::generar("articulos/index/".$categoria.'/'.$seccion); ?>'>
             <p>Ordenar por:
-                <select id='ordenar_por' name="ordenar_por" onchange="ordenar_por(<?php echo \core\URL::actual(); ?>);">
+                <select id='ordenar_por' name="ordenar_por" onchange="ordenar_por(this.value);">
                     <option value='nombre' ><?php echo iText('Nombre', 'dicc'); ?></option>
                     <option value='precio' ><?php echo iText('Precio', 'dicc'); ?></option>
                     <option value='precio desc' ><?php echo iText('Precio descendente', 'dicc'); ?></option>
-                    <option value='num_min_jug' ><?php echo iText('nº jugadores min', 'frases'); ?></option>
-                    <option value='num_max_jug desc' ><?php echo iText('nº jugadores max', 'frases'); ?></option>
+                    <option value='num_min_jug, num_max_jug' ><?php echo iText('nº jugadores min', 'frases'); ?></option>
+                    <option value='num_max_jug desc, num_min_jug desc' ><?php echo iText('nº jugadores max', 'frases'); ?></option>
                     <option value='anho desc' selected='selected'><?php echo iText('Últimas novedades', 'frases'); ?></option>
                 </select>  
                 <input type="submit" value="<?php echo iText('Ordenar', 'dicc'); ?>" title="Solo se mostrarán los <?php echo 2*\controladores\articulos::$num_arts_por_pag; ?> primeros artículos"/>

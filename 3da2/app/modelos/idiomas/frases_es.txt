@@ -21,6 +21,6 @@ totalDescargas|Número de descargas
 Reglamento de|
 Enanos de Breslavia|
 Últimas novedades|
-nº jugadores min|Numer minimalne gracze 
-nº jugadores max|Numer maksymalne gracze
+nº jugadores min|
+nº jugadores max|
 Enanos encontrados en Breslavia|
